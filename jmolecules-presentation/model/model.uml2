@@ -1,0 +1,43 @@
+@startuml
+
+package Orders {
+  class Order << (A, #7DA761) Aggregate>> {
+    - id: OrderId
+    - lineItems: List<LineItem>
+    - customer: Customer
+  }
+
+  class LineItem << (C, #7DA761) Entity>> {
+    - amount: int
+    - price: MonetaryAmount
+  }
+}
+
+package Customers {
+  class Customer << (A, #92B0D3) Aggregate>> {
+    - id: CustomerId
+  }
+}
+
+
+Order "1" *--> "1..*" LineItem : contains
+Order "*" -right-> "1" Customer : belongs to
+
+hide methods
+
+skinparam ClassBackgroundColor #fff
+skinparam shadowing false
+skinparam package {
+  FontColor #0C3064
+  BorderColor #0C3064
+}
+skinparam class {
+  FontColor #0C3064
+  AttributeFontColor #0C3064
+  BorderColor #0C3064
+  ArrowColor #0C3064
+  ArrowFontColor #0C3064
+  StereoTypeFontColor #0C3064
+}
+
+@enduml

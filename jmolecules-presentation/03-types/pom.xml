@@ -1,0 +1,108 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.jmolecules.examples</groupId>
+		<artifactId>jmolecules-presentation</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>jmolecules-presentation-types</artifactId>
+	<name>Presentation - Types-based metadata &amp; ByteBuddy</name>
+
+	<dependencies>
+
+		<!-- jMolecules -->
+
+		<dependency>
+			<groupId>org.jmolecules</groupId>
+			<artifactId>jmolecules-ddd</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jmolecules</groupId>
+			<artifactId>jmolecules-events</artifactId>
+		</dependency>
+
+		<!-- jMolecules integrations -->
+
+		<dependency>
+			<groupId>org.jmolecules.integrations</groupId>
+			<artifactId>jmolecules-spring</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jmolecules.integrations</groupId>
+			<artifactId>jmolecules-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.jmolecules.integrations</groupId>
+			<artifactId>jmolecules-archunit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.tngtech.archunit</groupId>
+			<artifactId>archunit-junit5</artifactId>
+			<version>${archunit.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>net.bytebuddy</groupId>
+				<artifactId>byte-buddy-maven-plugin</artifactId>
+				<version>${bytebuddy.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>transform</goal>
+						</goals>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.jmolecules.integrations</groupId>
+						<artifactId>jmolecules-bytebuddy</artifactId>
+						<version>${jmolecules-integrations.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<plugin>
+				<groupId>com.buschmais.jqassistant</groupId>
+				<artifactId>jqassistant-maven-plugin</artifactId>
+				<version>${jqassistant.version}</version>
+				<executions>
+					<execution>
+						<id>default-cli</id>
+						<goals>
+							<goal>scan</goal>
+							<goal>analyze</goal>
+						</goals>
+						<configuration>
+							<groups>
+								<group>jmolecules-ddd:Default</group>
+							</groups>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.jqassistant.contrib.plugin</groupId>
+						<artifactId>jqassistant-jmolecules-plugin</artifactId>
+						<version>1.2.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+		</plugins>
+	</build>
+
+</project>

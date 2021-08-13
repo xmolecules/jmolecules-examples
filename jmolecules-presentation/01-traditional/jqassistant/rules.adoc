@@ -1,0 +1,36 @@
+= My Project
+
+// Include a summary of all executed rules and their status
+link:jQA:Summary[]
+
+[[default]]
+[role=group, includesConcepts="example:*", includesConstraints="example:*"]
+== Default Rules
+
+[[example:Aggregate]]
+[source, cypher, role=concept]
+----
+MATCH
+    (repo:Java:Type) -[:IMPLEMENTS_GENERIC]-> (superType) -[:OF_RAW_TYPE]-> (:Java:Type { fqn: "org.springframework.data.repository.Repository"}),
+    (superType) -[:HAS_ACTUAL_TYPE_ARGUMENT { index: 0 }]-> () -[:OF_RAW_TYPE]-> (aggregateType)
+SET
+    aggregateType:Aggregate
+RETURN
+    repo, aggregateType
+----
+
+[[example:AggregateMustNotReferToOtherAggregate]]
+[source, cypher, role=constraint, requiresConcept="example:Aggregate"]
+----
+MATCH
+  (aggregate:Aggregate) -[:DECLARES]-> (f:Field) -[:OF_TYPE]-> (fieldType:Aggregate)
+WHERE
+  aggregate <> fieldType
+RETURN
+  aggregate, fieldType
+----
+
+== Imported Rules
+
+// Include specific rules that have been executed and their results.
+link:jQA:Rules[concepts="junit*:*"]

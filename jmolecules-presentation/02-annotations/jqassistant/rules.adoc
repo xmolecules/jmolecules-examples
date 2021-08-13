@@ -1,0 +1,24 @@
+= My Project
+
+// Include a summary of all executed rules and their status
+link:jQA:Summary[]
+
+[[example:Default]]
+[role=group, includesConstraints="example:*"]
+== Default Rules
+
+[[example:AggregateMustNotReferToOtherAggregate]]
+[source, cypher, role=constraint, requiresConcept="jmolecules-ddd:*"]
+----
+MATCH
+  (aggregate:AggregateRoot) -[:DECLARES]-> (f:Field) -[:OF_TYPE]-> (fieldType:AggregateRoot)
+WHERE
+  aggregate <> fieldType
+RETURN
+  aggregate, fieldType
+----
+
+== Imported Rules
+
+// Include specific rules that have been executed and their results.
+link:jQA:Rules[concepts="junit*:*"]

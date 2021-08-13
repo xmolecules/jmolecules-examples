@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="298px" preserveAspectRatio="none" style="width:436px;height:298px;background:#FFFFFF;" version="1.1" viewBox="0 0 436 298" width="436px" zoomAndPan="magnify"><defs/><g><!--MD5=[51e582cde4e5de317deb7aeb5458ded5]
+cluster Orders--><polygon fill="#FFFFFF" points="16,6,71,6,78,28.4883,210,28.4883,210,291,16,291,16,6" style="stroke:#0C3064;stroke-width:1.5;"/><line style="stroke:#0C3064;stroke-width:1.5;" x1="16" x2="78" y1="28.4883" y2="28.4883"/><text fill="#0C3064" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="49" x="20" y="21.5352">Orders</text><!--MD5=[e913b8d895c827c706a70be356dd4093]
+cluster Customers--><polygon fill="#FFFFFF" points="281,19,365,19,372,41.4883,419,41.4883,419,129,281,129,281,19" style="stroke:#0C3064;stroke-width:1.5;"/><line style="stroke:#0C3064;stroke-width:1.5;" x1="281" x2="372" y1="41.4883" y2="41.4883"/><text fill="#0C3064" font-family="sans-serif" font-size="14" font-weight="bold" lengthAdjust="spacing" textLength="78" x="285" y="34.5352">Customers</text><!--MD5=[cf4d6237fcae255cd2e1656cf84a30e2]
+class Order--><rect codeLine="3" fill="#FFFFFF" height="85.1309" id="Order" style="stroke:#0C3064;stroke-width:1.5;" width="162" x="32" y="41"/><ellipse cx="75.35" cy="60.1328" fill="#7DA761" rx="11" ry="11" style="stroke:#0C3064;stroke-width:1.0;"/><path d="M75.2133,55.481 L74.0595,60.5527 L76.3754,60.5527 Z M73.7191,53.2397 L76.7157,53.2397 L80.0609,65.6328 L77.6122,65.6328 L76.8485,62.5698 L73.5697,62.5698 L72.8227,65.6328 L70.3739,65.6328 Z " fill="#000000"/><text fill="#0C3064" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="71" x="93.65" y="57.6016">«Aggregate»</text><text fill="#0C3064" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="34" x="112.15" y="71.7344">Order</text><line style="stroke:#0C3064;stroke-width:1.5;" x1="33" x2="193" y1="79.2656" y2="79.2656"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="40" y="87.2656"/><text fill="#0C3064" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="58" x="52" y="93.9004">id: OrderId</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="40" y="100.2207"/><text fill="#0C3064" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="136" x="52" y="106.8555">lineItems: List&lt;LineItem&gt;</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="40" y="113.1758"/><text fill="#0C3064" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="110" x="52" y="119.8105">customer: Customer</text><!--MD5=[24e7354b14fe45153051fb5e63b1cd34]
+class LineItem--><rect codeLine="9" fill="#FFFFFF" height="72.1758" id="LineItem" style="stroke:#0C3064;stroke-width:1.5;" width="152" x="37" y="203"/><ellipse cx="84.75" cy="222.1328" fill="#7DA761" rx="11" ry="11" style="stroke:#0C3064;stroke-width:1.0;"/><path d="M87.2231,228.2759 Q86.6421,228.5747 86.0029,228.7241 Q85.3638,228.8735 84.6582,228.8735 Q82.1514,228.8735 80.8315,227.2217 Q79.5117,225.5698 79.5117,222.4487 Q79.5117,219.3193 80.8315,217.6675 Q82.1514,216.0156 84.6582,216.0156 Q85.3638,216.0156 86.0112,216.165 Q86.6587,216.3145 87.2231,216.6133 L87.2231,219.3359 Q86.5923,218.7549 85.9988,218.4851 Q85.4053,218.2153 84.7744,218.2153 Q83.4297,218.2153 82.7449,219.282 Q82.0601,220.3486 82.0601,222.4487 Q82.0601,224.5405 82.7449,225.6072 Q83.4297,226.6738 84.7744,226.6738 Q85.4053,226.6738 85.9988,226.4041 Q86.5923,226.1343 87.2231,225.5532 Z " fill="#000000"/><text fill="#0C3064" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="43" x="107.75" y="219.6016">«Entity»</text><text fill="#0C3064" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="48" x="105.25" y="233.7344">LineItem</text><line style="stroke:#0C3064;stroke-width:1.5;" x1="38" x2="188" y1="241.2656" y2="241.2656"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="45" y="249.2656"/><text fill="#0C3064" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="61" x="57" y="255.9004">amount: int</text><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="45" y="262.2207"/><text fill="#0C3064" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="126" x="57" y="268.8555">price: MonetaryAmount</text><!--MD5=[2ce0c9fb7f55b1e256ab28a8ea6b25ec]
+class Customer--><rect codeLine="16" fill="#FFFFFF" height="59.2207" id="Customer" style="stroke:#0C3064;stroke-width:1.5;" width="105" x="297.5" y="54"/><ellipse cx="315.2" cy="73.1328" fill="#92B0D3" rx="11" ry="11" style="stroke:#0C3064;stroke-width:1.0;"/><path d="M315.0633,68.481 L313.9095,73.5527 L316.2254,73.5527 Z M313.5691,66.2397 L316.5657,66.2397 L319.9109,78.6328 L317.4622,78.6328 L316.6985,75.5698 L313.4197,75.5698 L312.6727,78.6328 L310.2239,78.6328 Z " fill="#000000"/><text fill="#0C3064" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="71" x="327.8" y="70.6016">«Aggregate»</text><text fill="#0C3064" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="55" x="335.8" y="84.7344">Customer</text><line style="stroke:#0C3064;stroke-width:1.5;" x1="298.5" x2="401.5" y1="92.2656" y2="92.2656"/><rect fill="none" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="305.5" y="100.2656"/><text fill="#0C3064" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="79" x="317.5" y="106.9004">id: CustomerId</text><!--MD5=[bb7896cd95a18301bc8f089d30a057b9]
+link Order to LineItem--><path codeLine="22" d="M113,138.04 C113,138.04 113,173.48 113,189.46 " fill="none" id="Order-LineItem" style="stroke:#0C3064;stroke-width:1.0;"/><polygon fill="#0C3064" points="113,202.93,117,193.93,113,197.93,109,193.93,113,202.93" style="stroke:#0C3064;stroke-width:1.0;"/><line style="stroke:#0C3064;stroke-width:1.0;" x1="113" x2="113" y1="197.93" y2="189.93"/><polygon fill="#0C3064" points="113,126.04,109,132.04,113,138.04,117,132.04,113,126.04" style="stroke:#0C3064;stroke-width:1.0;"/><text fill="#0C3064" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="54" x="114" y="169.5684">contains</text><text fill="#0C3064" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="104.3625" y="146.5978">1</text><text fill="#0C3064" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="22" x="88.9031" y="192.2057">1..*</text><!--MD5=[65622aaf8fcfd7b10df86db327daabc8]
+link Order to Customer--><path codeLine="23" d="M194.23,83.5 C226.53,83.5 262.95,83.5 292.44,83.5 " fill="none" id="Order-to-Customer" style="stroke:#0C3064;stroke-width:1.0;"/><polygon fill="#0C3064" points="297.49,83.5,288.49,79.5,292.49,83.5,288.49,87.5,297.49,83.5" style="stroke:#0C3064;stroke-width:1.0;"/><text fill="#0C3064" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="67" x="212.25" y="77.0684">belongs to</text><text fill="#0C3064" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="6" x="201.995" y="80.3852">*</text><text fill="#0C3064" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="8" x="281.5433" y="80.02">1</text><!--MD5=[26d4c7c6c1c85a423de8777897f116fe]
+@startuml
+
+package Orders {
+  class Order << (A, #7DA761) Aggregate>> {
+    - id: OrderId
+    - lineItems: List<LineItem>
+    - customer: Customer
+  }
+
+  class LineItem << (C, #7DA761) Entity>> {
+    - amount: int
+    - price: MonetaryAmount
+  }
+}
+
+package Customers {
+  class Customer << (A, #92B0D3) Aggregate>> {
+    - id: CustomerId
+  }
+}
+
+
+Order "1" *- -> "1..*" LineItem : contains
+Order "*" -right-> "1" Customer : belongs to
+
+hide methods
+
+skinparam ClassBackgroundColor #fff
+skinparam shadowing false
+skinparam package {
+  FontColor #0C3064
+  BorderColor #0C3064
+}
+skinparam class {
+  FontColor #0C3064
+  AttributeFontColor #0C3064
+  BorderColor #0C3064
+  ArrowColor #0C3064
+  ArrowFontColor #0C3064
+  StereoTypeFontColor #0C3064
+}
+
+@enduml
+
+PlantUML version 1.2021.10(Mon Aug 30 15:43:48 CEST 2021)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: DE
+--></g></svg>

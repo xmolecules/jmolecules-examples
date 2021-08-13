@@ -11,6 +11,7 @@
 	<url>https://github.com/xmolecules/jmolecules-examples</url>
 
 	<modules>
+		<module>jmolecules-presentation</module>
 		<module>jmolecules-spring-data-jpa</module>
 	</modules>
 
@@ -20,7 +21,8 @@
 		<bytebuddy.version>1.11.14</bytebuddy.version>
 		<jmolecules-bom.version>2021.1.0</jmolecules-bom.version>
 		<jmolecules-integrations.version>0.5.0</jmolecules-integrations.version>
-		<moduliths.version>1.2.0-SNAPSHOT</moduliths.version>
+		<jqassistant.version>1.10.1</jqassistant.version>
+		<moduliths.version>1.2.0</moduliths.version>
 		<spring-boot.version>2.5.4</spring-boot.version>
 	</properties>
 
@@ -71,6 +73,9 @@
 	</dependencies>
 
 	<build>
+
+		<defaultGoal>verify</defaultGoal>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
