@@ -1,0 +1,102 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>org.jmolecules.examples</groupId>
+	<artifactId>jmolecules-examples</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+
+	<packaging>pom</packaging>
+	<name>jMolecules Examples</name>
+	<description>jMolecules examples</description>
+	<url>https://github.com/xmolecules/jmolecules-examples</url>
+
+	<modules>
+		<module>jmolecules-spring-data-jpa</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<archunit.version>0.20.1</archunit.version>
+		<bytebuddy.version>1.11.9</bytebuddy.version>
+		<jmolecules-bom.version>2021.1.0-SNAPSHOT</jmolecules-bom.version>
+		<jmolecules-integrations.version>0.5.0-SNAPSHOT</jmolecules-integrations.version>
+		<moduliths.version>1.2.0-SNAPSHOT</moduliths.version>
+		<spring-boot.version>2.5.2</spring-boot.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-dependencies</artifactId>
+				<version>${spring-boot.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+			<dependency>
+				<groupId>org.jmolecules</groupId>
+				<artifactId>jmolecules-bom</artifactId>
+				<version>${jmolecules-bom.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0</url>
+		</license>
+	</licenses>
+
+	<developers>
+		<developer>
+			<id>odrotbohm</id>
+			<name>Oliver Drotbohm</name>
+			<email>odrotbohm@vmware.com</email>
+			<organization>VMware Inc.</organization>
+			<organizationUrl>https://vmware.com</organizationUrl>
+		</developer>
+	</developers>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>16</source>
+					<target>16</target>
+					<parameters>true</parameters>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<repositories>
+		<repository>
+			<id>spring-snapshot</id>
+			<url>https://repo.spring.io/snapshot</url>
+		</repository>
+	</repositories>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-snapshot</id>
+			<url>https://repo.spring.io/snapshot</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+</project>

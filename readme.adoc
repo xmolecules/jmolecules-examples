@@ -1,0 +1,10 @@
+= jMolecules Examples
+
+This repository contains examples that showcase the usage of jMolecules and jMolecules Integrations.
+
+* link:jmolecules-spring-data-jpa[`jmolecules-spring-data-jpa`] -- Shows how a domain model using jMolecules DDD types to express domain concepts can be persisted with minimal additional JPA metadata.
+
+== External examples
+
+* Spring RESTBucks -- a hypermedia-based REST service exposing a coffee ordering business process. Uses jMolecules integrations for Spring, Jackson and persistence code generation via the jMolecules ByteBuddy plugin.
+* LNURL Auth -- A showcase application using jMolecules integrations.
