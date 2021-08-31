@@ -16,7 +16,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<archunit.version>0.20.1</archunit.version>
+		<archunit.version>0.21.0</archunit.version>
 		<bytebuddy.version>1.11.14</bytebuddy.version>
 		<jmolecules-bom.version>2021.1.0</jmolecules-bom.version>
 		<jmolecules-integrations.version>0.5.0</jmolecules-integrations.version>
