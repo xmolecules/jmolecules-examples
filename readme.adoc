@@ -7,4 +7,4 @@ This repository contains examples that showcase the usage of jMolecules and jMol
 == External examples
 
 * https://github.com/odrotbohm/restbucks[Spring RESTBucks] -- a hypermedia-based REST service exposing a coffee ordering business process. Uses jMolecules integrations for Spring, Jackson and persistence code generation via the jMolecules ByteBuddy plugin.
-* https://github.com/theborakompanioni/bitcoin-spring-boot-starter/tree/master/examples/incubator/lnurl-auth-example-application[LNURL Auth] -- A showcase application using jMolecules integrations.
+* https://github.com/theborakompanioni/bitcoin-spring-boot-starter/tree/master/incubator/spring-lnurl/spring-lnurl-auth-example-application[LNURL Auth] -- A showcase application using jMolecules integrations.
