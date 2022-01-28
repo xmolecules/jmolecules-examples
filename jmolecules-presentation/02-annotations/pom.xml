@@ -41,50 +41,55 @@
 
 	</dependencies>
 
-	<build>
+	<profiles>
+		<profile>
+			<id>jqa</id>
+			<build>
 
-		<plugins>
+				<plugins>
 
-			<plugin>
-				<groupId>com.buschmais.jqassistant</groupId>
-				<artifactId>jqassistant-maven-plugin</artifactId>
-				<version>${jqassistant.version}</version>
-				<executions>
-					<execution>
-						<id>default</id>
-						<goals>
-							<goal>scan</goal>
-							<goal>analyze</goal>
-						</goals>
-						<configuration>
-							<groups>
-								<group>jmolecules-ddd:Strict</group>
-								<group>example:Default</group>
-							</groups>
-							<scanIncludes>
-								<scanInclude>
-									<path>${project.basedir}/documentation/context-mapper</path>
-								</scanInclude>
-							</scanIncludes>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.jqassistant.contrib.plugin</groupId>
-						<artifactId>jqassistant-jmolecules-plugin</artifactId>
-						<version>${jqassistant-jmolecules.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>org.jqassistant.contrib.plugin</groupId>
-						<artifactId>jqassistant-context-mapper-plugin</artifactId>
-						<version>${jqassistant-context-mapper.version}</version>
-					</dependency>
-				</dependencies>
-			</plugin>
+					<plugin>
+						<groupId>com.buschmais.jqassistant</groupId>
+						<artifactId>jqassistant-maven-plugin</artifactId>
+						<version>${jqassistant.version}</version>
+						<executions>
+							<execution>
+								<id>default</id>
+								<goals>
+									<goal>scan</goal>
+									<goal>analyze</goal>
+								</goals>
+								<configuration>
+									<groups>
+										<group>jmolecules-ddd:Strict</group>
+										<group>example:Default</group>
+									</groups>
+									<scanIncludes>
+										<scanInclude>
+											<path>${project.basedir}/documentation/context-mapper</path>
+										</scanInclude>
+									</scanIncludes>
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>org.jqassistant.contrib.plugin</groupId>
+								<artifactId>jqassistant-jmolecules-plugin</artifactId>
+								<version>${jqassistant-jmolecules.version}</version>
+							</dependency>
+							<dependency>
+								<groupId>org.jqassistant.contrib.plugin</groupId>
+								<artifactId>jqassistant-context-mapper-plugin</artifactId>
+								<version>${jqassistant-context-mapper.version}</version>
+							</dependency>
+						</dependencies>
+					</plugin>
 
-		</plugins>
+				</plugins>
 
-	</build>
+			</build>
+		</profile>
+	</profiles>
 
 </project>

@@ -74,35 +74,43 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-
-			<plugin>
-				<groupId>com.buschmais.jqassistant</groupId>
-				<artifactId>jqassistant-maven-plugin</artifactId>
-				<version>${jqassistant.version}</version>
-				<executions>
-					<execution>
-						<id>default-cli</id>
-						<goals>
-							<goal>scan</goal>
-							<goal>analyze</goal>
-						</goals>
-						<configuration>
-							<groups>
-								<group>jmolecules-ddd:Default</group>
-							</groups>
-						</configuration>
-					</execution>
-				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.jqassistant.contrib.plugin</groupId>
-						<artifactId>jqassistant-jmolecules-plugin</artifactId>
-						<version>1.2.0</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-
 		</plugins>
 	</build>
+
+	<profiles>
+		<profile>
+			<id>jqa</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.buschmais.jqassistant</groupId>
+						<artifactId>jqassistant-maven-plugin</artifactId>
+						<version>${jqassistant.version}</version>
+						<executions>
+							<execution>
+								<id>default-cli</id>
+								<goals>
+									<goal>scan</goal>
+									<goal>analyze</goal>
+								</goals>
+								<configuration>
+									<groups>
+										<group>jmolecules-ddd:Default</group>
+									</groups>
+								</configuration>
+							</execution>
+						</executions>
+						<dependencies>
+							<dependency>
+								<groupId>org.jqassistant.contrib.plugin</groupId>
+								<artifactId>jqassistant-jmolecules-plugin</artifactId>
+								<version>1.2.0</version>
+							</dependency>
+						</dependencies>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>
