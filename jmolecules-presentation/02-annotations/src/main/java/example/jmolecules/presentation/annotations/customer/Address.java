@@ -35,7 +35,7 @@ import org.jmolecules.ddd.annotation.Identity;
 @NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)
 public class Address {
 
-	private @Identity @EmbeddedId Address.AddressId id;
+	private final @Identity @EmbeddedId Address.AddressId id;
 	private final String street, city, zipCode;
 
 	public Address(String street, String city, String zipCode) {

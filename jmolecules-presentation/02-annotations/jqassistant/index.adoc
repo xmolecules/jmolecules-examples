@@ -1,0 +1,57 @@
+= My Project
+
+// Include a summary of all executed rules and their status
+include::jQA:Summary[constraints="*",importedConstraints="*"]
+
+[[example:Default]]
+[role=group, includesConcepts="example:*", includesConstraints="example:*"]
+== Identification and Validation of Architectural Concepts
+
+=== Strategic DDD
+
+==== Concepts
+
+include::jQA:Summary[importedConcepts="jmolecules-ddd:BoundedContext*"]
+
+==== Reports
+
+[[example:ToBeArchitecture]]
+[source, cypher, role=concept, reportType="context-mapper-diagram"]
+.Renders the to-be architecture.
+----
+MATCH
+    (bc1:ContextMapper:BoundedContext)
+OPTIONAL MATCH
+    (bc1)-[d:DEFINES_DEPENDENCY]->(bc2:ContextMapper:BoundedContext)
+RETURN
+    bc1, d, bc2
+----
+
+==== Constraints
+
+include::jQA:Summary[importedConstraints="jmolecules-ddd:*BoundedContext*"]
+
+=== Tactical DDD
+
+=== Concepts
+include::jQA:Summary[importedConcepts="jmolecules-ddd:Aggregate*"]
+
+=== Constraints
+
+[[example:AggregateMustNotReferToOtherAggregate]]
+[source, cypher, role=constraint, requiresConcept="jmolecules-ddd:*"]
+----
+MATCH
+  (aggregate:AggregateRoot) -[:DECLARES]-> (f:Field) -[:OF_TYPE]-> (fieldType:AggregateRoot)
+WHERE
+  aggregate <> fieldType
+RETURN
+  aggregate, fieldType
+----
+
+include::jQA:Summary[importedConstraints="jmolecules-ddd:*Aggregate*"]
+
+== Imported Rules
+
+// Include specific rules that have been executed and their results.
+include::jQA:Rules[constraints="*"]

@@ -1,0 +1,128 @@
+= My Project
+
+// Include a summary of all executed rules and their status
+include::jQA:Summary[constraints="*",importedConstraints="*"]
+
+[[default]]
+[role=group, includesConcepts="example:*", includesConstraints="example:*"]
+== Identification and Validation of Architectural Concepts
+
+=== Strategic DDD
+
+==== Concepts
+
+[[example:BoundedContext]]
+[source, cypher, role=concept]
+.Identifies bounded contexts by using the first level of packages inside `example.jmolecules.presentation.traditional`.
+----
+MATCH
+    (:Package{fqn: "example.jmolecules.presentation.traditional"})-[:CONTAINS]->(p:Package)
+MERGE
+    (bc:BoundedContext{name: p.name})
+RETURN
+    bc AS BoundedContext
+----
+
+[[example:BoundedContextType]]
+[source, cypher, role=concept, requiresConcepts="example:BoundedContext"]
+.Assigns types to their bounded contexts.
+----
+MATCH
+    (bc:BoundedContext),
+    (p:Package{name: bc.name})-[:CONTAINS*]->(t:Type)
+MERGE
+    (bc)-[:CONTAINS]->(t)
+RETURN
+     bc AS BoundedContext, count(t) AS Types
+----
+
+[[example:BoundedContextDependency]]
+[source, cypher, role=concept, requiresConcepts="example:BoundedContextType"]
+.Aggregates the dependencies between types to the level of bounded contexts.
+----
+MATCH
+    (bc1:BoundedContext)-[:CONTAINS]->(t1:Type),
+    (bc2:BoundedContext)-[:CONTAINS]->(t2:Type),
+    (t1)-[:DEPENDS_ON]->(t2)
+WHERE
+    bc1 <> bc2
+WITH
+    DISTINCT bc1, bc2
+MERGE
+    (bc1)-[d:DEPENDS_ON]-(bc2)
+RETURN
+    bc1 AS Source, d AS Dependency, bc2 AS Target
+----
+
+==== Reports
+
+[[example:AllowedBoundedContextDependencies]]
+[source, cypher, role=concept, requiresConcepts="example:BoundedContext", reportType="context-mapper-diagram"]
+.To-Be-Architecture. Enrich allowed dependencies between bounded contexts.
+----
+WITH [
+["order", "customer"]
+] AS deps
+UNWIND
+deps AS dep
+MATCH
+(bc1:BoundedContext{name: dep[0]}),
+(bc2:BoundedContext{name: dep[1]})
+MERGE
+(bc1)-[d:DEFINES_DEPENDENCY]->(bc2)
+RETURN
+bc1 AS Source, d, bc2 AS Target
+----
+
+==== Constraints
+
+[[example:IllegalBoundedContextDependencies]]
+[source, cypher, role=constraint, requiresConcepts="example:BoundedContextDependency,example:AllowedBoundedContextDependencies"]
+.Checks that dependencies between bounded contexts are only implemented were allowed.
+----
+MATCH
+(bc1:BoundedContext)-[:DEPENDS_ON]->(bc2:BoundedContext)
+WHERE
+bc1 <> bc2 AND NOT (bc1)-[:DEFINES_DEPENDENCY]->(bc2)
+RETURN
+bc1 AS Source, bc2 AS Target
+----
+
+
+=== Tactical DDD
+
+==== Concepts
+
+[[example:Aggregate]]
+[source, cypher, role=concept]
+.Identifies aggregates via the Type Parameter used when extending from `Repository`.
+----
+MATCH
+    (repo:Java:Type)-[:IMPLEMENTS_GENERIC]->(superType)-[:OF_RAW_TYPE]->(:Java:Type{fqn: "org.springframework.data.repository.Repository"}),
+    (superType)-[:HAS_ACTUAL_TYPE_ARGUMENT{ index: 0}]->()-[:OF_RAW_TYPE]->(aggregateType)
+SET
+    aggregateType:Aggregate
+RETURN
+    repo AS Repository, aggregateType AS Aggregate
+----
+
+==== Constraints
+
+[[example:AggregateMustNotReferToOtherAggregate]]
+[source, cypher, role=constraint, requiresConcept="example:Aggregate"]
+.Checks that an aggregate does not refer to another aggregate via a field declaration.
+----
+MATCH
+  (aggregate:Aggregate)-[:DECLARES]->(:Field)-[:OF_TYPE]->(fieldType:Aggregate)
+WHERE
+  aggregate <> fieldType
+RETURN
+  aggregate, fieldType
+----
+
+== Rule Results
+
+Results of externally defined constraints.
+
+// Include specific rules that have been executed and their results.
+include::jQA:Rules[constraints="*"]

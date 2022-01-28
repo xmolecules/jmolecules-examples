@@ -48,7 +48,7 @@
 			<plugin>
 				<groupId>com.buschmais.jqassistant</groupId>
 				<artifactId>jqassistant-maven-plugin</artifactId>
-				<version>1.10.1</version>
+				<version>${jqassistant.version}</version>
 				<executions>
 					<execution>
 						<id>default</id>
@@ -57,12 +57,15 @@
 							<goal>analyze</goal>
 						</goals>
 						<configuration>
-							<failOnSeverity>MAJOR</failOnSeverity>
-							<warnOnSeverity>MINOR</warnOnSeverity>
 							<groups>
-								<group>jmolecules-ddd:Default</group>
+								<group>jmolecules-ddd:Strict</group>
 								<group>example:Default</group>
 							</groups>
+							<scanIncludes>
+								<scanInclude>
+									<path>${project.basedir}/documentation/context-mapper</path>
+								</scanInclude>
+							</scanIncludes>
 						</configuration>
 					</execution>
 				</executions>
@@ -70,7 +73,12 @@
 					<dependency>
 						<groupId>org.jqassistant.contrib.plugin</groupId>
 						<artifactId>jqassistant-jmolecules-plugin</artifactId>
-						<version>1.2.0</version>
+						<version>${jqassistant-jmolecules.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>org.jqassistant.contrib.plugin</groupId>
+						<artifactId>jqassistant-context-mapper-plugin</artifactId>
+						<version>${jqassistant-context-mapper.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>

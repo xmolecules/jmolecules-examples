@@ -38,12 +38,15 @@
 							<goal>scan</goal>
 							<goal>analyze</goal>
 						</goals>
-						<configuration>
-							<failOnSeverity>MAJOR</failOnSeverity>
-							<warnOnSeverity>MINOR</warnOnSeverity>
-						</configuration>
 					</execution>
 				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.jqassistant.contrib.plugin</groupId>
+						<artifactId>jqassistant-context-mapper-plugin</artifactId>
+						<version>${jqassistant-context-mapper.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 
 		</plugins>

@@ -21,7 +21,9 @@
 		<bytebuddy.version>1.11.14</bytebuddy.version>
 		<jmolecules-bom.version>2021.1.0</jmolecules-bom.version>
 		<jmolecules-integrations.version>0.5.0</jmolecules-integrations.version>
-		<jqassistant.version>1.10.1</jqassistant.version>
+		<jqassistant.version>1.11.1</jqassistant.version>
+		<jqassistant-context-mapper.version>1.0.0</jqassistant-context-mapper.version>
+		<jqassistant-jmolecules.version>1.4.0</jqassistant-jmolecules.version>
 		<moduliths.version>1.2.0</moduliths.version>
 		<spring-boot.version>2.5.4</spring-boot.version>
 	</properties>
