@@ -1,0 +1,12 @@
+ContextMap ShoppingSystem {
+    type = SYSTEM_LANDSCAPE
+    state = TO_BE
+
+    contains CustomerContext
+    contains OrderContext
+
+    CustomerContext [U]->[D] OrderContext
+}
+
+BoundedContext CustomerContext { }
+BoundedContext OrderContext { }
