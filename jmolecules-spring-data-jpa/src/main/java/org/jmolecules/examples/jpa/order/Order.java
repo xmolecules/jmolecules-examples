@@ -15,14 +15,13 @@
  */
 package org.jmolecules.examples.jpa.order;
 
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
 import java.util.List;
 import java.util.UUID;
-
-import javax.persistence.Table;
 
 import org.jmolecules.ddd.types.AggregateRoot;
 import org.jmolecules.ddd.types.Association;
