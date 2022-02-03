@@ -24,6 +24,7 @@ import java.util.UUID;
 
 import org.jmolecules.ddd.types.AggregateRoot;
 import org.jmolecules.ddd.types.Identifier;
+import org.jmolecules.ddd.types.ValueObject;
 import org.jmolecules.examples.jpa.customer.Customer.CustomerId;
 import org.springframework.util.Assert;
 
@@ -34,7 +35,7 @@ import org.springframework.util.Assert;
 public class Customer implements AggregateRoot<Customer, CustomerId> {
 
 	private final CustomerId id;
-	private String firstname, lastname;
+	private Name name;
 	private List<Address> addresses;
 
 	public Customer(String firstname, String lastname, Address address) {
@@ -43,12 +44,12 @@ public class Customer implements AggregateRoot<Customer, CustomerId> {
 
 		this.id = CustomerId.of(UUID.randomUUID().toString());
 
-		this.firstname = firstname;
-		this.lastname = lastname;
-
+		this.name = new Name(firstname, lastname);
 		this.addresses = new ArrayList<>();
 		this.addresses.add(address);
 	}
+
+	public record Name(String firstname, String lastname) implements ValueObject {}
 
 	@Value(staticConstructor = "of")
 	public static class CustomerId implements Identifier {

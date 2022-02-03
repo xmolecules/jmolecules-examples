@@ -17,6 +17,7 @@ package org.jmolecules.examples.jpa;
 
 import static org.assertj.core.api.Assertions.*;
 
+import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 
 import org.jmolecules.examples.jpa.customer.Address;
@@ -29,15 +30,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.assertj.AssertableApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.test.context.TestConstructor;
+import org.springframework.test.context.TestConstructor.AutowireMode;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Oliver Drotbohm
  */
 @SpringBootTest
+@TestConstructor(autowireMode = AutowireMode.ALL)
 @RequiredArgsConstructor
 class ApplicationIntegrationTests {
 
 	private final ConfigurableApplicationContext context;
+	private final EntityManager em;
 
 	@Test
 	void bootstrapsContainer() {
@@ -55,6 +61,7 @@ class ApplicationIntegrationTests {
 	}
 
 	@Test // #24
+	@Transactional
 	void exposesPersistenceComponents() {
 
 		var address = new Address("41 Greystreet", "Dreaming Tree", "2731");
@@ -65,6 +72,12 @@ class ApplicationIntegrationTests {
 		var orders = context.getBean(Orders.class);
 		var order = orders.save(new Order(customer));
 
-		customers.resolveRequired(order.getCustomer());
+		em.flush();
+		em.clear();
+
+		var resolved = customers.resolveRequired(order.getCustomer());
+
+		assertThat(resolved.getName().firstname()).isEqualTo("Dave");
+		assertThat(resolved.getName().lastname()).isEqualTo("Matthews");
 	}
 }
