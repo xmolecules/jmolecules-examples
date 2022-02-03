@@ -15,6 +15,8 @@
  */
 package example.jmolecules.presentation.traditional.order;
 
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -22,9 +24,6 @@ import lombok.Value;
 
 import java.io.Serializable;
 import java.util.UUID;
-
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
 
 @Entity
 @Getter

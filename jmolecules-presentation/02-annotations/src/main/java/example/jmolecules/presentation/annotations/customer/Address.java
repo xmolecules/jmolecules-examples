@@ -15,6 +15,7 @@
  */
 package example.jmolecules.presentation.annotations.customer;
 
+import jakarta.persistence.EmbeddedId;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,13 +25,11 @@ import lombok.Value;
 import java.io.Serializable;
 import java.util.UUID;
 
-import javax.persistence.EmbeddedId;
-
 import org.jmolecules.ddd.annotation.Entity;
 import org.jmolecules.ddd.annotation.Identity;
 
 @Entity
-@javax.persistence.Entity
+@jakarta.persistence.Entity
 @Getter
 @NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)
 public class Address {

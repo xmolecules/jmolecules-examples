@@ -15,6 +15,7 @@
  */
 package example.jmolecules.presentation.annotations.order;
 
+import jakarta.persistence.EmbeddedId;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +24,11 @@ import lombok.Value;
 import java.io.Serializable;
 import java.util.UUID;
 
-import javax.persistence.EmbeddedId;
-
 import org.jmolecules.ddd.annotation.Entity;
 import org.jmolecules.ddd.annotation.Identity;
 
 @Entity
-@javax.persistence.Entity
+@jakarta.persistence.Entity
 @Getter
 @RequiredArgsConstructor
 @EqualsAndHashCode(of = "id")

@@ -17,6 +17,11 @@ package example.jmolecules.presentation.traditional.order;
 
 import example.jmolecules.presentation.traditional.customer.Customer;
 import example.jmolecules.presentation.traditional.customer.Customer.CustomerId;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,12 +31,6 @@ import lombok.Value;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
-
-import javax.persistence.CascadeType;
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  * @author Oliver Drotbohm

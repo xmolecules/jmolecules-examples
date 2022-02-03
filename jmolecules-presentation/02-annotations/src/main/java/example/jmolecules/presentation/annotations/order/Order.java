@@ -17,6 +17,9 @@ package example.jmolecules.presentation.annotations.order;
 
 import example.jmolecules.presentation.annotations.customer.Customer;
 import example.jmolecules.presentation.annotations.customer.Customer.CustomerId;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,18 +30,14 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.CascadeType;
-import javax.persistence.EmbeddedId;
-import javax.persistence.OneToMany;
-
 import org.jmolecules.ddd.annotation.Identity;
 
 /**
  * @author Oliver Drotbohm
  */
 @org.jmolecules.ddd.annotation.AggregateRoot
-@javax.persistence.Entity
-@javax.persistence.Table(name = "SAMPLE_ORDER")
+@jakarta.persistence.Entity
+@jakarta.persistence.Table(name = "SAMPLE_ORDER")
 @Getter
 @RequiredArgsConstructor
 @NoArgsConstructor(force = true, access = AccessLevel.PRIVATE)

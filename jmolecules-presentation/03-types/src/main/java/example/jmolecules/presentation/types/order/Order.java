@@ -17,14 +17,13 @@ package example.jmolecules.presentation.types.order;
 
 import example.jmolecules.presentation.types.customer.Customer;
 import example.jmolecules.presentation.types.customer.Customer.CustomerId;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
 import java.util.List;
 import java.util.UUID;
-
-import javax.persistence.Table;
 
 import org.jmolecules.ddd.types.AggregateRoot;
 import org.jmolecules.ddd.types.Association;
