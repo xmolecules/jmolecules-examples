@@ -31,7 +31,7 @@ public class Address implements Entity<Customer, Address.AddressId> {
 
 	public Address(String street, String city, String zipCode) {
 
-		this.id = AddressId.of(UUID.randomUUID());
+		this.id = AddressId.of(UUID.randomUUID().toString());
 		this.street = street;
 		this.city = city;
 		this.zipCode = zipCode;
@@ -39,6 +39,6 @@ public class Address implements Entity<Customer, Address.AddressId> {
 
 	@Value(staticConstructor = "of")
 	public static class AddressId implements Identifier {
-		private final UUID id;
+		private final String id;
 	}
 }
