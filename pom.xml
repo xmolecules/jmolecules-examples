@@ -21,7 +21,7 @@
 		<bytebuddy.version>1.11.14</bytebuddy.version>
 		<jmolecules-bom.version>2021.2.3-SNAPSHOT</jmolecules-bom.version>
 		<jmolecules-integrations.version>0.9.0-SNAPSHOT</jmolecules-integrations.version>
-		<moduliths.version>1.3.0-M2</moduliths.version>
+		<moduliths.version>1.3.0-RC1</moduliths.version>
 		<spring-boot.version>3.0.0-SNAPSHOT</spring-boot.version>
 	</properties>
 
