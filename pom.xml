@@ -14,15 +14,17 @@
 		<module>jmolecules-presentation</module>
 		<module>jmolecules-spring-data-jpa</module>
 		<module>jmolecules-kotlin</module>
+		<module>jmolecules-axon</module>
 	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<archunit.version>0.23.1</archunit.version>
+		<axon.version>4.5.12</axon.version>
 		<bytebuddy.version>1.12.10</bytebuddy.version>
 		<java.version>17</java.version>
-		<jmolecules-bom.version>2022.1.0</jmolecules-bom.version>
-		<jmolecules-integrations.version>0.10.0</jmolecules-integrations.version>
+		<jmolecules-bom.version>2022.2.0-SNAPSHOT</jmolecules-bom.version>
+		<jmolecules-integrations.version>0.11.0-SNAPSHOT</jmolecules-integrations.version>
 		<moduliths.version>1.3.0</moduliths.version>
 		<spring-boot.version>3.0.0-SNAPSHOT</spring-boot.version>
 	</properties>
