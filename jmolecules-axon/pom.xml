@@ -8,9 +8,19 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<name>jMolecules Examples - Axon Framework</name>
+	<name>jMolecules Examples - Axon Framework Parent</name>
 	<description>Runtime Support for Axon Framework</description>
-	<artifactId>jmolecules-axon</artifactId>
+  <artifactId>jmolecules-examples-axon-root</artifactId>
+  <packaging>pom</packaging>
+
+  <properties>
+    <spring-boot.version>2.7.4</spring-boot.version>
+  </properties>
+
+  <modules>
+    <module>01-simple</module>
+    <module>02-onion-cqrs-es-bank</module>
+  </modules>
 
 	<dependencyManagement>
 		<dependencies>
@@ -39,40 +49,9 @@
 			<groupId>org.jmolecules</groupId>
 			<artifactId>jmolecules-events</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jmolecules.integrations</groupId>
 			<artifactId>jmolecules-bytebuddy</artifactId>
-		</dependency>
-
-		<!-- Axon Framework -->
-		<dependency>
-			<groupId>org.axonframework</groupId>
-			<artifactId>axon-modelling</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.axonframework</groupId>
-			<artifactId>axon-eventsourcing</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.axonframework</groupId>
-			<artifactId>axon-spring</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.axonframework</groupId>
-			<artifactId>axon-test</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

@@ -20,7 +20,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<archunit.version>0.23.1</archunit.version>
-		<axon.version>4.5.12</axon.version>
+		<axon.version>4.6.0</axon.version>
 		<bytebuddy.version>1.12.10</bytebuddy.version>
 		<java.version>17</java.version>
 		<jmolecules-bom.version>2022.2.0-SNAPSHOT</jmolecules-bom.version>
@@ -94,7 +94,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.1</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -103,6 +103,7 @@
 			</plugin>
 
 			<plugin>
+        <groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.2</version>
 			</plugin>

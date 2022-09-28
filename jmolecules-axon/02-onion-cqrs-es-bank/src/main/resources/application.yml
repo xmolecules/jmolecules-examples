@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: axon-bank
+  profiles:
+    include: mem
+
+springdoc:
+  swagger-ui:
+    use-root-path: true
+
+axon:
+  axonserver:
+    enabled: false # disable axon server connector
+  serializer:
+    events: jackson
+    general: jackson
+    messages: jackson
+

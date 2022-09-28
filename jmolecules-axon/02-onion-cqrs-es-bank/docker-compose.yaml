@@ -1,0 +1,18 @@
+version: "3"
+
+services:
+  axon-server:
+    container_name: "jmolecules-example-axon-server"
+    image: axoniq/axonserver:4.6.3-jdk-17-dev
+    hostname: axonserver
+    environment:
+      AXONIQ_AXONSERVER_DEVMODE_ENABLED: "true"
+      AXONIQ_AXONSERVER_SSL_ENABLED: "false"
+      AXONIQ_AXONSERVER_ACCESSCONTROL_ENABLED: "false"
+      AXONIQ_AXONSERVER_NAME: "localhost"
+      AXONIQ_AXONSERVER_HOSTNAME: "localhost"
+      AXONIQ_AXONSERVER_AUTOCLUSTER_FIRST: "localhost"
+    ports:
+      - "8024:8024"
+      - "8124:8124"
+      - "8224:8224"
