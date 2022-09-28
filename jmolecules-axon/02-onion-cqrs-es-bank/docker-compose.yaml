@@ -1,5 +1,10 @@
 version: "3"
 
+#
+# If you don't want to run with in-memory buses and stores, start docker compose and disable the mem-profile
+# To do so, please open the application.yml and comment out the lines 7-8 (profiles include).
+#
+
 services:
   axon-server:
     container_name: "jmolecules-example-axon-server"

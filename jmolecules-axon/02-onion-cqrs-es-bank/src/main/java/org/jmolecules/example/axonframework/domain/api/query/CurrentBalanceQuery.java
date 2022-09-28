@@ -5,6 +5,7 @@ import org.axonframework.messaging.responsetypes.ResponseTypes;
 
 import java.util.Optional;
 
+
 public record CurrentBalanceQuery(
   String accountId
 ) {

@@ -1,6 +1,7 @@
 package org.jmolecules.example.axonframework.infrastructure.rest;
 
 import org.axonframework.queryhandling.QueryGateway;
+import org.jmolecules.architecture.onion.classical.InfrastructureRing;
 import org.jmolecules.example.axonframework.domain.api.query.CurrentBalanceQuery;
 import org.jmolecules.example.axonframework.domain.api.query.CurrentBalanceResponse;
 import org.jmolecules.example.axonframework.domain.api.query.MoneyTransfersQuery;

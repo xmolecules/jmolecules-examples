@@ -9,7 +9,7 @@
     <relativePath>../pom.xml</relativePath>
   </parent>
 
-  <name>jMolecules Examples - Axon Framework Onion CQRS/ES Bank</name>
+  <name>jMolecules Examples - Axon Framework Bank Onion/CQRS/ES</name>
   <description>Axon Framework Spring-Boot Example using JMolecules applying Onion Architecture and CQRS/ES</description>
   <artifactId>jmolecules-axon-onion-cqrs-es-bank</artifactId>
 

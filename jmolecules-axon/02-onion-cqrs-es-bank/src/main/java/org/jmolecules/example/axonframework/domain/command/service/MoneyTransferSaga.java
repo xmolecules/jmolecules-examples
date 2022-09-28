@@ -1,4 +1,4 @@
-package org.jmolecules.example.axonframework.domain.command.model;
+package org.jmolecules.example.axonframework.domain.command.service;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.eventhandling.gateway.EventGateway;
@@ -6,6 +6,9 @@ import org.axonframework.modelling.saga.EndSaga;
 import org.axonframework.modelling.saga.SagaEventHandler;
 import org.axonframework.modelling.saga.StartSaga;
 import org.axonframework.spring.stereotype.Saga;
+import org.jmolecules.architecture.cqrs.annotation.CommandDispatcher;
+import org.jmolecules.event.annotation.DomainEventHandler;
+import org.jmolecules.event.annotation.DomainEventPublisher;
 import org.jmolecules.example.axonframework.domain.api.command.transfer.CancelMoneyTransferCommand;
 import org.jmolecules.example.axonframework.domain.api.command.transfer.CompleteMoneyTransferCommand;
 import org.jmolecules.example.axonframework.domain.api.command.transfer.ReceiveMoneyTransferCommand;
@@ -25,6 +28,7 @@ public class MoneyTransferSaga {
 
   @SagaEventHandler(associationProperty = "moneyTransferId")
   @StartSaga
+  @DomainEventHandler(namespace = "axon.bank", name = "MoneyTransferRequestedEvent")
   public void on(MoneyTransferRequestedEvent evt, CommandGateway commandGateway) {
     this.moneyTransferId = evt.moneyTransferId();
     this.sourceAccountId = evt.sourceAccountId();
@@ -47,6 +51,7 @@ public class MoneyTransferSaga {
     });
   }
 
+  @DomainEventHandler(namespace = "axon.bank", name = "MoneyTransferReceivedEvent")
   @SagaEventHandler(associationProperty = "moneyTransferId")
   public void on(MoneyTransferReceivedEvent evt, CommandGateway commandGateway) {
     logger.trace("on({})", evt);
@@ -58,6 +63,8 @@ public class MoneyTransferSaga {
 
   @SagaEventHandler(associationProperty = "moneyTransferId")
   @EndSaga
+  @DomainEventHandler(namespace = "axon.bank", name = "MoneyTransferCompletedEvent")
+  @DomainEventPublisher(publishes = "axon.bank.MoneyTransferredEvent", type = DomainEventPublisher.PublisherType.EXTERNAL)
   public void on(MoneyTransferCompletedEvent evt, EventGateway eventGateway) {
     logger.trace("on({})", evt);
     // Milestone event

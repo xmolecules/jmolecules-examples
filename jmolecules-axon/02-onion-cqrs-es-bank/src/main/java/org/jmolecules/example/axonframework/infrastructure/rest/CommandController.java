@@ -1,6 +1,7 @@
 package org.jmolecules.example.axonframework.infrastructure.rest;
 
 import org.axonframework.commandhandling.gateway.CommandGateway;
+import org.jmolecules.architecture.cqrs.annotation.CommandDispatcher;
 import org.jmolecules.example.axonframework.domain.api.command.CreateBankAccountCommand;
 import org.jmolecules.example.axonframework.domain.api.command.atm.DepositMoneyCommand;
 import org.jmolecules.example.axonframework.domain.api.command.atm.WithdrawMoneyCommand;
@@ -27,6 +28,7 @@ public class CommandController {
   }
 
   @PostMapping("/create-bank-account")
+  @CommandDispatcher(dispatches = "axon.bank.CreateBankAccountCommand")
   public ResponseEntity<String> createBankAccount(@RequestBody CreateBankAccountCommand cmd) {
     commandGateway.sendAndWait(cmd);
     return created(
@@ -39,18 +41,21 @@ public class CommandController {
   }
 
   @PutMapping("/withdraw-money")
+  @CommandDispatcher(dispatches = "axon.bank.WithdrawMoneyCommand")
   public ResponseEntity<Void> withdrawMoney(@RequestBody WithdrawMoneyCommand cmd) {
     commandGateway.sendAndWait(cmd);
     return noContent().build();
   }
 
   @PutMapping("/deposit-money")
+  @CommandDispatcher(dispatches = "axon.bank.DepositMoneyCommand")
   public ResponseEntity<Void> depositMoney(@RequestBody DepositMoneyCommand cmd) {
     commandGateway.sendAndWait(cmd);
     return noContent().build();
   }
 
   @PutMapping("/request-money-transfer")
+  @CommandDispatcher(dispatches = "axon.bank.RequestMoneyTransferCommand")
   public ResponseEntity<Void> transferMoney(@RequestBody RequestMoneyTransferCommand cmd) {
     commandGateway.sendAndWait(cmd);
     return noContent().build();

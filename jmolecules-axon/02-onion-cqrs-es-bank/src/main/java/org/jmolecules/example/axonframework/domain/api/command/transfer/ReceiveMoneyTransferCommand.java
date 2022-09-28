@@ -1,12 +1,14 @@
 package org.jmolecules.example.axonframework.domain.api.command.transfer;
 
-import org.axonframework.modelling.command.TargetAggregateIdentifier;
+import org.jmolecules.architecture.cqrs.annotation.Command;
+import org.jmolecules.ddd.annotation.Association;
 
 /**
  * Invoked by the saga, recipient is target account.
  */
+@Command(namespace = "axon.bank", name = "ReceiveMoneyTransferCommand")
 public record ReceiveMoneyTransferCommand(
-  @TargetAggregateIdentifier
+  @Association
   String targetAccountId,
 
   String moneyTransferId,
