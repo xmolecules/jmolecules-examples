@@ -21,7 +21,7 @@ import com.tngtech.archunit.lang.ConditionEvents;
 import com.tngtech.archunit.lang.SimpleConditionEvent;
 
 @AnalyzeClasses(packagesOf = Application.class)
-public class ArchitectureTest {
+class ArchitectureTest {
 
 	@ArchTest
 	void verifyAggregates(JavaClasses types) {
