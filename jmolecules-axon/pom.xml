@@ -12,6 +12,10 @@
 	<description>Runtime Support for Axon Framework</description>
 	<artifactId>jmolecules-axon</artifactId>
 
+	<properties>
+		<jmolecules-bom.version>2022.2.2-SNAPSHOT</jmolecules-bom.version>
+	</properties>
+
 	<dependencyManagement>
 		<dependencies>
 			<!-- Axon Framework -->
@@ -26,6 +30,7 @@
 	</dependencyManagement>
 
 	<dependencies>
+
 		<!-- jMolecules -->
 		<dependency>
 			<groupId>org.jmolecules</groupId>
@@ -39,10 +44,10 @@
 			<groupId>org.jmolecules</groupId>
 			<artifactId>jmolecules-events</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jmolecules.integrations</groupId>
-			<artifactId>jmolecules-bytebuddy</artifactId>
+			<artifactId>jmolecules-bytebuddy-nodep</artifactId>
+			<scope>provided</scope>
 		</dependency>
 
 		<!-- Axon Framework -->
@@ -89,13 +94,9 @@
 						</goals>
 					</execution>
 				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.jmolecules.integrations</groupId>
-						<artifactId>jmolecules-bytebuddy</artifactId>
-						<version>${jmolecules-integrations.version}</version>
-					</dependency>
-				</dependencies>
+				<configuration>
+					<classPathDiscovery>true</classPathDiscovery>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
