@@ -14,12 +14,13 @@
   <packaging>pom</packaging>
 
   <properties>
-    <spring-boot.version>2.7.4</spring-boot.version>
+    <spring-boot.version>2.7.5</spring-boot.version>
   </properties>
 
   <modules>
     <module>01-simple</module>
-    <module>02-onion-cqrs-es-bank</module>
+    <module>02-axonstyle-cqrs-es-bank</module>
+    <module>03-onion-axon-cqrs-es-bank</module>
   </modules>
 
 	<dependencyManagement>
@@ -65,6 +66,12 @@
 				<groupId>net.bytebuddy</groupId>
 				<artifactId>byte-buddy-maven-plugin</artifactId>
 				<version>${bytebuddy.version}</version>
+				<configuration>
+					<initialization>
+						<!-- switch off validation, to allow kotlin data class method names -->
+						<validated>false</validated>
+					</initialization>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
