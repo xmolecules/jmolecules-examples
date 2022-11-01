@@ -4,12 +4,10 @@ import mu.KLogging
 import org.axonframework.commandhandling.CommandResultMessage
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.axonframework.eventhandling.gateway.EventGateway
-import org.axonframework.modelling.saga.EndSaga
 import org.axonframework.modelling.saga.SagaEventHandler
 import org.axonframework.modelling.saga.SagaLifecycle
 import org.axonframework.modelling.saga.StartSaga
 import org.axonframework.spring.stereotype.Saga
-import org.jmolecules.architecture.cqrs.annotation.CommandDispatcher
 import org.jmolecules.event.annotation.DomainEventHandler
 import org.jmolecules.event.annotation.DomainEventPublisher
 import org.jmolecules.example.axonframework.domain.api.command.transfer.CancelMoneyTransferCommand
@@ -17,14 +15,14 @@ import org.jmolecules.example.axonframework.domain.api.command.transfer.Complete
 import org.jmolecules.example.axonframework.domain.api.command.transfer.ReceiveMoneyTransferCommand
 import org.jmolecules.example.axonframework.domain.api.type.Reason
 import org.jmolecules.example.axonframework.domain.event.transfer.*
-import org.jmolecules.example.axonframework.domain.model.moneytransfer.MoneyTransferModel
+import org.jmolecules.example.axonframework.domain.model.moneytransfer.MoneyTransfer
 
 @Saga
 class MoneyTransferSaga {
 
     companion object : KLogging()
 
-    private lateinit var moneyTransfer: MoneyTransferModel
+    private lateinit var moneyTransfer: MoneyTransfer
 
     @StartSaga
     @SagaEventHandler(associationProperty = "moneyTransferId")
@@ -33,7 +31,7 @@ class MoneyTransferSaga {
 
         logger.info { "MoneyTransfer [${evt.moneyTransferId}] started with: $evt" }
 
-        moneyTransfer = MoneyTransferModel(
+        moneyTransfer = MoneyTransfer(
             moneyTransferId = evt.moneyTransferId,
             sourceAccountId = evt.sourceAccountId,
             targetAccountId = evt.targetAccountId,

@@ -1,8 +1,8 @@
 package org.jmolecules.example.axonframework.application.moneytransfer
 
-import org.jmolecules.example.axonframework.domain.api.exception.InsufficientBalanceException
-import org.jmolecules.example.axonframework.domain.api.exception.MaximumBalanceExceededException
-import org.jmolecules.example.axonframework.domain.api.exception.MoneyTransferNotFoundException
+import org.jmolecules.example.axonframework.domain.api.command.InsufficientBalanceException
+import org.jmolecules.example.axonframework.domain.api.command.MaximumBalanceExceededException
+import org.jmolecules.example.axonframework.domain.api.command.transfer.MoneyTransferNotFoundException
 import org.jmolecules.example.axonframework.domain.api.query.MoneyTransferSummary
 import org.jmolecules.example.axonframework.domain.api.type.AccountId
 import org.jmolecules.example.axonframework.domain.api.type.Amount

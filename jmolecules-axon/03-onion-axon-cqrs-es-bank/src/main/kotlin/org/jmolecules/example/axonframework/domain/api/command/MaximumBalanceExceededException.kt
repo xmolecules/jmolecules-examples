@@ -1,4 +1,4 @@
-package org.jmolecules.example.axonframework.domain.api.exception
+package org.jmolecules.example.axonframework.domain.api.command
 
 import org.jmolecules.example.axonframework.domain.api.type.AccountId
 import org.jmolecules.example.axonframework.domain.api.type.Amount

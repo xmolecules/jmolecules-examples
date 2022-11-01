@@ -1,7 +1,7 @@
 package org.jmolecules.example.axonframework.application
 
-import org.jmolecules.example.axonframework.domain.api.exception.InsufficientBalanceException
-import org.jmolecules.example.axonframework.domain.api.exception.MaximumBalanceExceededException
+import org.jmolecules.example.axonframework.domain.api.command.InsufficientBalanceException
+import org.jmolecules.example.axonframework.domain.api.command.MaximumBalanceExceededException
 import org.jmolecules.example.axonframework.domain.api.query.BankAccountCurrentBalance
 import org.jmolecules.example.axonframework.domain.api.type.AccountId
 import org.jmolecules.example.axonframework.domain.api.type.Balance

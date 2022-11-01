@@ -4,6 +4,9 @@ import org.jmolecules.example.axonframework.domain.model.bank.BankAccountCreatio
 import org.jmolecules.example.axonframework.domain.api.type.Amount
 import org.jmolecules.example.axonframework.domain.api.type.Balance
 
+/**
+ * Balance of a bank account: current and the upper and lower limits.
+ */
 data class BankAccountBalance(
     internal val currentBalance: Balance,
     internal val maximumBalance: Balance,

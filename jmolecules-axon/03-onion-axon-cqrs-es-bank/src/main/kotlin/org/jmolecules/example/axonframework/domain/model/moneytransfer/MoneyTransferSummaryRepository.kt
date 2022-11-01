@@ -8,7 +8,7 @@ import java.util.*
 /**
  * Repository for money transfers.
  */
-interface MoneyTransferRepository {
+interface MoneyTransferSummaryRepository {
 
     fun findById(id: MoneyTransferId): Optional<MoneyTransferSummary>
     fun findByAccountId(accountId: AccountId): List<MoneyTransferSummary>

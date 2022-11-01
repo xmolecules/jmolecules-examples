@@ -10,12 +10,12 @@ import org.jmolecules.example.axonframework.domain.event.transfer.MoneyTransferC
 import org.jmolecules.example.axonframework.domain.event.transfer.MoneyTransferCompletedEvent
 import org.jmolecules.example.axonframework.domain.event.transfer.MoneyTransferRequestedEvent
 import org.jmolecules.example.axonframework.domain.model.moneytransfer.MoneyTransferSummaryProjection
-import org.jmolecules.example.axonframework.domain.model.moneytransfer.MoneyTransferRepository
+import org.jmolecules.example.axonframework.domain.model.moneytransfer.MoneyTransferSummaryRepository
 import java.util.*
 
 @QueryModel
 class MoneyTransferSummaryProjectionImpl(
-    private val repository: MoneyTransferRepository
+    private val repository: MoneyTransferSummaryRepository
 ) : MoneyTransferSummaryProjection {
 
     @QueryHandler

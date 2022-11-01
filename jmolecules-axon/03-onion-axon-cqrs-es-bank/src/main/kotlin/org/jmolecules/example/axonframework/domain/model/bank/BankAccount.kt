@@ -1,9 +1,9 @@
 package org.jmolecules.example.axonframework.domain.model.bank
 
-import org.jmolecules.example.axonframework.domain.api.exception.InsufficientBalanceException
-import org.jmolecules.example.axonframework.domain.api.exception.MaximumBalanceExceededException
-import org.jmolecules.example.axonframework.domain.api.exception.MoneyTransferNotFoundException
-import org.jmolecules.example.axonframework.domain.model.moneytransfer.MoneyTransfers
+import org.jmolecules.example.axonframework.domain.api.command.InsufficientBalanceException
+import org.jmolecules.example.axonframework.domain.api.command.MaximumBalanceExceededException
+import org.jmolecules.example.axonframework.domain.api.command.transfer.MoneyTransferNotFoundException
+import org.jmolecules.example.axonframework.domain.model.moneytransfer.BankAccountMoneyTransfers
 import org.jmolecules.example.axonframework.domain.api.type.AccountId
 import org.jmolecules.example.axonframework.domain.api.type.Amount
 import org.jmolecules.example.axonframework.domain.api.type.Balance
@@ -15,7 +15,7 @@ import org.jmolecules.example.axonframework.domain.api.type.MoneyTransferId
 class BankAccount(
     private val accountId: AccountId,
     private val balanceModel: BankAccountBalance,
-    private val moneyTransfers: MoneyTransfers
+    private val moneyTransfers: BankAccountMoneyTransfers
 ) {
     companion object {
         /**
@@ -43,7 +43,7 @@ class BankAccount(
                     maximumBalance = MAX_BALANCE,
                     minimumBalance = MIN_BALANCE
                 ),
-                moneyTransfers = MoneyTransfers()
+                moneyTransfers = BankAccountMoneyTransfers()
             )
     }
 

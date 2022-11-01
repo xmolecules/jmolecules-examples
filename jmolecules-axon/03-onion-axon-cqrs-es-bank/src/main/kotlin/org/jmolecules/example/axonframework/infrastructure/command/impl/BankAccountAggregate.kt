@@ -13,9 +13,9 @@ import org.jmolecules.example.axonframework.domain.api.command.transfer.CancelMo
 import org.jmolecules.example.axonframework.domain.api.command.transfer.CompleteMoneyTransferCommand
 import org.jmolecules.example.axonframework.domain.api.command.transfer.ReceiveMoneyTransferCommand
 import org.jmolecules.example.axonframework.domain.api.command.transfer.RequestMoneyTransferCommand
-import org.jmolecules.example.axonframework.domain.api.exception.InsufficientBalanceException
-import org.jmolecules.example.axonframework.domain.api.exception.MaximumBalanceExceededException
-import org.jmolecules.example.axonframework.domain.api.exception.MoneyTransferNotFoundException
+import org.jmolecules.example.axonframework.domain.api.command.InsufficientBalanceException
+import org.jmolecules.example.axonframework.domain.api.command.MaximumBalanceExceededException
+import org.jmolecules.example.axonframework.domain.api.command.transfer.MoneyTransferNotFoundException
 import org.jmolecules.example.axonframework.domain.event.BankAccountCreatedEvent
 import org.jmolecules.example.axonframework.domain.event.atm.MoneyDepositedEvent
 import org.jmolecules.example.axonframework.domain.event.atm.MoneyWithdrawnEvent

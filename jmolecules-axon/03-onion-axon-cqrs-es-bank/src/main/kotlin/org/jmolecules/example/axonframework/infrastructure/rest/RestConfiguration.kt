@@ -1,8 +1,8 @@
 package org.jmolecules.example.axonframework.infrastructure.rest
 
-import org.jmolecules.example.axonframework.domain.api.exception.InsufficientBalanceException
-import org.jmolecules.example.axonframework.domain.api.exception.MaximumBalanceExceededException
-import org.jmolecules.example.axonframework.domain.api.exception.MoneyTransferNotFoundException
+import org.jmolecules.example.axonframework.domain.api.command.InsufficientBalanceException
+import org.jmolecules.example.axonframework.domain.api.command.MaximumBalanceExceededException
+import org.jmolecules.example.axonframework.domain.api.command.transfer.MoneyTransferNotFoundException
 import org.springdoc.core.GroupedOpenApi
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
