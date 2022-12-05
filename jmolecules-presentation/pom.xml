@@ -19,10 +19,6 @@
 		<module>03-types</module>
 	</modules>
 
-	<properties>
-		<jmolecules-bom.version>2022.2.2-SNAPSHOT</jmolecules-bom.version>
-	</properties>
-
 	<dependencies>
 
 		<!-- Persistence -->

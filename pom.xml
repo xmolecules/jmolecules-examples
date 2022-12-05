@@ -20,12 +20,12 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<archunit.version>1.0.0</archunit.version>
-		<axon.version>4.6.1</axon.version>
-		<bytebuddy.version>1.12.18</bytebuddy.version>
+		<axon.version>4.6.2</axon.version>
+		<bytebuddy.version>1.12.19</bytebuddy.version>
 		<java.version>17</java.version>
-		<jmolecules-bom.version>2022.2.1</jmolecules-bom.version>
-		<spring-modulith.version>0.1.0-SNAPSHOT</spring-modulith.version>
-		<spring-boot.version>3.0.0-SNAPSHOT</spring-boot.version>
+		<jmolecules-bom.version>2022.2.2</jmolecules-bom.version>
+		<spring-modulith.version>0.1.0</spring-modulith.version>
+		<spring-boot.version>3.0.0</spring-boot.version>
 	</properties>
 
 	<profiles>
