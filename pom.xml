@@ -20,7 +20,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<archunit.version>0.23.1</archunit.version>
-		<axon.version>4.6.0</axon.version>
 		<bytebuddy.version>1.12.18</bytebuddy.version>
 		<java.version>17</java.version>
 		<jmolecules-bom.version>2022.2.0-SNAPSHOT</jmolecules-bom.version>

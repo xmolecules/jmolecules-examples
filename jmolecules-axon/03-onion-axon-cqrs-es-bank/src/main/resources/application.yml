@@ -10,6 +10,8 @@ spring:
 springdoc:
   swagger-ui:
     use-root-path: true
+    syntax-highlight:
+      activated: true
 
 axon:
   serializer:
