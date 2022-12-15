@@ -18,7 +18,18 @@ BoundedContext BankAccountContext {
   Aggregate BankAccount {
     Entity BankAccountAggregate {
       aggregateRoot
+
+      String accountId
+      BalanceModel balance
+      MoneyTransferModel moneyTransfers
     }
+
+    ValueObject BalanceModel {
+    }
+
+    ValueObject MoneyTransferModel {
+    }
+
     DomainEvent BankAccountCreatedEvent
     DomainEvent MoneyDepositedEvent
     DomainEvent MoneyWithdrawnEvent
