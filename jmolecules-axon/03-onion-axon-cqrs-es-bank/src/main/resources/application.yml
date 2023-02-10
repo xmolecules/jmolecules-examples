@@ -1,23 +1,28 @@
 server:
-  port: 8080
+  port: 8081
 
 spring:
   application:
-    name: axon-bank
+    name: clean-axon-bank
   profiles:
-    include: mem # disable this and start docker compose to play with axon server as event store.
+    include: no-mem # disable this and start docker compose to play with axon server as event store.
 
 springdoc:
   swagger-ui:
     use-root-path: true
     syntax-highlight:
       activated: true
+    try-it-out-enabled: true
 
 axon:
   serializer:
-    events: jackson
-    general: jackson
-    messages: jackson
+#    events: jackson
+#    general: jackson
+#    messages: jackson
+
+logging:
+  level:
+    org.jmolecules.example.axonframework: TRACE
 
 ---
 #

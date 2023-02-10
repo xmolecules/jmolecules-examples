@@ -8,7 +8,7 @@ version: "3"
 services:
   axon-server:
     container_name: "jmolecules-example-axon-server"
-    image: axoniq/axonserver:4.6.3-jdk-17-dev
+    image: axoniq/axonserver:4.6.7-jdk-17-dev
     hostname: axonserver
     environment:
       AXONIQ_AXONSERVER_DEVMODE_ENABLED: "true"

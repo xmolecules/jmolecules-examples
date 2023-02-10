@@ -14,7 +14,7 @@
   <artifactId>jmolecules-axon-onion-cqrs-es-bank</artifactId>
 
   <properties>
-    <kotlin.version>1.7.22</kotlin.version>
+    <kotlin.version>1.8.10</kotlin.version>
     <kotlin-logging.version>3.0.4</kotlin-logging.version>
   </properties>
 
@@ -51,6 +51,7 @@
       <groupId>org.axonframework</groupId>
       <artifactId>axon-spring-boot-starter</artifactId>
     </dependency>
+
     <dependency>
       <groupId>com.fasterxml.jackson.datatype</groupId>
       <artifactId>jackson-datatype-jsr310</artifactId>
@@ -69,7 +70,6 @@
       <artifactId>springdoc-openapi-kotlin</artifactId>
       <version>${springdoc-openapi.version}</version>
     </dependency>
-
   </dependencies>
 
   <build>
@@ -81,8 +81,8 @@
         <version>${kotlin.version}</version>
         <configuration>
           <jvmTarget>${java.version}</jvmTarget>
-          <apiVersion>1.5</apiVersion>
-          <languageVersion>1.5</languageVersion>
+          <apiVersion>1.8</apiVersion>
+          <languageVersion>1.8</languageVersion>
           <args>
             <arg>-Xinline-classes</arg>
           </args>
@@ -171,6 +171,21 @@
             <goals>
               <goal>testCompile</goal>
             </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>repackage</goal>
+            </goals>
+            <configuration>
+              <finalName>axon-bank</finalName>
+            </configuration>
           </execution>
         </executions>
       </plugin>
