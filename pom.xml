@@ -21,7 +21,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<archunit.version>1.0.0</archunit.version>
 		<axon.version>4.6.2</axon.version>
-		<bytebuddy.version>1.12.19</bytebuddy.version>
+		<bytebuddy.version>1.12.20</bytebuddy.version>
 		<java.version>17</java.version>
 		<jmolecules-bom.version>2022.2.2</jmolecules-bom.version>
 		<jmolecules-integrations.version>0.11.0-SNAPSHOT</jmolecules-integrations.version>

@@ -51,3 +51,14 @@ A customer can retrieve account information. To run this use case, he/she needs 
 - [Event Sourcing](./documentation/adrs/004-event-sourcing.md)
 - [Explicit Messaging](./documentation/adrs/005-command-event-query-bus.md)
 - [In and Out Ports](./documentation/adrs/006-in-and-out-ports.md)
+
+## Running Example
+
+The example can be started by running the `CleanAxonBankApplication`. It supports
+two spring profiles (configured via `application.yml`). The `mem` profile 
+works with an in-memory Event Store. If `no-mem` profile is active, the 
+application requires an Axon Server, which can be started by starting 
+docker compose with the corresponding `docker-compose.yaml` file. 
+
+To interact with application, use Swagger UI available via http://localhost:8081/swagger-ui/index.html
+It provides several use cases switchable via group selection on the top of the UI. 
