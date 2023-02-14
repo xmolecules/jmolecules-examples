@@ -19,9 +19,10 @@ import java.io.IOException;
 
 import org.jmolecules.archunit.JMoleculesDddRules;
 import org.junit.jupiter.api.Test;
-import org.moduliths.docs.Documenter;
-import org.moduliths.docs.Documenter.Options;
-import org.moduliths.docs.Documenter.Options.DiagramStyle;
+import org.springframework.modulith.docs.Documenter;
+import org.springframework.modulith.docs.Documenter.CanvasOptions;
+import org.springframework.modulith.docs.Documenter.DiagramOptions;
+import org.springframework.modulith.docs.Documenter.DiagramOptions.DiagramStyle;
 
 import com.tngtech.archunit.junit.AnalyzeClasses;
 import com.tngtech.archunit.junit.ArchTest;
@@ -37,8 +38,10 @@ class ArchitectureTests {
 
 	@Test
 	void documentation() throws IOException {
-		new Documenter(Application.class)
-				.writeModuleCanvases()
-				.writeModulesAsPlantUml(Options.defaults().withStyle(DiagramStyle.C4));
+
+		var diagramOptions = DiagramOptions.defaults().withStyle(DiagramStyle.C4);
+		var canvasOptions = CanvasOptions.defaults();
+
+		new Documenter(Application.class).writeDocumentation(diagramOptions, canvasOptions);
 	}
 }

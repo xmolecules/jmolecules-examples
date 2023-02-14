@@ -1,5 +1,7 @@
 package org.jmolecules.example.axonframework.core.port.`in`
 
+import org.jmolecules.example.axonframework.core.model.bankaccount.exception.InsufficientBalanceException
+import org.jmolecules.example.axonframework.core.model.bankaccount.exception.MaximumBalanceExceededException
 import org.jmolecules.example.axonframework.core.model.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.core.model.bankaccount.type.Balance
 

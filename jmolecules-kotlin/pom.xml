@@ -48,6 +48,12 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.jmolecules.integrations</groupId>
+			<artifactId>jmolecules-bytebuddy-nodep</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-reflect</artifactId>
       <version>${kotlin.version}</version>
@@ -107,13 +113,9 @@
 						</goals>
 					</execution>
 				</executions>
-				<dependencies>
-					<dependency>
-						<groupId>org.jmolecules.integrations</groupId>
-						<artifactId>jmolecules-bytebuddy</artifactId>
-						<version>${jmolecules-integrations.version}</version>
-					</dependency>
-				</dependencies>
+				<configuration>
+					<classPathDiscovery>true</classPathDiscovery>
+				</configuration>
 			</plugin>
 
 			<plugin>

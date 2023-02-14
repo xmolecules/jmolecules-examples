@@ -27,11 +27,10 @@ import example.jmolecules.presentation.annotations.order.Orders;
 import lombok.RequiredArgsConstructor;
 
 import org.junit.jupiter.api.Test;
-import org.moduliths.docs.Documenter;
-import org.moduliths.docs.Documenter.Options;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.assertj.AssertableApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.modulith.docs.Documenter;
 
 /**
  * @author Oliver Drotbohm
@@ -71,9 +70,6 @@ class ApplicationIntegrationTests {
 
 	@Test
 	void generateDocumentation() throws Exception {
-
-		new Documenter(Application.class)
-				.writeModulesAsPlantUml(Options.defaults())
-				.writeModuleCanvases();
+		new Documenter(Application.class).writeDocumentation();
 	}
 }

@@ -37,9 +37,9 @@
 		<!-- Moduliths -->
 
 		<dependency>
-			<groupId>org.moduliths</groupId>
-			<artifactId>moduliths-docs</artifactId>
-			<version>${moduliths.version}</version>
+			<groupId>org.springframework.experimental</groupId>
+			<artifactId>spring-modulith-docs</artifactId>
+			<version>${spring-modulith.version}</version>
 			<scope>test</scope>
 		</dependency>
 
