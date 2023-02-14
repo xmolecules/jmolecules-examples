@@ -4,7 +4,7 @@ import mu.KLogging
 import org.axonframework.eventhandling.gateway.EventGateway
 import org.jmolecules.example.axonframework.core.model.moneytransfer.event.MoneyTransferFailedEvent
 import org.jmolecules.example.axonframework.core.model.moneytransfer.event.MoneyTransferredEvent
-import org.jmolecules.example.axonframework.core.port.out.command.MoneyTransferEventPort
+import org.jmolecules.example.axonframework.core.port.out.event.MoneyTransferEventPort
 import org.springframework.stereotype.Component
 
 /**

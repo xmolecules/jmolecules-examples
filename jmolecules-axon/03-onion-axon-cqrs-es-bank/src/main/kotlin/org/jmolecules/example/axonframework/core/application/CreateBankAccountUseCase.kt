@@ -1,9 +1,10 @@
 package org.jmolecules.example.axonframework.core.application
 
-import org.jmolecules.example.axonframework.core.model.bankaccount.type.AccountId
-import org.jmolecules.example.axonframework.core.model.bankaccount.type.Balance
 import org.jmolecules.example.axonframework.core.model.bankaccount.exception.InsufficientBalanceException
 import org.jmolecules.example.axonframework.core.model.bankaccount.exception.MaximumBalanceExceededException
+import org.jmolecules.example.axonframework.core.model.bankaccount.type.AccountId
+import org.jmolecules.example.axonframework.core.model.bankaccount.type.Balance
+import org.jmolecules.example.axonframework.core.port.`in`.CreateBankAccountInPort
 import org.jmolecules.example.axonframework.core.port.out.command.BankAccountCommandPort
 import org.springframework.stereotype.Component
 
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Component
 @Component
 class CreateBankAccountUseCase(
   private val bankAccountPort: BankAccountCommandPort
-) {
+) : CreateBankAccountInPort {
 
   /**
    * Creates a bank account.
@@ -21,7 +22,7 @@ class CreateBankAccountUseCase(
    * @param initialBalance balance of the account.
    */
   @Throws(MaximumBalanceExceededException::class, InsufficientBalanceException::class)
-  fun createBankAccount(accountId: AccountId, initialBalance: Balance) {
+  override fun createBankAccount(accountId: AccountId, initialBalance: Balance) {
     bankAccountPort.createBankAccount(accountId, initialBalance)
   }
 }

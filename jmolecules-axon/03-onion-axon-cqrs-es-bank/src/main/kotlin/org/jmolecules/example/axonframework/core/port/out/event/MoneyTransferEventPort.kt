@@ -1,4 +1,4 @@
-package org.jmolecules.example.axonframework.core.port.out.command
+package org.jmolecules.example.axonframework.core.port.out.event
 
 import org.jmolecules.example.axonframework.core.model.moneytransfer.event.MoneyTransferFailedEvent
 import org.jmolecules.example.axonframework.core.model.moneytransfer.event.MoneyTransferredEvent

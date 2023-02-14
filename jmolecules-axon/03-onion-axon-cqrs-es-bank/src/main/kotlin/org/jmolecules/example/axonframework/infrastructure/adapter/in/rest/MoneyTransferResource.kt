@@ -7,7 +7,7 @@ import org.jmolecules.example.axonframework.core.model.bankaccount.type.AccountI
 import org.jmolecules.example.axonframework.core.model.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.core.model.moneytransfer.type.MoneyTransferId
 import org.jmolecules.example.axonframework.core.model.moneytransfer.read.MoneyTransferSummary
-import org.jmolecules.example.axonframework.core.application.MoneyTransferUseCase
+import org.jmolecules.example.axonframework.core.application.TransferMoneyUseCase
 import org.jmolecules.example.axonframework.infrastructure.adapter.`in`.rest.MoneyTransferResource.MoneyTransferStatusDto.*
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.notFound
@@ -21,7 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 @RestController
 @RequestMapping("/rest/money-transfer")
 class MoneyTransferResource(
-  private val moneyTransfer: MoneyTransferUseCase,
+  private val moneyTransfer: TransferMoneyUseCase,
 ) {
   @PutMapping("/execute")
   @Operation(

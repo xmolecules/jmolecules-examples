@@ -11,7 +11,7 @@ import org.jmolecules.example.axonframework.core.model.moneytransfer.event.*
 import org.jmolecules.example.axonframework.core.model.moneytransfer.state.MoneyTransfer
 import org.jmolecules.example.axonframework.core.model.moneytransfer.type.Reason
 import org.jmolecules.example.axonframework.core.port.out.command.MoneyTransferCommandPort
-import org.jmolecules.example.axonframework.core.port.out.command.MoneyTransferEventPort
+import org.jmolecules.example.axonframework.core.port.out.event.MoneyTransferEventPort
 
 @Saga
 class MoneyTransferProcessManager {

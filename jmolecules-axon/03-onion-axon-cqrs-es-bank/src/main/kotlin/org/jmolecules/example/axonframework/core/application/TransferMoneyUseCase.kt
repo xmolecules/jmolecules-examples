@@ -7,6 +7,7 @@ import org.jmolecules.example.axonframework.core.model.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.core.model.moneytransfer.exception.MoneyTransferNotFoundException
 import org.jmolecules.example.axonframework.core.model.moneytransfer.read.MoneyTransferSummary
 import org.jmolecules.example.axonframework.core.model.moneytransfer.type.MoneyTransferId
+import org.jmolecules.example.axonframework.core.port.`in`.TransferMoneyInPort
 import org.jmolecules.example.axonframework.core.port.out.command.MoneyTransferCommandPort
 import org.jmolecules.example.axonframework.core.port.out.query.MoneyTransferQueryPort
 import org.springframework.stereotype.Component
@@ -17,10 +18,10 @@ import java.util.concurrent.CompletableFuture
  * Operations related to money transfers.
  */
 @Component
-class MoneyTransferUseCase(
+class TransferMoneyUseCase(
   private val moneyTransferCommandPort: MoneyTransferCommandPort,
   private val moneyTransferQueryPort: MoneyTransferQueryPort,
-) {
+) : TransferMoneyInPort {
 
   /**
    * Initializes money transfers from source to target account.
@@ -32,7 +33,7 @@ class MoneyTransferUseCase(
    * @throws [MaximumBalanceExceededException] if the balance target account would be above the maximum.
    */
   @Throws(InsufficientBalanceException::class, MaximumBalanceExceededException::class)
-  fun transferMoney(sourceAccountId: AccountId, targetAccountId: AccountId, amount: Amount): MoneyTransferId {
+  override fun transferMoney(sourceAccountId: AccountId, targetAccountId: AccountId, amount: Amount): MoneyTransferId {
     return moneyTransferCommandPort.transferMoney(
       sourceAccountId = sourceAccountId,
       targetAccountId = targetAccountId,
@@ -47,7 +48,7 @@ class MoneyTransferUseCase(
    * @return list of transfers, the account is part of.
    */
   @Throws(MoneyTransferNotFoundException::class)
-  fun getMoneyTransfers(accountId: AccountId): CompletableFuture<List<MoneyTransferSummary>> {
+  override fun getMoneyTransfers(accountId: AccountId): CompletableFuture<List<MoneyTransferSummary>> {
     return moneyTransferQueryPort.getMoneyTransfers(accountId = accountId)
   }
 
@@ -58,7 +59,7 @@ class MoneyTransferUseCase(
    * @return money transfer.
    */
   @Throws(MoneyTransferNotFoundException::class)
-  fun getMoneyTransfer(moneyTransferId: MoneyTransferId): CompletableFuture<Optional<MoneyTransferSummary>> {
+  override fun getMoneyTransfer(moneyTransferId: MoneyTransferId): CompletableFuture<Optional<MoneyTransferSummary>> {
     return moneyTransferQueryPort.getMoneyTransfer(moneyTransferId = moneyTransferId)
   }
 }

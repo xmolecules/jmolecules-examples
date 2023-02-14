@@ -1,0 +1,129 @@
+@startuml
+
+top to bottom direction
+
+package "In Adapter" {
+    [AtmResource] <<REST controller>>
+    [BankAccountResource] <<REST controller>>
+    [MoneyTransferResource] <<REST controller>>
+}
+
+component "Application" {
+    portin "Create Bank Account" as InPort1
+    portin "Deposit Money" as InPort2
+    portin "Withdraw Money" as InPort3
+    portin "Transfer Money" as InPort4
+    portin "Retrieve Bank Account Information" as InPort5
+
+    component "Policies" {
+        [Transfer Money PM] <<process manager>>
+    }
+
+    component "Use Cases" {
+        [Create Bank Account] <<use case>> as UC01
+        [Deposit Money] <<use case>> as UC02
+        [Withdraw Money] <<use case>> as UC03
+        [Transfer Money PM] <<use case>> as UC04
+        [Retrieve Bank Account Information] <<use case>> as UC05
+    }
+    portout "Bank Account Command" as OutPort1
+    portout "Bank Account Query" as OutPort2
+    portout "ATM Command" as OutPort3
+    portout "Money Transfer Command" as OutPort4
+    portout "Bank Account Query" as OutPort5
+}
+
+component "Domain Model" {
+    component "bankaccount" {
+        [Bank Account] <<command>>
+        [Current Balance] <<query>>
+        [Bank Account Events]
+    }
+    component "moneytransfer" {
+        [Bank Account Money Transfers] <<command>>
+        [Money Transfer]
+        [Money Transfer Summary] <<query>>
+        [Money Transfer Events]
+    }
+}
+
+component "Out Adapter" {
+
+    component "Command model" {
+        component "Commands"
+        [BankAccountAggregate]
+    }
+
+    component "Query model" {
+        component "Queries"
+        component "Current Balances" {
+            [Current Balance Projection]
+            [Current Balance Projector]
+            [Current Balance Repository]
+        }
+        component "Money Transfers" {
+            [Money Transfer Projector]
+            [Money Transfer Projection]
+            [Money Transfer Repository]
+        }
+    }
+
+    component "Message Dispatcher" {
+        [BankAccountCommandDispatcher]
+        [BankAccountQueryDispatcher]
+    }
+}
+
+AtmResource -down-> InPort2
+AtmResource -down-> InPort3
+BankAccountResource -down-> InPort1
+BankAccountResource -down-> InPort5
+MoneyTransferResource -down-> InPort4
+
+InPort1 <.. UC01 : impl
+InPort2 <.. UC02 : impl
+InPort3 <.. UC03 : impl
+InPort4 <.. UC04 : impl
+InPort5 <.. UC05 : impl
+
+UC01 --> OutPort1
+UC05 --> OutPort2
+
+UC02 --> OutPort3
+UC03 --> OutPort3
+
+UC04 --> OutPort4
+UC04 --> OutPort5
+
+BankAccountCommandDispatcher .up.> OutPort1 : impl
+BankAccountCommandDispatcher .up.> OutPort3 : impl
+BankAccountCommandDispatcher .up.> OutPort4 : impl
+
+[BankAccountQueryDispatcher] .up.> OutPort2 : impl
+[BankAccountQueryDispatcher] .up.> OutPort5 : impl
+
+BankAccountCommandDispatcher --> Commands
+BankAccountAggregate --> Commands
+BankAccountAggregate --> [Bank Account Money Transfers]
+BankAccountAggregate --> [Bank Account Events]
+
+BankAccountAggregate --> [Bank Account]
+[Bank Account] --> [Bank Account Events]
+[Bank Account Money Transfers] --> [Money Transfer Events]
+BankAccountAggregate --> [Money Transfer Events]
+
+BankAccountQueryDispatcher --> Queries
+[Current Balance Projection] --> Queries
+[Current Balance Projection] --> [Current Balance Repository]
+[Current Balance Projector] --> [Current Balance Repository]
+[Current Balance Repository] --> [Current Balance]
+
+[Money Transfer Projection] --> Queries
+[Money Transfer Projection] --> [Money Transfer Repository]
+[Money Transfer Projector] --> [Money Transfer Repository]
+[Money Transfer Repository] --> [Money Transfer Summary]
+
+[Transfer Money PM] --> [Money Transfer Events]
+[Transfer Money PM] --> [Money Transfer]
+[Transfer Money PM] --> OutPort4
+@enduml
