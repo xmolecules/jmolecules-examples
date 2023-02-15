@@ -54,7 +54,7 @@ A customer can retrieve account information. To run this use case, he/she needs 
 
 ## Running Example
 
-The example can be started by running the `CleanAxonBankApplication`. It supports
+The example can be started by running the `HexagonalAxonBankApplication`. It supports
 two spring profiles (configured via `application.yml`). The `mem` profile 
 works with an in-memory Event Store. If `no-mem` profile is active, the 
 application requires an Axon Server, which can be started by starting 

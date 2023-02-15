@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 import org.axonframework.queryhandling.QueryHandler;
 import org.jmolecules.architecture.cqrs.annotation.QueryModel;
 import org.jmolecules.event.annotation.DomainEventHandler;
+import org.springframework.stereotype.Component;
 
 @Slf4j
 @QueryModel

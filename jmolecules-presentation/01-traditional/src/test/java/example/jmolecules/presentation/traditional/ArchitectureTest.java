@@ -48,7 +48,7 @@ class ArchitectureTest {
 
 		/*
 		 * (non-Javadoc)
-		 * @see com.tngtech.archunit.lang.AbstractClassesTransformer#doTransform(com.tngtech.archunit.core.domain.JavaClasses)
+		 * @see com.tngtech.archunit.lang.AbstractClassesTransformer#doTransform(com.tngtech.archunit.bank.domain.JavaClasses)
 		 */
 		@Override
 		public Set<JavaClass> doTransform(JavaClasses collection) {
