@@ -5,6 +5,7 @@ import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.BankAc
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.*
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFoundException
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -18,7 +19,7 @@ internal class BankAccountTest {
   private val moneyTransferId = MoneyTransferId.of("0815")
 
   @Test
-  fun `creates bank account with valid balance`() {
+  fun `create bank account with valid balance`() {
     val event = BankAccount.createAccount(
       accountId = accountId,
       initialBalance = validInitialBalance
@@ -27,7 +28,7 @@ internal class BankAccountTest {
   }
 
   @Test
-  fun `don't create bank account with insufficient balance`() {
+  fun `fail to create bank account with insufficient balance`() {
     val ex = assertThrows<InsufficientBalanceException> {
       BankAccount.createAccount(
         accountId = accountId,
@@ -39,7 +40,7 @@ internal class BankAccountTest {
   }
 
   @Test
-  fun `don't create bank account with too high balance`() {
+  fun `fail to create bank account with too high balance`() {
     val ex = assertThrows<MaximumBalanceExceededException> {
       BankAccount.createAccount(
         accountId = accountId,
@@ -181,8 +182,29 @@ internal class BankAccountTest {
   }
 
   @Test
-  fun `request and acknowledge money transfer`() {
+  fun `fail to receive money transfer`() {
+    val amount = Amount.of(1000)
+    val bankAccount = BankAccount.createAccount(
+      accountId = accountId,
+      initialBalance = validInitialBalance
+    ).let { BankAccount.initializeAccount(accountId = it.accountId, initialBalance = it.initialBalance) }
+
+    val ex = assertThrows<MaximumBalanceExceededException> {
+      bankAccount.receiveMoneyTransfer(
+        moneyTransferId = moneyTransferId,
+        targetAccountId = otherAccountId,
+        amount = amount
+      )
+    }
+
+    assertThat(ex.accountId).isEqualTo(accountId)
+    assertThat(ex.currentBalance).isEqualTo(validInitialBalance)
+  }
+
+  @Test
+  fun `request and complete money transfer`() {
     val amount = Amount.of(11)
+    val other = MoneyTransferId.of("other")
     val bankAccount = BankAccount.createAccount(
       accountId = accountId,
       initialBalance = validInitialBalance
@@ -197,6 +219,23 @@ internal class BankAccountTest {
 
     bankAccount.initializeMoneyTransfer(event.moneyTransferId, event.amount)
     assertThat(bankAccount.getActiveMoneyTransfers().hasMoneyTransfer(event.moneyTransferId)).isTrue
+
+    val ex = assertThrows<MoneyTransferNotFoundException> {
+      bankAccount.completeMoneyTransfer(
+        moneyTransferId = other,
+        sourceAccountId = event.sourceAccountId
+      )
+    }
+    assertThat(ex.moneyTransferId).isEqualTo(other)
+    assertThat(ex.accountId).isEqualTo(accountId)
+
+    val completion = bankAccount.completeMoneyTransfer(
+      moneyTransferId = event.moneyTransferId,
+      sourceAccountId = event.sourceAccountId
+    )
+    assertThat(completion.moneyTransferId).isEqualTo(event.moneyTransferId)
+    assertThat(completion.sourceAccountId).isEqualTo(event.sourceAccountId)
+
     bankAccount.acknowledgeMoneyTransferCompletion(event.moneyTransferId)
 
     // no active transfer anymore
@@ -207,7 +246,7 @@ internal class BankAccountTest {
   }
 
   @Test
-  fun `request and fail to acknowledge money transfer`() {
+  fun `request and fail to complete money transfer`() {
     val amount = Amount.of(11)
     val unknown = MoneyTransferId.of("unknown")
     val bankAccount = BankAccount.createAccount(
@@ -234,6 +273,8 @@ internal class BankAccountTest {
   @Test
   fun `request and cancel money transfer`() {
     val amount = Amount.of(11)
+    val reason = RejectionReason.of("reason")
+    val otherTransfer = MoneyTransferId.of("other")
     val bankAccount = BankAccount.createAccount(
       accountId = accountId,
       initialBalance = validInitialBalance
@@ -248,7 +289,28 @@ internal class BankAccountTest {
 
     bankAccount.initializeMoneyTransfer(event.moneyTransferId, event.amount)
     assertThat(bankAccount.getActiveMoneyTransfers().hasMoneyTransfer(event.moneyTransferId)).isTrue
-    bankAccount.acknowledgeMoneyTransferCompletion(event.moneyTransferId)
+
+    val ex = assertThrows<MoneyTransferNotFoundException> {
+      bankAccount.cancelMoneyTransfer(
+        moneyTransferId = otherTransfer,
+        sourceAccountId = accountId,
+        rejectionReason = reason
+      )
+    }
+
+    assertThat(ex.moneyTransferId).isEqualTo(otherTransfer)
+    assertThat(ex.accountId).isEqualTo(accountId)
+
+    val cancellation = bankAccount.cancelMoneyTransfer(
+      moneyTransferId = event.moneyTransferId,
+      sourceAccountId = accountId,
+      rejectionReason = reason
+    )
+
+    assertThat(cancellation.moneyTransferId).isEqualTo(event.moneyTransferId)
+    assertThat(cancellation.reason).isEqualTo(reason)
+
+    bankAccount.acknowledgeMoneyTransferCancellation(event.moneyTransferId)
 
     // no active transfer anymore
     assertThat(bankAccount.getActiveMoneyTransfers().hasMoneyTransfer(event.moneyTransferId)).isFalse
@@ -256,4 +318,5 @@ internal class BankAccountTest {
     // amount back to initial
     assertThat(bankAccount.getCurrentBalance()).isEqualTo(validInitialBalance)
   }
+
 }
