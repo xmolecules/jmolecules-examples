@@ -4,8 +4,8 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import mu.KLogging
 import org.jmolecules.ddd.annotation.ValueObject
-import org.jmolecules.example.axonframework.bank.application.usecase.DepositMoneyUseCase
-import org.jmolecules.example.axonframework.bank.application.usecase.WithdrawMoneyUseCase
+import org.jmolecules.example.axonframework.bank.application.port.`in`.DepositMoneyInPort
+import org.jmolecules.example.axonframework.bank.application.port.`in`.WithdrawMoneyInPort
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.springframework.http.ResponseEntity
@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/rest/atm")
 class AtmResource(
-  private val withdrawMoneyUC: WithdrawMoneyUseCase,
-  private val depositMoneyUC: DepositMoneyUseCase,
+  private val withdrawMoneyInPort: WithdrawMoneyInPort,
+  private val depositMoneyInPort: DepositMoneyInPort,
 ) {
 
-  companion object: KLogging()
+  companion object : KLogging()
 
   @PutMapping(value = ["/withdraw-money"])
   @Operation(
@@ -34,7 +34,7 @@ class AtmResource(
   )
   fun withdrawMoney(@RequestBody dto: WithdrawMoneyDto): ResponseEntity<Void> {
     logger.info { "ATM Withdraw Request: $dto" }
-    withdrawMoneyUC.withdrawMoney(AccountId.of(dto.accountId), Amount.of(dto.amount))
+    withdrawMoneyInPort.withdrawMoney(AccountId.of(dto.accountId), Amount.of(dto.amount))
     return ResponseEntity.noContent().build()
   }
 
@@ -49,7 +49,7 @@ class AtmResource(
   )
   fun depositMoney(@RequestBody dto: DepositMoneyDto): ResponseEntity<Void> {
     logger.info { "ATM Deposit Request: $dto" }
-    depositMoneyUC.depositMoney(AccountId.of(dto.accountId), Amount.of(dto.amount))
+    depositMoneyInPort.depositMoney(AccountId.of(dto.accountId), Amount.of(dto.amount))
     return ResponseEntity.noContent().build()
   }
 

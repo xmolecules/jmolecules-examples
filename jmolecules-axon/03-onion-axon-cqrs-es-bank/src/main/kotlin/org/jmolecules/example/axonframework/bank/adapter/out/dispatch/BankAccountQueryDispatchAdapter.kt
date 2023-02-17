@@ -2,16 +2,16 @@ package org.jmolecules.example.axonframework.bank.adapter.out.dispatch
 
 import org.axonframework.queryhandling.QueryGateway
 import org.jmolecules.architecture.hexagonal.SecondaryAdapter
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.read.BankAccountCurrentBalance
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.CurrentBalance
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.MoneyTransferSummary
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummary
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 import org.jmolecules.example.axonframework.bank.application.port.out.query.BankAccountQueryPort
 import org.jmolecules.example.axonframework.bank.application.port.out.query.MoneyTransferQueryPort
 import org.jmolecules.example.axonframework.bank.adapter.out.readmodel.bankaccount.BankAccountCurrentBalanceQuery
 import org.jmolecules.example.axonframework.bank.adapter.out.readmodel.moneytransfer.MoneyTransferSummariesForBankAccountQuery
 import org.jmolecules.example.axonframework.bank.adapter.out.readmodel.moneytransfer.MoneyTransferSummaryByIdQuery
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.MoneyTransferSummaries
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummaries
 import org.jmolecules.example.axonframework.infrastructure.architecture.QueryDispatcher
 import org.springframework.stereotype.Component
 import java.util.Optional
@@ -27,7 +27,7 @@ class BankAccountQueryDispatchAdapter(
 ) : BankAccountQueryPort, MoneyTransferQueryPort {
 
   @QueryDispatcher(namespace = "axon.bank", name = "BankAccountCurrentBalanceQuery")
-  override fun getCurrentBalance(accountId: AccountId): CompletableFuture<Optional<BankAccountCurrentBalance>> {
+  override fun getCurrentBalance(accountId: AccountId): CompletableFuture<Optional<CurrentBalance>> {
     return queryGateway.query(
       BankAccountCurrentBalanceQuery(accountId), BankAccountCurrentBalanceQuery.RESPONSE_TYPE
     )
@@ -46,6 +46,4 @@ class BankAccountQueryDispatchAdapter(
       MoneyTransferSummaryByIdQuery(moneyTransferId), MoneyTransferSummaryByIdQuery.RESPONSE_TYPE
     )
   }
-
-
 }

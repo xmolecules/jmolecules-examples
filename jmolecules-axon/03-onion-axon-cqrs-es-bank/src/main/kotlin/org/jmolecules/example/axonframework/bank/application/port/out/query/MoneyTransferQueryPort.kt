@@ -2,8 +2,8 @@ package org.jmolecules.example.axonframework.bank.application.port.out.query
 
 import org.jmolecules.architecture.hexagonal.SecondaryPort
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.MoneyTransferSummaries
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.MoneyTransferSummary
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummaries
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummary
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 import java.util.*
 import java.util.concurrent.CompletableFuture

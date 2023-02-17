@@ -3,9 +3,10 @@ package org.jmolecules.example.axonframework.bank.adapter.out.readmodel.moneytra
 import org.axonframework.queryhandling.QueryHandler
 import org.jmolecules.architecture.cqrs.annotation.QueryModel
 import org.jmolecules.example.axonframework.bank.application.port.out.repository.MoneyTransferSummaryRepository
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.MoneyTransferSummaries
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.MoneyTransferSummary
-import java.util.Optional
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.BankAccountMoneyTransfer
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummaries
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummary
+import java.util.*
 
 /**
  * Query domain for the money transfers.
@@ -22,7 +23,7 @@ class MoneyTransferSummaryProjection(
    */
   @QueryHandler
   fun query(query: MoneyTransferSummaryByIdQuery): Optional<MoneyTransferSummary> {
-    return repository.findById(query.moneyTransferId)
+    return repository.findById(query.moneyTransferId).map { it.toDomain() }
   }
 
   /**
@@ -32,7 +33,7 @@ class MoneyTransferSummaryProjection(
    */
   @QueryHandler
   fun query(query: MoneyTransferSummariesForBankAccountQuery): MoneyTransferSummaries {
-    return MoneyTransferSummaries(elements = repository.findByAccountId(query.accountId))
+    return MoneyTransferSummaries(elements = repository.findByAccountId(query.accountId).map { it.toDomain() })
   }
 
   /**
@@ -40,7 +41,15 @@ class MoneyTransferSummaryProjection(
    */
   @QueryHandler
   fun query(query: AllMoneyTransfersQuery): List<MoneyTransferSummary> {
-    return repository.findAll()
+    return repository.findAll().map { it.toDomain() }
   }
 
+  fun BankAccountMoneyTransfer.toDomain() = MoneyTransferSummary(
+    moneyTransferId = this.moneyTransferId,
+    sourceAccountId = this.sourceAccountId,
+    targetAccountId = this.targetAccountId,
+    amount = this.amount,
+    success = this.success,
+    errorMessage = this.errorMessage
+  )
 }

@@ -1,6 +1,5 @@
 package org.jmolecules.example.axonframework.bank.domain.bankaccount.type
 
-import com.fasterxml.jackson.annotation.JsonCreator
 import org.jmolecules.ddd.annotation.ValueObject
 
 /**

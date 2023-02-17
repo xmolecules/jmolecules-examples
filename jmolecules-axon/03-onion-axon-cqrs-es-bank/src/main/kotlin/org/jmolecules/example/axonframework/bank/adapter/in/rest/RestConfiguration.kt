@@ -4,9 +4,9 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Info
 import org.axonframework.axonserver.connector.command.AxonServerRemoteCommandHandlingException
 import org.jmolecules.ddd.annotation.ValueObject
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.exception.InsufficientBalanceException
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.exception.MaximumBalanceExceededException
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.exception.MoneyTransferNotFoundException
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalanceException
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceededException
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFoundException
 import org.springdoc.core.GroupedOpenApi
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

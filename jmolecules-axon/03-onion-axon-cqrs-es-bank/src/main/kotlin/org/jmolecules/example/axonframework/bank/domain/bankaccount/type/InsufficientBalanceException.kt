@@ -1,9 +1,8 @@
-package org.jmolecules.example.axonframework.bank.domain.bankaccount.exception
+package org.jmolecules.example.axonframework.bank.domain.bankaccount.type
 
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
-
+/**
+ * Indicates insufficient balance.
+ */
 class InsufficientBalanceException(
   accountId: AccountId,
   currentBalance: Balance,

@@ -4,10 +4,10 @@ import org.jmolecules.architecture.cqrs.annotation.Command
 import org.jmolecules.ddd.annotation.Association
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.Reason
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
 
 /**
- * Internal commandmodel to cancel money transfer.
+ * Internal command to cancel money transfer.
  */
 @Command(namespace = "axon.bank", name = "CancelMoneyTransferCommand")
 data class CancelMoneyTransferCommand(
@@ -15,5 +15,5 @@ data class CancelMoneyTransferCommand(
   val sourceAccountId: AccountId,
   val moneyTransferId: MoneyTransferId,
   val targetAccountId: AccountId,
-  val reason: Reason,
+  val rejectionReason: RejectionReason,
 )

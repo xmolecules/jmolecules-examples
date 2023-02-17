@@ -1,12 +1,12 @@
 package org.jmolecules.example.axonframework.bank.application.port.`in`
 
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.exception.InsufficientBalanceException
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.exception.MaximumBalanceExceededException
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalanceException
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceededException
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.exception.MoneyTransferNotFoundException
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.MoneyTransferSummaries
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.MoneyTransferSummary
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFoundException
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummaries
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummary
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 import java.util.*
 import java.util.concurrent.CompletableFuture

@@ -6,13 +6,11 @@ import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Account
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 
 /**
- * Internal commandmodel to complete money transfer.
+ * Internal command to complete money transfer.
  */
 @Command(namespace = "axon.bank", name = "CompleteMoneyTransferCommand")
 data class CompleteMoneyTransferCommand(
-
   @Association
   val sourceAccountId: AccountId,
   val moneyTransferId: MoneyTransferId
-
 )

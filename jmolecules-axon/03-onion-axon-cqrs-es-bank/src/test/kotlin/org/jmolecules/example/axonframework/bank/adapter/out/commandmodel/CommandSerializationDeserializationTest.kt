@@ -13,7 +13,7 @@ import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Account
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.Reason
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
 import org.jmolecules.example.axonframework.infrastructure.InfrastructureConfiguration.Companion.DEFAULT_OBJECT_MAPPER
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
@@ -54,7 +54,7 @@ internal class CommandSerializationDeserializationTest {
           moneyTransferId = MoneyTransferId.of("0815"),
           sourceAccountId = AccountId.of("4711"),
           targetAccountId = AccountId.of("4712"),
-          reason = Reason.of("no money")
+          rejectionReason = RejectionReason.of("no money")
         )
       ),
       Arguments.of(

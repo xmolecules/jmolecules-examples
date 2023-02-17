@@ -7,7 +7,7 @@ import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.Money
 /**
  * Represents a single money transfer.
  */
-data class MoneyTransfer(
+class MoneyTransfer(
   val moneyTransferId: MoneyTransferId,
   val sourceAccountId: AccountId,
   val targetAccountId: AccountId,

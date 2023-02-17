@@ -6,7 +6,7 @@ import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Account
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 
 /**
- * Withdraw money commandmodel.
+ * Withdraw money command.
  */
 @Command(namespace = "axon.bank", name = "WithdrawMoneyCommand")
 data class WithdrawMoneyCommand(

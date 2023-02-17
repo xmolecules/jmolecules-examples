@@ -3,7 +3,7 @@ package org.jmolecules.example.axonframework.bank.adapter.out.readmodel.moneytra
 import org.axonframework.messaging.responsetypes.ResponseType
 import org.axonframework.messaging.responsetypes.ResponseTypes.optionalInstanceOf
 import org.jmolecules.ddd.annotation.ValueObject
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.MoneyTransferSummary
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummary
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 import org.jmolecules.example.axonframework.infrastructure.architecture.Query
 import java.util.*

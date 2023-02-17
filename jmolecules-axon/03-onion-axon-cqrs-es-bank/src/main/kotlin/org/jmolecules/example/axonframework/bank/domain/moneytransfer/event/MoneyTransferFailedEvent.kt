@@ -5,7 +5,7 @@ import org.jmolecules.event.annotation.DomainEvent
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.Reason
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
 
 @Revision("1")
 @DomainEvent(namespace = "axon.bank", name = "MoneyTransferFailedEvent")
@@ -14,5 +14,5 @@ data class MoneyTransferFailedEvent(
   val sourceAccountId: AccountId,
   val targetAccountId: AccountId,
   val amount: Amount,
-  val reason: Reason
+  val reason: RejectionReason
 )

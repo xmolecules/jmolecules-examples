@@ -1,11 +1,11 @@
 package org.jmolecules.example.axonframework.bank.application.usecase
 
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.exception.InsufficientBalanceException
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.exception.MaximumBalanceExceededException
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
 import org.jmolecules.example.axonframework.bank.application.port.`in`.CreateBankAccountInPort
 import org.jmolecules.example.axonframework.bank.application.port.out.command.BankAccountCommandPort
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalanceException
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceededException
 import org.springframework.stereotype.Component
 
 /**

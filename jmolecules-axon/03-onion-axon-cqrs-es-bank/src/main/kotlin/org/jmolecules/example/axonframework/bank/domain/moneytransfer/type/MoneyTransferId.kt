@@ -1,5 +1,6 @@
 package org.jmolecules.example.axonframework.bank.domain.moneytransfer.type
 
+import org.jmolecules.ddd.annotation.Identity
 import org.jmolecules.ddd.annotation.ValueObject
 
 /**

@@ -1,30 +1,26 @@
 package org.jmolecules.example.axonframework.bank.domain.bankaccount.state
 
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.state.BankAccountCreationVerificationResult.*
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.BankAccountCreatedEvent
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.MoneyDepositedEvent
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.MoneyWithdrawnEvent
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.exception.InsufficientBalanceException
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.exception.MaximumBalanceExceededException
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.state.BankAccountMoneyTransfers
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.Reason
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.exception.MoneyTransferNotFoundException
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.state.BankAccountCreationVerificationResult.*
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.*
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferCancelledEvent
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferCompletedEvent
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferReceivedEvent
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferRequestedEvent
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFoundException
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.state.ActiveMoneyTransfers
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
 
 /**
  * Represents bank account.
  */
 class BankAccount(
   private val accountId: AccountId,
-  private val balanceModel: BankAccountBalance,
-  private val moneyTransfers: BankAccountMoneyTransfers
+  private var balanceModel: BankAccountBalance,
+  private val activeMoneyTransfers: ActiveMoneyTransfers
 ) {
   companion object {
     /**
@@ -72,7 +68,7 @@ class BankAccount(
           maximumBalance = MAX_BALANCE,
           minimumBalance = MIN_BALANCE
         ),
-        moneyTransfers = BankAccountMoneyTransfers()
+        activeMoneyTransfers = ActiveMoneyTransfers()
       )
   }
 
@@ -101,7 +97,7 @@ class BankAccount(
     targetAccountId: AccountId,
     amount: Amount
   ): MoneyTransferRequestedEvent {
-    if (!balanceModel.canDecrease(amount, moneyTransfers.getReservedAmount())) {
+    if (!balanceModel.canDecrease(amount, activeMoneyTransfers.getReservedAmount())) {
       throw InsufficientBalanceException(
         accountId = accountId,
         currentBalance = balanceModel.currentBalance,
@@ -138,7 +134,7 @@ class BankAccount(
   }
 
   fun withdrawMoney(amount: Amount): MoneyWithdrawnEvent {
-    if (!balanceModel.canDecrease(amount, moneyTransfers.getReservedAmount())) {
+    if (!balanceModel.canDecrease(amount, activeMoneyTransfers.getReservedAmount())) {
       throw InsufficientBalanceException(
         accountId = accountId,
         currentBalance = balanceModel.currentBalance,
@@ -164,21 +160,22 @@ class BankAccount(
   fun cancelMoneyTransfer(
     moneyTransferId: MoneyTransferId,
     sourceAccountId: AccountId,
-    reason: Reason
+    rejectionReason: RejectionReason
   ): MoneyTransferCancelledEvent {
     if (!checkMoneyTransfer(moneyTransferId)) {
       throw MoneyTransferNotFoundException(accountId = sourceAccountId, moneyTransferId = moneyTransferId)
     }
     return MoneyTransferCancelledEvent(
       moneyTransferId = moneyTransferId,
-      reason = reason
+      reason = rejectionReason
     )
   }
 
-  private fun checkMoneyTransfer(moneyTransferId: MoneyTransferId) = moneyTransfers.hasMoneyTransfer(moneyTransferId)
+  private fun checkMoneyTransfer(moneyTransferId: MoneyTransferId) =
+    activeMoneyTransfers.hasMoneyTransfer(moneyTransferId)
 
   private fun getAmountForMoneyTransfer(moneyTransferId: MoneyTransferId, sourceAccountId: AccountId): Amount {
-    return moneyTransfers.getAmountForTransfer(moneyTransferId)
+    return activeMoneyTransfers.getAmountForTransfer(moneyTransferId)
       ?: throw MoneyTransferNotFoundException(accountId = sourceAccountId, moneyTransferId = moneyTransferId)
   }
 
@@ -186,29 +183,29 @@ class BankAccount(
   // Model modification
 
   fun increaseAmount(amount: Amount) {
-    balanceModel.increase(amount)
+    balanceModel = balanceModel.increase(amount)
   }
 
   fun decreaseAmount(amount: Amount) {
-    balanceModel.decrease(amount)
+    balanceModel = balanceModel.decrease(amount)
   }
 
   fun initializeMoneyTransfer(moneyTransferId: MoneyTransferId, amount: Amount) {
-    moneyTransfers.initTransfer(moneyTransferId = moneyTransferId, amount = amount)
+    activeMoneyTransfers.initTransfer(moneyTransferId = moneyTransferId, amount = amount)
   }
 
   fun acknowledgeMoneyTransferCompletion(moneyTransferId: MoneyTransferId) {
-    val amount = moneyTransfers.getAmountForTransfer(moneyTransferId)
+    val amount = activeMoneyTransfers.getAmountForTransfer(moneyTransferId)
       ?: throw MoneyTransferNotFoundException(
         accountId,
         moneyTransferId
       )
-    balanceModel.decrease(amount)
-    moneyTransfers.completeTransfer(moneyTransferId)
+    balanceModel = balanceModel.decrease(amount)
+    activeMoneyTransfers.completeTransfer(moneyTransferId)
   }
 
   fun acknowledgeMoneyTransferCancellation(moneyTransferId: MoneyTransferId) {
-    moneyTransfers.cancelTransfer(moneyTransferId)
+    activeMoneyTransfers.cancelTransfer(moneyTransferId)
   }
 }
 

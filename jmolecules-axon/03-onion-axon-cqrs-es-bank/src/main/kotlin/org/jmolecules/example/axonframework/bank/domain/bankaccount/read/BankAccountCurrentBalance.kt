@@ -1,12 +1,25 @@
 package org.jmolecules.example.axonframework.bank.domain.bankaccount.read
 
+import org.jmolecules.ddd.annotation.Entity
+import org.jmolecules.ddd.annotation.Identity
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
 
 /**
- * Bank account balance.
+ * Entity to store bank account current balance.
  */
-data class BankAccountCurrentBalance(
+@Entity
+class BankAccountCurrentBalance(
+  @Identity
   val accountId: AccountId,
-  val currentBalance: Balance
-)
+  val balance: Balance
+) {
+  fun decreaseBalance(amount: Amount): BankAccountCurrentBalance {
+    return BankAccountCurrentBalance(accountId, balance - amount)
+  }
+
+  fun increaseBalance(amount: Amount): BankAccountCurrentBalance {
+    return BankAccountCurrentBalance(accountId, balance + amount)
+  }
+}

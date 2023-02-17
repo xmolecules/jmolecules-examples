@@ -3,11 +3,11 @@ package org.jmolecules.example.axonframework.bank.adapter.`in`.rest
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import org.jmolecules.ddd.annotation.ValueObject
-import org.jmolecules.example.axonframework.bank.application.usecase.CreateBankAccountUseCase
-import org.jmolecules.example.axonframework.bank.application.usecase.RetrieveAccountInformationUseCase
+import org.jmolecules.example.axonframework.bank.application.port.`in`.CreateBankAccountInPort
+import org.jmolecules.example.axonframework.bank.application.port.`in`.RetrieveBankAccountInformationInPort
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.read.BankAccountCurrentBalance
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.CurrentBalance
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.notFound
 import org.springframework.http.ResponseEntity.ok
@@ -20,8 +20,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 @RestController
 @RequestMapping("/rest/bank-account")
 class BankAccountResource(
-  private val createBankAccountUC: CreateBankAccountUseCase,
-  private val retrieveAccountInfoUC: RetrieveAccountInformationUseCase
+  private val createBankAccountInPort: CreateBankAccountInPort,
+  private val retrieveBankAccountInformationInPort: RetrieveBankAccountInformationInPort
 ) {
   @PostMapping("/create")
   @Operation(
@@ -32,7 +32,7 @@ class BankAccountResource(
     ]
   )
   fun createBankAccount(@RequestBody dto: CreateBankAccountDto): ResponseEntity<String> {
-    createBankAccountUC.createBankAccount(AccountId.of(dto.accountId), Balance.of(dto.initialBalance))
+    createBankAccountInPort.createBankAccount(AccountId.of(dto.accountId), Balance.of(dto.initialBalance))
     return ResponseEntity.created(
       ServletUriComponentsBuilder
         .fromCurrentContextPath()
@@ -50,8 +50,8 @@ class BankAccountResource(
       ApiResponse(responseCode = "404", description = "Account not found.")
     ]
   )
-  fun findCurrentBalance(@PathVariable("accountId") accountId: String): ResponseEntity<BalanceDto> {
-    val option = retrieveAccountInfoUC.getCurrentBalance(AccountId.of(accountId)).join()
+  fun findCurrentBalance(@PathVariable("accountId") accountId: String): ResponseEntity<CurrentBalanceDto> {
+    val option = retrieveBankAccountInformationInPort.getCurrentBalance(AccountId.of(accountId)).join()
     return option
       .map { ok(it.toDto()) }
       .orElse(notFound().build())
@@ -64,12 +64,12 @@ class BankAccountResource(
   )
 
   @ValueObject
-  data class BalanceDto(
+  data class CurrentBalanceDto(
     val accountId: String,
     val currentBalance: Int
   )
 
-  fun BankAccountCurrentBalance.toDto() = BalanceDto(
+  fun CurrentBalance.toDto() = CurrentBalanceDto(
     accountId = this.accountId.value,
     currentBalance = this.currentBalance.value
   )

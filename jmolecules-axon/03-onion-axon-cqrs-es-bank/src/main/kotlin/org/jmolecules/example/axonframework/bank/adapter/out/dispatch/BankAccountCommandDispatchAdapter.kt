@@ -9,7 +9,7 @@ import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.state.MoneyTransfer
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.Reason
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
 import org.jmolecules.example.axonframework.bank.application.port.out.command.AtmCommandPort
 import org.jmolecules.example.axonframework.bank.application.port.out.command.BankAccountCommandPort
 import org.jmolecules.example.axonframework.bank.application.port.out.command.MoneyTransferCommandPort
@@ -23,7 +23,7 @@ import org.jmolecules.example.axonframework.bank.adapter.out.commandmodel.moneyt
 import org.springframework.stereotype.Component
 
 /**
- * Implementation of the bank account commandmodel dispatch.
+ * Implementation of the bank account command model dispatch.
  */
 @Component
 @SecondaryAdapter
@@ -102,13 +102,13 @@ class BankAccountCommandDispatchAdapter(
   }
 
   @CommandDispatcher(dispatches = "axon.bank.CancelMoneyTransferCommand")
-  override fun cancelMoneyTransfer(moneyTransfer: MoneyTransfer, reason: Reason) {
+  override fun cancelMoneyTransfer(moneyTransfer: MoneyTransfer, rejectionReason: RejectionReason) {
     commandGateway.sendAndWait<Void>(
       CancelMoneyTransferCommand(
         moneyTransferId = moneyTransfer.moneyTransferId,
         sourceAccountId = moneyTransfer.sourceAccountId,
         targetAccountId = moneyTransfer.targetAccountId,
-        reason = reason
+        rejectionReason = rejectionReason
       )
     )
   }

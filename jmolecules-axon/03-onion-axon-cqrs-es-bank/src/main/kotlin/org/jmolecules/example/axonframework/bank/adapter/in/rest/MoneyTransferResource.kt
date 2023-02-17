@@ -4,11 +4,11 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import org.jmolecules.ddd.annotation.ValueObject
 import org.jmolecules.example.axonframework.bank.adapter.`in`.rest.MoneyTransferResource.MoneyTransferStatusDto.*
-import org.jmolecules.example.axonframework.bank.application.usecase.TransferMoneyUseCase
+import org.jmolecules.example.axonframework.bank.application.port.`in`.TransferMoneyInPort
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.MoneyTransferSummary
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummary
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.notFound
 import org.springframework.http.ResponseEntity.ok
@@ -21,7 +21,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder
 @RestController
 @RequestMapping("/rest/money-transfer")
 class MoneyTransferResource(
-  private val moneyTransfer: TransferMoneyUseCase,
+  private val moneyTransferInPort: TransferMoneyInPort,
 ) {
   @PutMapping("/execute")
   @Operation(
@@ -32,7 +32,7 @@ class MoneyTransferResource(
     ]
   )
   fun transferMoney(@RequestBody dto: RequestMoneyTransferDto): ResponseEntity<Void> {
-    val transferId = moneyTransfer.transferMoney(
+    val transferId = moneyTransferInPort.transferMoney(
       AccountId.of(dto.sourceAccountId),
       AccountId.of(dto.targetAccountId),
       Amount.of(dto.amount)
@@ -56,7 +56,7 @@ class MoneyTransferResource(
     ]
   )
   fun findMoneyTransfer(@PathVariable("moneyTransferId") moneyTransferId: String): ResponseEntity<MoneyTransferDto> {
-    val moneyTransferOption = moneyTransfer.getMoneyTransfer(MoneyTransferId.of(moneyTransferId)).join()
+    val moneyTransferOption = moneyTransferInPort.getMoneyTransfer(MoneyTransferId.of(moneyTransferId)).join()
     return moneyTransferOption
       .map { ok(it.toDto()) }
       .orElse(notFound().build())
@@ -72,7 +72,7 @@ class MoneyTransferResource(
     ]
   )
   fun findMoneyTransfers(@PathVariable("accountId") accountId: String): ResponseEntity<List<MoneyTransferDto>> {
-    val summaries = moneyTransfer.getMoneyTransfers(AccountId.of(accountId)).join()
+    val summaries = moneyTransferInPort.getMoneyTransfers(AccountId.of(accountId)).join()
     return ok(
       summaries.elements.map { it.toDto() }
     )
@@ -97,7 +97,6 @@ class MoneyTransferResource(
 
   @ValueObject
   enum class MoneyTransferStatusDto {
-    IN_PROGRESS,
     SUCCESS,
     FAILURE
   }
@@ -108,7 +107,6 @@ class MoneyTransferResource(
     targetAccountId = this.targetAccountId.value,
     amount = this.amount.value,
     status = when {
-      this.success == null -> IN_PROGRESS
       this.success -> SUCCESS
       else -> FAILURE
     },

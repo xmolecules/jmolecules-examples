@@ -1,8 +1,8 @@
 package org.jmolecules.example.axonframework.bank.application.port.out.command
 
 import org.jmolecules.architecture.hexagonal.SecondaryPort
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.exception.InsufficientBalanceException
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.exception.MaximumBalanceExceededException
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalanceException
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceededException
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import kotlin.jvm.Throws

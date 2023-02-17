@@ -43,7 +43,7 @@ class BankAccountAggregate {
   var accountId: String? = null
     private set
 
-  // domain domain
+  // domain model
   private lateinit var bankAccount: BankAccount
 
   @DomainEventPublisher(
@@ -51,7 +51,9 @@ class BankAccountAggregate {
   )
   @CommandHandler(namespace = "axon.bank", name = "DepositMoneyCommand")
   fun handle(cmd: DepositMoneyCommand) {
-    AggregateLifecycle.apply(bankAccount.depositMoney(cmd.amount))
+    AggregateLifecycle.apply(
+      bankAccount.depositMoney(cmd.amount)
+    )
   }
 
   @DomainEventPublisher(
@@ -59,7 +61,9 @@ class BankAccountAggregate {
   )
   @CommandHandler(namespace = "axon.bank", name = "WithdrawMoneyCommand")
   fun handle(cmd: WithdrawMoneyCommand) {
-    AggregateLifecycle.apply(bankAccount.withdrawMoney(cmd.amount))
+    AggregateLifecycle.apply(
+      bankAccount.withdrawMoney(cmd.amount)
+    )
   }
 
   @DomainEventPublisher(
@@ -110,7 +114,7 @@ class BankAccountAggregate {
       bankAccount.cancelMoneyTransfer(
         moneyTransferId = cmd.moneyTransferId,
         sourceAccountId = cmd.sourceAccountId,
-        reason = cmd.reason
+        rejectionReason = cmd.rejectionReason
       )
     )
   }

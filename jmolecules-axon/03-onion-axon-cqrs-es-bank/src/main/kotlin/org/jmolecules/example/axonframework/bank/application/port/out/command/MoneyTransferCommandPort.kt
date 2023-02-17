@@ -5,7 +5,7 @@ import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Account
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.state.MoneyTransfer
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.Reason
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
 
 /**
  * Command port for money transfers.
@@ -34,5 +34,5 @@ interface MoneyTransferCommandPort {
   /**
    * Indicate cancellation of money transfer.
    */
-  fun cancelMoneyTransfer(moneyTransfer: MoneyTransfer, reason: Reason)
+  fun cancelMoneyTransfer(moneyTransfer: MoneyTransfer, rejectionReason: RejectionReason)
 }

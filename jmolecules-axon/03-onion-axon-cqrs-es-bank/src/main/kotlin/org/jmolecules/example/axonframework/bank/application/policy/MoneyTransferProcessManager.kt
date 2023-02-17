@@ -9,7 +9,7 @@ import org.jmolecules.event.annotation.DomainEventHandler
 import org.jmolecules.event.annotation.DomainEventPublisher
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.*
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.state.MoneyTransfer
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.Reason
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
 import org.jmolecules.example.axonframework.bank.application.port.out.command.MoneyTransferCommandPort
 import org.jmolecules.example.axonframework.bank.application.port.out.event.MoneyTransferEventPort
 
@@ -34,7 +34,7 @@ class MoneyTransferProcessManager {
     try {
       moneyTransferCommandPort.receiveMoneyTransfer(moneyTransfer)
     } catch (e: Exception) {
-      moneyTransferCommandPort.cancelMoneyTransfer(moneyTransfer, Reason.of(e.message))
+      moneyTransferCommandPort.cancelMoneyTransfer(moneyTransfer, RejectionReason.of(e.message))
     }
   }
 
@@ -45,7 +45,7 @@ class MoneyTransferProcessManager {
     try {
       moneyTransferCommandPort.completeMoneyTransfer(moneyTransfer)
     } catch (e: Exception) {
-      moneyTransferCommandPort.cancelMoneyTransfer(moneyTransfer, Reason.of(e.message))
+      moneyTransferCommandPort.cancelMoneyTransfer(moneyTransfer, RejectionReason.of(e.message))
     }
   }
 

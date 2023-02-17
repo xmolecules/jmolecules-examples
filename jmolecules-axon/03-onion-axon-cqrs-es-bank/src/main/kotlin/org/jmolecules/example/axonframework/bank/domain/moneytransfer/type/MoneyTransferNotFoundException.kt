@@ -1,4 +1,4 @@
-package org.jmolecules.example.axonframework.bank.domain.moneytransfer.exception
+package org.jmolecules.example.axonframework.bank.domain.moneytransfer.type
 
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId

@@ -2,11 +2,9 @@ package org.jmolecules.example.axonframework.bank.adapter.out.readmodel.moneytra
 
 import org.axonframework.messaging.responsetypes.ResponseType
 import org.axonframework.messaging.responsetypes.ResponseTypes.instanceOf
-import org.axonframework.messaging.responsetypes.ResponseTypes.multipleInstancesOf
 import org.jmolecules.ddd.annotation.ValueObject
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.MoneyTransferSummaries
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.MoneyTransferSummary
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummaries
 import org.jmolecules.example.axonframework.infrastructure.architecture.Query
 
 @ValueObject

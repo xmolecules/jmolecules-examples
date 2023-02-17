@@ -4,7 +4,10 @@ import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.ReservedAmount
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 
-data class BankAccountMoneyTransfers(
+/**
+ * Represents money transfers of a bank account.
+ */
+data class ActiveMoneyTransfers(
   private val activeMoneyTransfers: MutableMap<MoneyTransferId, Amount> = mutableMapOf()
 ) {
   fun getReservedAmount(): ReservedAmount = ReservedAmount.of(activeMoneyTransfers.values.sumOf { it.value })

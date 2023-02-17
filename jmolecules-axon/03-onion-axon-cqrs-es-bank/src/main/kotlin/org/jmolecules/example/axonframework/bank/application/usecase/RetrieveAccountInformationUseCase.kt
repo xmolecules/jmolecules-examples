@@ -1,7 +1,7 @@
 package org.jmolecules.example.axonframework.bank.application.usecase
 
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.read.BankAccountCurrentBalance
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.CurrentBalance
 import org.jmolecules.example.axonframework.bank.application.port.`in`.RetrieveBankAccountInformationInPort
 import org.jmolecules.example.axonframework.bank.application.port.out.query.BankAccountQueryPort
 import org.springframework.stereotype.Component
@@ -21,7 +21,7 @@ class RetrieveAccountInformationUseCase(
    * @param accountId account id.
    * @return current balance.
    */
-  override fun getCurrentBalance(accountId: AccountId): CompletableFuture<Optional<BankAccountCurrentBalance>> {
+  override fun getCurrentBalance(accountId: AccountId): CompletableFuture<Optional<CurrentBalance>> {
     return bankAccountQueryPort.getCurrentBalance(accountId)
   }
 }

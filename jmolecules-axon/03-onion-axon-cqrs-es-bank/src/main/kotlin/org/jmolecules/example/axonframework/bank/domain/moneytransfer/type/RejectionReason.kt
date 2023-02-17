@@ -7,8 +7,8 @@ import org.jmolecules.ddd.annotation.ValueObject
  */
 @JvmInline
 @ValueObject
-value class Reason private constructor(val value: String) {
+value class RejectionReason private constructor(val value: String) {
   companion object {
-    fun of(value: String?) = Reason(value ?: "No detailed reason available")
+    fun of(value: String?) = RejectionReason(value ?: "No detailed reason available")
   }
 }
