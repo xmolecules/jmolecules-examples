@@ -1,4 +1,4 @@
-package org.jmolecules.example.archunit
+package org.jmolecules.archunit
 
 import com.tngtech.archunit.base.DescribedPredicate.greaterThanOrEqualTo
 import com.tngtech.archunit.core.domain.JavaClasses

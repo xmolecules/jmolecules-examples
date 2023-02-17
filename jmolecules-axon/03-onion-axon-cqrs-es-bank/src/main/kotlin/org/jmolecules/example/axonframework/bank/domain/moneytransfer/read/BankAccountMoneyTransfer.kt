@@ -14,7 +14,7 @@ class BankAccountMoneyTransfer(
   val sourceAccountId: AccountId,
   val targetAccountId: AccountId,
   val amount: Amount,
-  var success: Boolean,
+  var success: Boolean? = null,
   var errorMessage: RejectionReason? = null
 ) {
   /**

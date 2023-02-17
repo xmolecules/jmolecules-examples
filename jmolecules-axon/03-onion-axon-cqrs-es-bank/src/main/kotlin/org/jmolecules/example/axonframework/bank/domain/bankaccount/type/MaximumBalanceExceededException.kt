@@ -5,10 +5,10 @@ import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
 
 class MaximumBalanceExceededException(
-  accountId: AccountId,
-  currentBalance: Balance,
-  maximumBalance: Balance,
-  depositAmount: Amount?
+  val accountId: AccountId,
+  val currentBalance: Balance,
+  val maximumBalance: Balance,
+  val depositAmount: Amount?
 ) : RuntimeException(
   if (depositAmount == null) {
     "BankAccount[id=$accountId] can't be created, its balance $currentBalance would exceed max. balance of $maximumBalance"

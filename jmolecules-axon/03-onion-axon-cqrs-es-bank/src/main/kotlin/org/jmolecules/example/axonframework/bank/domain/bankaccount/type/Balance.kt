@@ -20,4 +20,5 @@ value class Balance private constructor(val value: Int) {
   operator fun minus(value: ReservedAmount): Balance = Balance(this.value - value.value)
   operator fun compareTo(other: Balance): Int = this.value.compareTo(other.value)
 
+  override fun toString(): String = "'$value'"
 }

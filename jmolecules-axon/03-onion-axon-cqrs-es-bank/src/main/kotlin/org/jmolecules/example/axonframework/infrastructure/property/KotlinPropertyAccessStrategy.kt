@@ -1,4 +1,4 @@
-package org.jmolecules.example.axonframework.infrastructure.util
+package org.jmolecules.example.axonframework.infrastructure.property
 
 import com.fasterxml.jackson.module.kotlin.isKotlinClass
 import org.axonframework.common.property.AbstractMethodPropertyAccessStrategy

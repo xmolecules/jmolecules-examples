@@ -14,12 +14,15 @@ import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
-import org.jmolecules.example.axonframework.infrastructure.InfrastructureConfiguration.Companion.DEFAULT_OBJECT_MAPPER
+import org.jmolecules.example.axonframework.infrastructure.configuration.InfrastructureConfiguration.Companion.DEFAULT_OBJECT_MAPPER
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 import java.util.stream.Stream
 
+/**
+ * Makes sure the commands are serializable and de-serializable with Jackson.
+ */
 internal class CommandSerializationDeserializationTest {
 
   private val objectMapper: ObjectMapper = DEFAULT_OBJECT_MAPPER

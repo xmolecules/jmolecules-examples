@@ -3,9 +3,9 @@ package org.jmolecules.example.axonframework.bank
 import com.tngtech.archunit.core.domain.JavaClasses
 import com.tngtech.archunit.junit.AnalyzeClasses
 import com.tngtech.archunit.junit.ArchTest
+import org.jmolecules.archunit.AxonCqrsEsRules
+import org.jmolecules.archunit.HexagonalArchitecture
 import org.jmolecules.archunit.JMoleculesArchitectureRules
-import org.jmolecules.example.archunit.AxonCqrsEsRules
-import org.jmolecules.example.archunit.HexagonalArchitecture
 
 /**
  * Test compliance to hexagonal architecture based on JMolecules annotations.

@@ -14,4 +14,6 @@ value class AccountId private constructor(val value: String) {
       return AccountId(value)
     }
   }
+
+  override fun toString(): String = "'$value'"
 }

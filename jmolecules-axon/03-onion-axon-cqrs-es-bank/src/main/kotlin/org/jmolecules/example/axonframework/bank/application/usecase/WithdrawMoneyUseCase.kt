@@ -5,12 +5,10 @@ import org.jmolecules.example.axonframework.bank.application.port.out.command.At
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalanceException
-import org.springframework.stereotype.Component
 
 /**
  * Use case to withdraw money.
  */
-@Component
 class WithdrawMoneyUseCase(
   private val atmOutPort: AtmCommandPort
 ) : WithdrawMoneyInPort {

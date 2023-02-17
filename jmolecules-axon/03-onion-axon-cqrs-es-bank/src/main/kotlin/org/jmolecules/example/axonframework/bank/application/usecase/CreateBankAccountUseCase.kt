@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component
 /**
  * Application Service to manipulate the bank account.
  */
-@Component
 class CreateBankAccountUseCase(
   private val bankAccountPort: BankAccountCommandPort
 ) : CreateBankAccountInPort {

@@ -18,7 +18,6 @@ import java.util.concurrent.CompletableFuture
 /**
  * Operations related to money transfers.
  */
-@Component
 class TransferMoneyUseCase(
   private val moneyTransferCommandPort: MoneyTransferCommandPort,
   private val moneyTransferQueryPort: MoneyTransferQueryPort,

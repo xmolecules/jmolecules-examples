@@ -8,6 +8,7 @@ import org.jmolecules.example.axonframework.bank.application.port.`in`.TransferM
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferStatus
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummary
 import org.springframework.http.ResponseEntity
 import org.springframework.http.ResponseEntity.notFound
@@ -98,6 +99,7 @@ class MoneyTransferResource(
   @ValueObject
   enum class MoneyTransferStatusDto {
     SUCCESS,
+    IN_PROGRESS,
     FAILURE
   }
 
@@ -106,10 +108,15 @@ class MoneyTransferResource(
     sourceAccountId = this.sourceAccountId.value,
     targetAccountId = this.targetAccountId.value,
     amount = this.amount.value,
-    status = when {
-      this.success -> SUCCESS
-      else -> FAILURE
+    status = when (this.status) {
+      is MoneyTransferStatus.InProgress -> IN_PROGRESS
+      is MoneyTransferStatus.Succeeded -> SUCCESS
+      is MoneyTransferStatus.Rejected -> FAILURE
     },
-    errorMessage = this.errorMessage?.value
+    errorMessage = if (this.status is MoneyTransferStatus.Rejected) {
+      this.status.rejectionReason.value
+    } else {
+      null
+    }
   )
 }

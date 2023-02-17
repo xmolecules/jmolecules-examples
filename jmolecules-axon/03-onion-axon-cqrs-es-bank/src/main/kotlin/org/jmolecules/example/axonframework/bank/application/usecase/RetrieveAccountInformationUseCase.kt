@@ -11,7 +11,6 @@ import java.util.concurrent.CompletableFuture
 /**
  * Account information retrieval use case.
  */
-@Component
 class RetrieveAccountInformationUseCase(
   private val bankAccountQueryPort: BankAccountQueryPort
 ) : RetrieveBankAccountInformationInPort {

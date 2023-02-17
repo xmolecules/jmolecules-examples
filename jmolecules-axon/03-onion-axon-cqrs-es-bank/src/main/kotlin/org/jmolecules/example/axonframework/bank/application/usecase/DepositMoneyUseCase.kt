@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component
 /**
  * Operations on bank account available at ATM.
  */
-@Component
 class DepositMoneyUseCase(
   private val atmOutPort: AtmCommandPort
 ) : DepositMoneyInPort {

@@ -9,9 +9,9 @@ import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.Mone
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferCompletedEvent
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferReceivedEvent
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferRequestedEvent
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFoundException
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.state.ActiveMoneyTransfers
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFoundException
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
 
 /**
@@ -53,14 +53,13 @@ class BankAccount(
           maximumBalance = result.maximumBalance
         )
 
-        ValidBalanceAmountVerificationResult ->
-          BankAccountCreatedEvent(
-            accountId = accountId,
-            initialBalance = initialBalance
-          )
+        ValidBalanceAmountVerificationResult -> BankAccountCreatedEvent(
+          accountId = accountId,
+          initialBalance = initialBalance
+        )
       }
 
-    fun initializeAccount(initialBalance: Balance, accountId: AccountId) =
+    fun initializeAccount(accountId: AccountId, initialBalance: Balance) =
       BankAccount(
         accountId = accountId,
         balanceModel = BankAccountBalance(
@@ -97,6 +96,9 @@ class BankAccount(
     targetAccountId: AccountId,
     amount: Amount
   ): MoneyTransferRequestedEvent {
+
+    // TODO: validate that the source account id  matches current account id
+    // TODO: validate source != target
     if (!balanceModel.canDecrease(amount, activeMoneyTransfers.getReservedAmount())) {
       throw InsufficientBalanceException(
         accountId = accountId,
@@ -118,6 +120,7 @@ class BankAccount(
     targetAccountId: AccountId,
     amount: Amount
   ): MoneyTransferReceivedEvent {
+    // TODO: validate that the target account id  matches current account id
     if (!balanceModel.canIncrease(amount)) {
       throw MaximumBalanceExceededException(
         accountId = accountId,
@@ -178,6 +181,10 @@ class BankAccount(
     return activeMoneyTransfers.getAmountForTransfer(moneyTransferId)
       ?: throw MoneyTransferNotFoundException(accountId = sourceAccountId, moneyTransferId = moneyTransferId)
   }
+
+  internal fun getCurrentBalance(): Balance = this.balanceModel.currentBalance
+
+  internal fun getActiveMoneyTransfers(): ActiveMoneyTransfers = this.activeMoneyTransfers
 
   // -----------------------------------------------------------
   // Model modification

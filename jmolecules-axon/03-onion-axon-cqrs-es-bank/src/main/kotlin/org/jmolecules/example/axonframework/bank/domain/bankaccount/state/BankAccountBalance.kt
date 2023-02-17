@@ -1,7 +1,7 @@
 package org.jmolecules.example.axonframework.bank.domain.bankaccount.state
 
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.state.BankAccountCreationVerificationResult.*
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.ReservedAmount
 
@@ -25,18 +25,34 @@ data class BankAccountBalance(
         balance < minimumBalance -> InsufficientBalanceAmountVerificationResult(
           minimumBalance
         )
+
         balance > maximumBalance -> BalanceAmountExceededVerificationResult(
           maximumBalance
         )
+
         else -> ValidBalanceAmountVerificationResult
       }
     }
   }
 
 
+  /**
+   * Is increase possible?
+   */
   fun canIncrease(amount: Amount) = currentBalance + amount <= maximumBalance
+
+  /**
+   * Is decrease possible?
+   */
   fun canDecrease(amount: Amount, reserved: ReservedAmount) = currentBalance - reserved - amount >= minimumBalance
 
+  /**
+   * Increase amount.
+   */
   fun increase(amount: Amount) = copy(currentBalance = currentBalance + amount)
-  fun decrease(amount: Amount) = copy(currentBalance = currentBalance + amount)
+
+  /**
+   * Decrease amount.
+   */
+  fun decrease(amount: Amount) = copy(currentBalance = currentBalance - amount)
 }

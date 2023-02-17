@@ -15,5 +15,6 @@ value class Amount private constructor(val value: Int) {
     }
   }
 
+  override fun toString(): String = "'$value'"
 }
 

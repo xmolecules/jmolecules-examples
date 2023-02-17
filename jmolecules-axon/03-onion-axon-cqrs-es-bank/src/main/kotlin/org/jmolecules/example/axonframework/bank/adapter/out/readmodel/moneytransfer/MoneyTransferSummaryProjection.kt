@@ -4,6 +4,7 @@ import org.axonframework.queryhandling.QueryHandler
 import org.jmolecules.architecture.cqrs.annotation.QueryModel
 import org.jmolecules.example.axonframework.bank.application.port.out.repository.MoneyTransferSummaryRepository
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.BankAccountMoneyTransfer
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferStatus
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummaries
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummary
 import java.util.*
@@ -49,7 +50,6 @@ class MoneyTransferSummaryProjection(
     sourceAccountId = this.sourceAccountId,
     targetAccountId = this.targetAccountId,
     amount = this.amount,
-    success = this.success,
-    errorMessage = this.errorMessage
+    status = MoneyTransferStatus.of(this.success, this.errorMessage),
   )
 }

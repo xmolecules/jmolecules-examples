@@ -1,6 +1,6 @@
 @file: InfrastructureRing
 
-package org.jmolecules.example.axonframework.infrastructure
+package org.jmolecules.example.axonframework.infrastructure.configuration
 
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
@@ -15,6 +15,8 @@ import org.axonframework.eventsourcing.eventstore.inmemory.InMemoryEventStorageE
 import org.axonframework.modelling.saga.repository.SagaStore
 import org.axonframework.modelling.saga.repository.inmemory.InMemorySagaStore
 import org.jmolecules.architecture.onion.classical.InfrastructureRing
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferStatus
+import org.jmolecules.example.axonframework.infrastructure.jackson.KotlinTypeInfo
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -27,6 +29,7 @@ class InfrastructureConfiguration {
   companion object : KLogging() {
     val DEFAULT_OBJECT_MAPPER = jacksonObjectMapper()
       .apply {
+        addMixIn(MoneyTransferStatus::class.java, KotlinTypeInfo::class.java)
         setSerializationInclusion(JsonInclude.Include.NON_NULL)
         configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
         configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
@@ -72,7 +75,10 @@ class InfrastructureConfiguration {
     return Jackson2ObjectMapperBuilderCustomizer { builder ->
       builder
         .serializationInclusion(JsonInclude.Include.NON_NULL)
-        .featuresToDisable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+        .featuresToDisable(
+          SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,
+          DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES
+        )
     }
   }
 
