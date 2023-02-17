@@ -17,7 +17,7 @@ We use the following Kotlin constructs for this:
 
 - Value objects based on a single value are represented by a `value class`.
 - Value objects based on multiple values are represented by a `data class`.
-- Constant values from a limited set are represented either by `enum class`.
+- Constant values from a limited set are represented by `enum class`.
 
 The domain and application ring must use the domain types only (no other data types are allowed).
 
