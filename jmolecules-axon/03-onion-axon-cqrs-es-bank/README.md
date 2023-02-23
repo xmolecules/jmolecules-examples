@@ -35,9 +35,16 @@ can't be executed in an atomic way, the money is first reserved on the first acc
 second account and then confirmed for the first account. On any errors, the money transfer is cancelled
 and the reservation on the source account is reset.
 
+A customer can query information about money transfers identifying the latter by the unique id or by quering
+all money transfers in which an account was involved as a source or as a target.
+
 ### UC-005 Retrieve bank account information
 
 A customer can retrieve account information. To run this use case, he/she needs the account id.
+
+## Overall CQRS idea
+
+![Component Diagram](./documentation/context-mapper/cqrs.svg)
 
 ## Component diagram
 

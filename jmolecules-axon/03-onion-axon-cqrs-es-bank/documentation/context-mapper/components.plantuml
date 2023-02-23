@@ -16,7 +16,7 @@ component "Application" {
     portin "Retrieve Bank Account Information" as InPort5
 
     component "Policies" {
-        [Transfer Money PM] <<process manager>>
+        [Transfer Money PM] <<process manager>> #pink
     }
 
     component "Use Cases" {
@@ -26,44 +26,44 @@ component "Application" {
         [Transfer Money PM] <<use case>> as UC04
         [Retrieve Bank Account Information] <<use case>> as UC05
     }
-    portout "Bank Account Command" as OutPort1
-    portout "Bank Account Query" as OutPort2
-    portout "ATM Command" as OutPort3
-    portout "Money Transfer Command" as OutPort4
-    portout "Bank Account Query" as OutPort5
+    portout "Bank\n Account\n Command" as BankAccountCommandPort
+    portout "Bank\n Account\n Query" as BankAccountQueryPort
+    portout "ATM\n Command" as AtmCommandPort
+    portout "Money\n Transfer\n Command" as MoneyTransferCommandPort
+    portout "Money\n Transfer\n Query" as MoneyTransferQueryPort
 }
 
 component "Domain Model" {
     component "bankaccount" {
-        [Bank Account] <<command>>
-        [Current Balance] <<query>>
-        [Bank Account Events]
+        [Bank Account] <<command>> #yellow
+        [Current Balance] <<query>> #lightgreen
+        [Bank Account Events] #orange
     }
     component "moneytransfer" {
-        [Bank Account Money Transfers] <<command>>
-        [Money Transfer]
-        [Money Transfer Summary] <<query>>
-        [Money Transfer Events]
+        [Active Money Transfers] <<command>> #yellow
+        [Money Transfer] #yellow
+        [Money Transfer Summary] <<query>> #lightgreen
+        [Money Transfer Events] #orange
     }
 }
 
 component "Out Adapter" {
 
     component "Command model" {
-        component "Commands"
-        [BankAccountAggregate]
+        component "Commands" #lightblue
+        [BankAccountAggregate] #lightblue
     }
 
     component "Query model" {
-        component "Queries"
+        component "Queries" #lightgreen
         component "Current Balances" {
-            [Current Balance Projection]
-            [Current Balance Projector]
+            [Current Balance Projection] #lightgreen
+            [Current Balance Projector] #lightgreen
             [Current Balance Repository]
         }
         component "Money Transfers" {
-            [Money Transfer Projector]
-            [Money Transfer Projection]
+            [Money Transfer Projector] #lightgreen
+            [Money Transfer Projection] #lightgreen
             [Money Transfer Repository]
         }
     }
@@ -86,44 +86,47 @@ InPort3 <.. UC03 : impl
 InPort4 <.. UC04 : impl
 InPort5 <.. UC05 : impl
 
-UC01 --> OutPort1
-UC05 --> OutPort2
+UC01 --> BankAccountCommandPort
 
-UC02 --> OutPort3
-UC03 --> OutPort3
+UC02 --> AtmCommandPort
+UC03 --> AtmCommandPort
 
-UC04 --> OutPort4
-UC04 --> OutPort5
+UC04 --> MoneyTransferCommandPort
+UC04 --> MoneyTransferQueryPort
 
-BankAccountCommandDispatcher .up.> OutPort1 : impl
-BankAccountCommandDispatcher .up.> OutPort3 : impl
-BankAccountCommandDispatcher .up.> OutPort4 : impl
+UC05 --> BankAccountQueryPort
 
-[BankAccountQueryDispatcher] .up.> OutPort2 : impl
-[BankAccountQueryDispatcher] .up.> OutPort5 : impl
+BankAccountCommandDispatcher .up.> BankAccountCommandPort : impl
+BankAccountCommandDispatcher .up.> AtmCommandPort : impl
+BankAccountCommandDispatcher .up.> MoneyTransferCommandPort : impl
+[BankAccountQueryDispatcher] .up.> BankAccountQueryPort : impl
+[BankAccountQueryDispatcher] .up.> MoneyTransferQueryPort : impl
 
-BankAccountCommandDispatcher --> Commands
-BankAccountAggregate --> Commands
-BankAccountAggregate --> [Bank Account Money Transfers]
+BankAccountCommandDispatcher -down-> Commands
+BankAccountAggregate -up-> Commands
+BankAccountAggregate --> [Active Money Transfers]
 BankAccountAggregate --> [Bank Account Events]
 
 BankAccountAggregate --> [Bank Account]
-[Bank Account] --> [Bank Account Events]
-[Bank Account Money Transfers] --> [Money Transfer Events]
+[Bank Account] -up-> [Bank Account Events]
+[Active Money Transfers] -up-> [Money Transfer Events]
 BankAccountAggregate --> [Money Transfer Events]
 
-BankAccountQueryDispatcher --> Queries
-[Current Balance Projection] --> Queries
+BankAccountQueryDispatcher -down-> Queries
+[Current Balance Projection] -up-> Queries
 [Current Balance Projection] --> [Current Balance Repository]
 [Current Balance Projector] --> [Current Balance Repository]
+[Current Balance Projector] -down-> [Bank Account Events]
 [Current Balance Repository] --> [Current Balance]
 
-[Money Transfer Projection] --> Queries
+[Money Transfer Projection] -up-> Queries
 [Money Transfer Projection] --> [Money Transfer Repository]
 [Money Transfer Projector] --> [Money Transfer Repository]
+[Money Transfer Projector] -down-> [Money Transfer Events]
 [Money Transfer Repository] --> [Money Transfer Summary]
+
 
 [Transfer Money PM] --> [Money Transfer Events]
 [Transfer Money PM] --> [Money Transfer]
-[Transfer Money PM] --> OutPort4
+[Transfer Money PM] --> MoneyTransferCommandPort
 @enduml

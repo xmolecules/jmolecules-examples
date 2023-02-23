@@ -12,11 +12,10 @@ We consider the application to be used and deployed as a self-contained system i
 ## Decision
 
 Use clean architecture as a main architectural principle / blueprint. To classify it in more detail, we consider
-Clean Architecture to be a principle to separates software components into ring structure, by one ring being enclosing
-the other. The rings from inside to outside are: **domain ring**, **application ring**, **adapter ring**, *
-*infrastructure ring**.
+Clean Architecture to be a principle to separates software components into ring structures, by one ring being enclosing
+the other. The rings from inside to outside are: **domain ring**, **application ring**, **adapter ring**, **infrastructure ring**.
 
-The main rule of Clean Architecture is the dependency direction from outside to inside (inner rings MUST NOT
+The main rule of Clean Architecture is the dependency direction from outside to inside (components of inner rings MUST NOT
 reference outer rings).
 
 In addition, the infrastructure and adapter rings are separated into **in** and **out** (sometimes also called

@@ -6,7 +6,7 @@ accepted
 
 ## Context
 
-How the mapping of the problem space concepts is performed into solution space including the implementation.
+A guiding principle how the mapping of the problem space concepts is performed into solution space including the implementation.
 
 ## Decision
 
@@ -16,10 +16,12 @@ solution's domain model. Especially we model all required model types as they ar
 We use the following Kotlin constructs for this:
 
 - Value objects based on a single value are represented by a `value class`.
-- Value objects based on multiple values are represented by a `data class`.
-- Constant values from a limited set are represented by `enum class`.
+- Value objects based on multiple values are represented by a `data class`, having immutable members.
+- Constant values from a limited set are represented by `enum class` or by `sealed class`.
+- Entities are represented by `class` and may have mutable or immutable members.
+- The only exception is the type `Boolean` which might be used directly. 
 
-The domain and application ring must use the domain types only (no other data types are allowed).
+The domain and application ring MUST use the domain types only (no other data types are allowed). 
 
 ## Consequences
 

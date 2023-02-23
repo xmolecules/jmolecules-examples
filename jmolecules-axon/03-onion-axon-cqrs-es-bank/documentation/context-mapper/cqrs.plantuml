@@ -1,0 +1,45 @@
+@startuml
+
+left to right direction
+
+component "Adapter" {
+    [Query Dispatcher]
+    [Command Dispatcher]
+}
+
+component "Application" {
+
+    component "Command Model" {
+        [Command] #lightblue
+        [Aggregate] #yellow
+    }
+
+    component "Query Model" {
+        [Query] #lightgreen
+        [Projector] #lightgreen
+        [Projection] #lightgreen
+        [Repository]
+    }
+
+    [Domain Event] #orange
+    [Policy] #pink
+
+}
+
+[Query Dispatcher] -right-> [Query]
+[Command Dispatcher] -right-> [Command]
+
+
+[Command] -> [Aggregate]
+[Aggregate] --> [Domain Event]
+
+[Domain Event] --> [Projector]
+[Domain Event] -> [Policy]
+
+[Policy] -> [Command]
+[Query] -> [Projection]
+
+[Projection] --> [Repository]
+[Projector] -> [Repository]
+
+@enduml
