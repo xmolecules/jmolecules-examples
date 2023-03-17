@@ -7,6 +7,8 @@ system constructed following principles of DDD, Clean Architecture and CQRS/ES.
 
 ## Use Cases 
 
+![Use Case Diagram](./documentation/context-mapper/usecase.svg)
+
 ### UC-001 Create Bank Account
 
 A customer can apply for a new bank account. The account has an account id, serving as a primary
@@ -49,6 +51,10 @@ A customer can retrieve account information. To run this use case, he/she needs 
 ## Component diagram
 
 ![Component Diagram](./documentation/context-mapper/components.svg)
+
+## Domain Model (command side)
+
+![Class Diagram](./documentation/context-mapper/class.svg)
 
 ## ADRs (Architecture Decision Records)
 

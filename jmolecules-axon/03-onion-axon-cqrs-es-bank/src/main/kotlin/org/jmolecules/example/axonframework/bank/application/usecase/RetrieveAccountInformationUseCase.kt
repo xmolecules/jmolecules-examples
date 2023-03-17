@@ -4,7 +4,6 @@ import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Account
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.CurrentBalance
 import org.jmolecules.example.axonframework.bank.application.port.`in`.RetrieveBankAccountInformationInPort
 import org.jmolecules.example.axonframework.bank.application.port.out.query.BankAccountQueryPort
-import org.springframework.stereotype.Component
 import java.util.*
 import java.util.concurrent.CompletableFuture
 
@@ -21,6 +20,6 @@ class RetrieveAccountInformationUseCase(
    * @return current balance.
    */
   override fun getCurrentBalance(accountId: AccountId): CompletableFuture<Optional<CurrentBalance>> {
-    return bankAccountQueryPort.getCurrentBalance(accountId)
+    return bankAccountQueryPort.findCurrentBalance(accountId)
   }
 }

@@ -1,7 +1,7 @@
 package org.jmolecules.example.axonframework.bank.application.port.out.repository
 
 import org.jmolecules.ddd.annotation.Repository
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.read.BankAccountCurrentBalance
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.query.BankAccountCurrentBalance
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import java.util.*
 

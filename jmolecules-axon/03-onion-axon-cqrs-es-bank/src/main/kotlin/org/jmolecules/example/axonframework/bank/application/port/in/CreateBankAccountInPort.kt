@@ -1,7 +1,7 @@
 package org.jmolecules.example.axonframework.bank.application.port.`in`
 
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalanceException
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceededException
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalance
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceeded
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
 
@@ -14,6 +14,6 @@ interface CreateBankAccountInPort {
    * @param accountId account id.
    * @param initialBalance balance of the account.
    */
-  @Throws(MaximumBalanceExceededException::class, InsufficientBalanceException::class)
+  @Throws(MaximumBalanceExceeded::class, InsufficientBalance::class)
   fun createBankAccount(accountId: AccountId, initialBalance: Balance)
 }

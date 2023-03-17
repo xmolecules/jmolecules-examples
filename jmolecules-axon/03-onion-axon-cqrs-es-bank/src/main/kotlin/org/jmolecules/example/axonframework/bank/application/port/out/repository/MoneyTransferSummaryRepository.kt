@@ -2,7 +2,7 @@ package org.jmolecules.example.axonframework.bank.application.port.out.repositor
 
 import org.jmolecules.ddd.annotation.Repository
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.BankAccountMoneyTransfer
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.query.BankAccountMoneyTransfer
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 import java.util.*
 

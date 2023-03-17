@@ -1,13 +1,12 @@
-package org.jmolecules.example.axonframework.bank.adapter.out.readmodel.moneytransfer
+package org.jmolecules.example.axonframework.bank.adapter.out.querymodel.moneytransfer
 
 import org.jmolecules.architecture.cqrs.annotation.QueryModel
 import org.jmolecules.event.annotation.DomainEventHandler
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferCancelledEvent
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferCompletedEvent
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferRequestedEvent
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummary
 import org.jmolecules.example.axonframework.bank.application.port.out.repository.MoneyTransferSummaryRepository
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.BankAccountMoneyTransfer
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.query.BankAccountMoneyTransfer
 import org.springframework.stereotype.Component
 
 @Component

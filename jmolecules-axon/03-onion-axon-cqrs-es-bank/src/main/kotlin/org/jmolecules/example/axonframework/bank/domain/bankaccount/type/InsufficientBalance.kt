@@ -3,7 +3,7 @@ package org.jmolecules.example.axonframework.bank.domain.bankaccount.type
 /**
  * Indicates insufficient balance.
  */
-class InsufficientBalanceException(
+class InsufficientBalance(
   val accountId: AccountId,
   val currentBalance: Balance,
   val withdrawAmount: Amount?,

@@ -14,5 +14,5 @@ interface BankAccountQueryPort {
   /**
    * Retrieves current balance.
    */
-  fun getCurrentBalance(accountId: AccountId): CompletableFuture<Optional<CurrentBalance>>
+  fun findCurrentBalance(accountId: AccountId): CompletableFuture<Optional<CurrentBalance>>
 }

@@ -1,4 +1,4 @@
-package org.jmolecules.example.axonframework.bank.adapter.out.readmodel.moneytransfer
+package org.jmolecules.example.axonframework.bank.adapter.out.querymodel.moneytransfer
 
 import org.jmolecules.ddd.annotation.ValueObject
 import org.jmolecules.example.axonframework.infrastructure.architecture.Query

@@ -16,10 +16,10 @@ interface MoneyTransferQueryPort {
   /**
    * Retrieves a list of money transfers the account was involved in.
    */
-  fun getMoneyTransfers(accountId: AccountId): CompletableFuture<MoneyTransferSummaries>
+  fun findMoneyTransfers(accountId: AccountId): CompletableFuture<MoneyTransferSummaries>
 
   /**
    * Retrieves a money transfer by id.
    */
-  fun getMoneyTransfer(moneyTransferId: MoneyTransferId): CompletableFuture<Optional<MoneyTransferSummary>>
+  fun findMoneyTransfer(moneyTransferId: MoneyTransferId): CompletableFuture<Optional<MoneyTransferSummary>>
 }

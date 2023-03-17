@@ -4,7 +4,7 @@ import org.jmolecules.example.axonframework.bank.application.port.`in`.WithdrawM
 import org.jmolecules.example.axonframework.bank.application.port.out.command.AtmCommandPort
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalanceException
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalance
 
 /**
  * Use case to withdraw money.
@@ -18,7 +18,7 @@ class WithdrawMoneyUseCase(
    * @param accountId account id.
    * @param amount amount to withdraw.
    */
-  @Throws(InsufficientBalanceException::class)
+  @Throws(InsufficientBalance::class)
   override fun withdrawMoney(accountId: AccountId, amount: Amount) {
     atmOutPort.withdrawMoney(accountId, amount)
   }

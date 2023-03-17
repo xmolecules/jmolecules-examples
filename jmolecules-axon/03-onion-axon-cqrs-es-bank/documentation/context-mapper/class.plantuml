@@ -1,0 +1,53 @@
+@startuml
+
+package bankaccount {
+
+class BankAccount {
+    - accountId: AccountId,
+    - balanceModel: BankAccountBalance,
+    - activeMoneyTransfers: ActiveMoneyTransfers
+    + {static} initializeAccount(accountId: AccountId, initialBalance: Balance): BankAccount
+
+    + depositMoney(amount: Amount): MoneyDepositedEvent
+    + withdrawMoney(amount: Amount): MoneyWithdrawnEvent
+    + requestMoneyTransfer(moneyTransferId: MoneyTransferId, ...): MoneyTransferRequestedEvent
+    + receiveMoneyTransfer(moneyTransferId: MoneyTransferId, ...): MoneyTransferReceivedEvent
+    + completeMoneyTransfer(moneyTransferId: MoneyTransferId, ...): MoneyTransferCompletedEvent
+    + cancelMoneyTransfer(moneyTransferId: MoneyTransferId, ...): MoneyTransferCancelledEvent
+
+    + increaseBalance(amount: Amount)
+    + decreaseBalance(amount: Amount)
+    + initializeMoneyTransfer(moneyTransferId: MoneyTransferId, amount: Amount)
+    + acknowledgeMoneyTransferCompletion(moneyTransferId: MoneyTransferId)
+    + acknowledgeMoneyTransferCancellation(moneyTransferId: MoneyTransferId)
+}
+
+class BankAccountBalance {
+    - currentBalance: Balance
+    - maximumBalance: Balance
+    - minimumBalance: Balance
+    + canIncrease(amount: Amount): Boolean
+    + canDecrease(amount: Amount): Boolean
+    + increase(amount: Amount): BankAccountBalance
+    + decrease(amount: Amount): BankAccountBalance
+}
+}
+
+package moneytransfer {
+
+class ActiveMoneyTransfers {
+    + getReservedAmount(): ReservedAmount
+    + getAmountForTransfer(moneyTransferId: MoneyTransferId): Amount
+    + hasMoneyTransfer(moneyTransferId: MoneyTransferId): Boolean
+    + initTransfer(moneyTransferId: MoneyTransferId, amount: Amount)
+    + completeTransfer(moneyTransferId: MoneyTransferId)
+    + cancelTransfer(moneyTransferId: MoneyTransferId)
+}
+
+}
+
+
+BankAccount -r-> ActiveMoneyTransfers
+BankAccount --> BankAccountBalance
+
+@enduml

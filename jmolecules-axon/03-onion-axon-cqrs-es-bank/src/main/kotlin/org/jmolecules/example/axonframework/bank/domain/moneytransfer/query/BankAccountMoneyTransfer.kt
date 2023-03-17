@@ -1,4 +1,4 @@
-package org.jmolecules.example.axonframework.bank.domain.moneytransfer.read
+package org.jmolecules.example.axonframework.bank.domain.moneytransfer.query
 
 import org.jmolecules.ddd.annotation.Entity
 import org.jmolecules.ddd.annotation.Identity

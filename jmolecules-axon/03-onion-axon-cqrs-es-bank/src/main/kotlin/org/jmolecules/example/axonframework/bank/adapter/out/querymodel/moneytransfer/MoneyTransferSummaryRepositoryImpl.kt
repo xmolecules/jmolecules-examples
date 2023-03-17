@@ -1,8 +1,8 @@
-package org.jmolecules.example.axonframework.bank.adapter.out.readmodel.moneytransfer
+package org.jmolecules.example.axonframework.bank.adapter.out.querymodel.moneytransfer
 
 import org.jmolecules.example.axonframework.bank.application.port.out.repository.MoneyTransferSummaryRepository
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.read.BankAccountMoneyTransfer
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.query.BankAccountMoneyTransfer
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 import org.springframework.stereotype.Component
 import java.util.*

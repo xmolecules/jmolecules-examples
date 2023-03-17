@@ -4,9 +4,9 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Info
 import org.axonframework.axonserver.connector.command.AxonServerRemoteCommandHandlingException
 import org.jmolecules.ddd.annotation.ValueObject
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalanceException
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceededException
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFoundException
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalance
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceeded
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFound
 import org.springdoc.core.GroupedOpenApi
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -26,8 +26,8 @@ class RestConfiguration {
 
   @ExceptionHandler(
     IllegalArgumentException::class,
-    MaximumBalanceExceededException::class,
-    InsufficientBalanceException::class,
+    MaximumBalanceExceeded::class,
+    InsufficientBalance::class,
     AxonServerRemoteCommandHandlingException::class
   )
   fun badRequest(exception: Exception): ResponseEntity<ErrorDto> {
@@ -42,7 +42,7 @@ class RestConfiguration {
   }
 
   @ExceptionHandler(
-    MoneyTransferNotFoundException::class,
+    MoneyTransferNotFound::class,
   )
   fun notFound(exception: Exception): ResponseEntity<ErrorDto> {
     return ResponseEntity.notFound().build()

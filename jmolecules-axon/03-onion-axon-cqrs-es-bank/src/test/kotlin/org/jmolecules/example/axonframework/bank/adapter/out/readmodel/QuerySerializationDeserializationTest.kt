@@ -2,10 +2,10 @@ package org.jmolecules.example.axonframework.bank.adapter.out.readmodel
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.assertj.core.api.Assertions.assertThat
-import org.jmolecules.example.axonframework.bank.adapter.out.readmodel.bankaccount.BankAccountCurrentBalanceQuery
-import org.jmolecules.example.axonframework.bank.adapter.out.readmodel.moneytransfer.AllMoneyTransfersQuery
-import org.jmolecules.example.axonframework.bank.adapter.out.readmodel.moneytransfer.MoneyTransferSummariesForBankAccountQuery
-import org.jmolecules.example.axonframework.bank.adapter.out.readmodel.moneytransfer.MoneyTransferSummaryByIdQuery
+import org.jmolecules.example.axonframework.bank.adapter.out.querymodel.bankaccount.BankAccountCurrentBalanceQuery
+import org.jmolecules.example.axonframework.bank.adapter.out.querymodel.moneytransfer.AllMoneyTransfersQuery
+import org.jmolecules.example.axonframework.bank.adapter.out.querymodel.moneytransfer.MoneyTransferSummariesForBankAccountQuery
+import org.jmolecules.example.axonframework.bank.adapter.out.querymodel.moneytransfer.MoneyTransferSummaryByIdQuery
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.*

@@ -7,7 +7,7 @@ import org.jmolecules.example.axonframework.bank.application.port.out.MoneyTrans
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.state.MoneyTransfer
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.command.MoneyTransfer
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
 import org.jmolecules.example.axonframework.bank.application.port.out.command.AtmCommandPort

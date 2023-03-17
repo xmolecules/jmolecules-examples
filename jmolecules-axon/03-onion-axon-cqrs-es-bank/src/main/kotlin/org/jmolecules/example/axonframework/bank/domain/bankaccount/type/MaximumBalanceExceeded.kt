@@ -1,10 +1,6 @@
 package org.jmolecules.example.axonframework.bank.domain.bankaccount.type
 
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
-
-class MaximumBalanceExceededException(
+class MaximumBalanceExceeded(
   val accountId: AccountId,
   val currentBalance: Balance,
   val maximumBalance: Balance,

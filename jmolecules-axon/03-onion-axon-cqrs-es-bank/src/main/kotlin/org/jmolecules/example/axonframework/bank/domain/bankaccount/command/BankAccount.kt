@@ -1,17 +1,17 @@
-package org.jmolecules.example.axonframework.bank.domain.bankaccount.state
+package org.jmolecules.example.axonframework.bank.domain.bankaccount.command
 
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.BankAccountCreatedEvent
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.MoneyDepositedEvent
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.MoneyWithdrawnEvent
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.state.BankAccountCreationVerificationResult.*
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.command.BankAccountCreationVerificationResult.*
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.*
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferCancelledEvent
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferCompletedEvent
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferReceivedEvent
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferRequestedEvent
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.state.ActiveMoneyTransfers
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.command.ActiveMoneyTransfers
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFoundException
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFound
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
 
 /**
@@ -39,14 +39,14 @@ class BankAccount(
         maximumBalance = MAX_BALANCE,
         minimumBalance = MIN_BALANCE
       )) {
-        is InsufficientBalanceAmountVerificationResult -> throw InsufficientBalanceException(
+        is InsufficientBalanceAmountVerificationResult -> throw InsufficientBalance(
           accountId = accountId,
           withdrawAmount = null,
           currentBalance = initialBalance,
           minimumBalance = result.minimumBalance
         )
 
-        is BalanceAmountExceededVerificationResult -> throw MaximumBalanceExceededException(
+        is BalanceAmountExceededVerificationResult -> throw MaximumBalanceExceeded(
           accountId = accountId,
           depositAmount = null,
           currentBalance = initialBalance,
@@ -77,7 +77,7 @@ class BankAccount(
 
   fun depositMoney(amount: Amount): MoneyDepositedEvent {
     if (!balanceModel.canIncrease(amount)) {
-      throw MaximumBalanceExceededException(
+      throw MaximumBalanceExceeded(
         accountId = accountId,
         currentBalance = balanceModel.currentBalance,
         maximumBalance = balanceModel.maximumBalance,
@@ -85,6 +85,21 @@ class BankAccount(
       )
     }
     return MoneyDepositedEvent(
+      accountId = accountId,
+      amount = amount
+    )
+  }
+
+  fun withdrawMoney(amount: Amount): MoneyWithdrawnEvent {
+    if (!balanceModel.canDecrease(amount, activeMoneyTransfers.getReservedAmount())) {
+      throw InsufficientBalance(
+        accountId = accountId,
+        currentBalance = balanceModel.currentBalance,
+        withdrawAmount = amount,
+        minimumBalance = balanceModel.minimumBalance
+      )
+    }
+    return MoneyWithdrawnEvent(
       accountId = accountId,
       amount = amount
     )
@@ -100,7 +115,7 @@ class BankAccount(
     // TODO: validate that the source account id  matches current account id
     // TODO: validate source != target
     if (!balanceModel.canDecrease(amount, activeMoneyTransfers.getReservedAmount())) {
-      throw InsufficientBalanceException(
+      throw InsufficientBalance(
         accountId = accountId,
         currentBalance = balanceModel.currentBalance,
         withdrawAmount = amount,
@@ -122,7 +137,7 @@ class BankAccount(
   ): MoneyTransferReceivedEvent {
     // TODO: validate that the target account id  matches current account id
     if (!balanceModel.canIncrease(amount)) {
-      throw MaximumBalanceExceededException(
+      throw MaximumBalanceExceeded(
         accountId = accountId,
         currentBalance = balanceModel.currentBalance,
         maximumBalance = balanceModel.maximumBalance,
@@ -132,21 +147,6 @@ class BankAccount(
     return MoneyTransferReceivedEvent(
       moneyTransferId = moneyTransferId,
       targetAccountId = targetAccountId,
-      amount = amount
-    )
-  }
-
-  fun withdrawMoney(amount: Amount): MoneyWithdrawnEvent {
-    if (!balanceModel.canDecrease(amount, activeMoneyTransfers.getReservedAmount())) {
-      throw InsufficientBalanceException(
-        accountId = accountId,
-        currentBalance = balanceModel.currentBalance,
-        withdrawAmount = amount,
-        minimumBalance = balanceModel.minimumBalance
-      )
-    }
-    return MoneyWithdrawnEvent(
-      accountId = accountId,
       amount = amount
     )
   }
@@ -166,7 +166,7 @@ class BankAccount(
     rejectionReason: RejectionReason
   ): MoneyTransferCancelledEvent {
     if (!checkMoneyTransfer(moneyTransferId)) {
-      throw MoneyTransferNotFoundException(accountId = sourceAccountId, moneyTransferId = moneyTransferId)
+      throw MoneyTransferNotFound(accountId = sourceAccountId, moneyTransferId = moneyTransferId)
     }
     return MoneyTransferCancelledEvent(
       moneyTransferId = moneyTransferId,
@@ -179,7 +179,7 @@ class BankAccount(
 
   private fun getAmountForMoneyTransfer(moneyTransferId: MoneyTransferId, sourceAccountId: AccountId): Amount {
     return activeMoneyTransfers.getAmountForTransfer(moneyTransferId)
-      ?: throw MoneyTransferNotFoundException(accountId = sourceAccountId, moneyTransferId = moneyTransferId)
+      ?: throw MoneyTransferNotFound(accountId = sourceAccountId, moneyTransferId = moneyTransferId)
   }
 
   internal fun getCurrentBalance(): Balance = this.balanceModel.currentBalance
@@ -189,11 +189,11 @@ class BankAccount(
   // -----------------------------------------------------------
   // Model modification
 
-  fun increaseAmount(amount: Amount) {
+  fun increaseBalance(amount: Amount) {
     balanceModel = balanceModel.increase(amount)
   }
 
-  fun decreaseAmount(amount: Amount) {
+  fun decreaseBalance(amount: Amount) {
     balanceModel = balanceModel.decrease(amount)
   }
 
@@ -203,7 +203,7 @@ class BankAccount(
 
   fun acknowledgeMoneyTransferCompletion(moneyTransferId: MoneyTransferId) {
     val amount = activeMoneyTransfers.getAmountForTransfer(moneyTransferId)
-      ?: throw MoneyTransferNotFoundException(
+      ?: throw MoneyTransferNotFound(
         accountId,
         moneyTransferId
       )

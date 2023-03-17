@@ -1,4 +1,4 @@
-package org.jmolecules.example.axonframework.bank.domain.moneytransfer.state
+package org.jmolecules.example.axonframework.bank.domain.moneytransfer.command
 
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount

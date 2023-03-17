@@ -1,7 +1,7 @@
-package org.jmolecules.example.axonframework.bank.adapter.out.readmodel.bankaccount
+package org.jmolecules.example.axonframework.bank.adapter.out.querymodel.bankaccount
 
 import org.jmolecules.example.axonframework.bank.application.port.out.repository.BankAccountCurrentBalanceRepository
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.read.BankAccountCurrentBalance
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.query.BankAccountCurrentBalance
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.springframework.stereotype.Component
 import java.util.*

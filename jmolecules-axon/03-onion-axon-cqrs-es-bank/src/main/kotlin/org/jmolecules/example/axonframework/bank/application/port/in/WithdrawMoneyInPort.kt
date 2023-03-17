@@ -1,6 +1,6 @@
 package org.jmolecules.example.axonframework.bank.application.port.`in`
 
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalanceException
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalance
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 
@@ -13,6 +13,6 @@ interface WithdrawMoneyInPort {
    * @param accountId account id.
    * @param amount amount to withdraw.
    */
-  @Throws(InsufficientBalanceException::class)
+  @Throws(InsufficientBalance::class)
   fun withdrawMoney(accountId: AccountId, amount: Amount)
 }

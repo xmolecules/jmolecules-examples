@@ -9,7 +9,7 @@ import org.jmolecules.event.annotation.DomainEventPublisher
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.BankAccountCreatedEvent
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.MoneyDepositedEvent
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.MoneyWithdrawnEvent
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.state.BankAccount
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.command.BankAccount
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferCancelledEvent
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferCompletedEvent
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferReceivedEvent
@@ -129,12 +129,12 @@ class BankAccountAggregate {
 
   @DomainEventHandler(namespace = "axon.bank", name = "MoneyDepositedEvent")
   fun on(evt: MoneyDepositedEvent) {
-    bankAccount.increaseAmount(amount = evt.amount)
+    bankAccount.increaseBalance(amount = evt.amount)
   }
 
   @DomainEventHandler(namespace = "axon.bank", name = "MoneyWithdrawnEvent")
   fun on(evt: MoneyWithdrawnEvent) {
-    bankAccount.decreaseAmount(amount = evt.amount)
+    bankAccount.decreaseBalance(amount = evt.amount)
   }
 
   @DomainEventHandler(namespace = "axon.bank", name = "MoneyTransferRequestedEvent")
@@ -149,7 +149,7 @@ class BankAccountAggregate {
 
   @DomainEventHandler(namespace = "axon.bank", name = "MoneyTransferReceivedEvent")
   fun on(evt: MoneyTransferReceivedEvent) {
-    bankAccount.increaseAmount(amount = evt.amount)
+    bankAccount.increaseBalance(amount = evt.amount)
   }
 
   @DomainEventHandler(namespace = "axon.bank", name = "MoneyTransferCancelledEvent")

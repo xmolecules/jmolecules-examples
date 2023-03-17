@@ -1,6 +1,6 @@
-package org.jmolecules.example.axonframework.bank.domain.bankaccount.state
+package org.jmolecules.example.axonframework.bank.domain.bankaccount.command
 
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.state.BankAccountCreationVerificationResult.*
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.command.BankAccountCreationVerificationResult.*
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.ReservedAmount

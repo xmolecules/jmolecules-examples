@@ -8,7 +8,7 @@ import org.axonframework.spring.stereotype.Saga
 import org.jmolecules.event.annotation.DomainEventHandler
 import org.jmolecules.event.annotation.DomainEventPublisher
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.*
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.state.MoneyTransfer
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.command.MoneyTransfer
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
 import org.jmolecules.example.axonframework.bank.application.port.out.command.MoneyTransferCommandPort
 import org.jmolecules.example.axonframework.bank.application.port.out.event.MoneyTransferEventPort

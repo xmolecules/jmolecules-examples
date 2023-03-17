@@ -1,6 +1,6 @@
 package org.jmolecules.example.axonframework.bank.application.port.`in`
 
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceededException
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceeded
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 
@@ -13,6 +13,6 @@ interface DepositMoneyInPort {
    * @param accountId account id.
    * @param amount amount to deposit.
    */
-  @Throws(MaximumBalanceExceededException::class)
+  @Throws(MaximumBalanceExceeded::class)
   fun depositMoney(accountId: AccountId, amount: Amount)
 }

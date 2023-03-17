@@ -8,9 +8,9 @@ import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.Money
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 import org.jmolecules.example.axonframework.bank.application.port.out.query.BankAccountQueryPort
 import org.jmolecules.example.axonframework.bank.application.port.out.query.MoneyTransferQueryPort
-import org.jmolecules.example.axonframework.bank.adapter.out.readmodel.bankaccount.BankAccountCurrentBalanceQuery
-import org.jmolecules.example.axonframework.bank.adapter.out.readmodel.moneytransfer.MoneyTransferSummariesForBankAccountQuery
-import org.jmolecules.example.axonframework.bank.adapter.out.readmodel.moneytransfer.MoneyTransferSummaryByIdQuery
+import org.jmolecules.example.axonframework.bank.adapter.out.querymodel.bankaccount.BankAccountCurrentBalanceQuery
+import org.jmolecules.example.axonframework.bank.adapter.out.querymodel.moneytransfer.MoneyTransferSummariesForBankAccountQuery
+import org.jmolecules.example.axonframework.bank.adapter.out.querymodel.moneytransfer.MoneyTransferSummaryByIdQuery
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferSummaries
 import org.jmolecules.example.axonframework.infrastructure.architecture.QueryDispatcher
 import org.springframework.stereotype.Component
@@ -27,21 +27,21 @@ class BankAccountQueryDispatchAdapter(
 ) : BankAccountQueryPort, MoneyTransferQueryPort {
 
   @QueryDispatcher(namespace = "axon.bank", name = "BankAccountCurrentBalanceQuery")
-  override fun getCurrentBalance(accountId: AccountId): CompletableFuture<Optional<CurrentBalance>> {
+  override fun findCurrentBalance(accountId: AccountId): CompletableFuture<Optional<CurrentBalance>> {
     return queryGateway.query(
       BankAccountCurrentBalanceQuery(accountId), BankAccountCurrentBalanceQuery.RESPONSE_TYPE
     )
   }
 
   @QueryDispatcher(namespace = "axon.bank", name = "MoneyTransferSummariesForBankAccountQuery")
-  override fun getMoneyTransfers(accountId: AccountId): CompletableFuture<MoneyTransferSummaries> {
+  override fun findMoneyTransfers(accountId: AccountId): CompletableFuture<MoneyTransferSummaries> {
     return queryGateway.query(
       MoneyTransferSummariesForBankAccountQuery(accountId), MoneyTransferSummariesForBankAccountQuery.RESPONSE_TYPE
     )
   }
 
   @QueryDispatcher(namespace = "axon.bank", name = "MoneyTransferSummaryByIdQuery")
-  override fun getMoneyTransfer(moneyTransferId: MoneyTransferId): CompletableFuture<Optional<MoneyTransferSummary>> {
+  override fun findMoneyTransfer(moneyTransferId: MoneyTransferId): CompletableFuture<Optional<MoneyTransferSummary>> {
     return queryGateway.query(
       MoneyTransferSummaryByIdQuery(moneyTransferId), MoneyTransferSummaryByIdQuery.RESPONSE_TYPE
     )

@@ -1,10 +1,11 @@
 package org.jmolecules.example.axonframework.bank.domain.bankaccount.state
 
 import org.assertj.core.api.Assertions.assertThat
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.command.BankAccount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.BankAccountCreatedEvent
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.*
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
-import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFoundException
+import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFound
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -29,7 +30,7 @@ internal class BankAccountTest {
 
   @Test
   fun `fail to create bank account with insufficient balance`() {
-    val ex = assertThrows<InsufficientBalanceException> {
+    val ex = assertThrows<InsufficientBalance> {
       BankAccount.createAccount(
         accountId = accountId,
         initialBalance = tooLowInitialBalance
@@ -41,7 +42,7 @@ internal class BankAccountTest {
 
   @Test
   fun `fail to create bank account with too high balance`() {
-    val ex = assertThrows<MaximumBalanceExceededException> {
+    val ex = assertThrows<MaximumBalanceExceeded> {
       BankAccount.createAccount(
         accountId = accountId,
         initialBalance = tooHighInitialBalance
@@ -63,7 +64,7 @@ internal class BankAccountTest {
     assertThat(event.accountId).isEqualTo(accountId)
     assertThat(event.amount).isEqualTo(amount)
 
-    bankAccount.increaseAmount(event.amount)
+    bankAccount.increaseBalance(event.amount)
     assertThat(bankAccount.getCurrentBalance()).isEqualTo(validInitialBalance + amount)
   }
 
@@ -75,7 +76,7 @@ internal class BankAccountTest {
       initialBalance = validInitialBalance
     ).let { BankAccount.initializeAccount(accountId = it.accountId, initialBalance = it.initialBalance) }
 
-    val ex = assertThrows<MaximumBalanceExceededException> {
+    val ex = assertThrows<MaximumBalanceExceeded> {
       bankAccount.depositMoney(amount)
     }
     assertThat(ex.accountId).isEqualTo(accountId)
@@ -94,7 +95,7 @@ internal class BankAccountTest {
     assertThat(event.accountId).isEqualTo(accountId)
     assertThat(event.amount).isEqualTo(amount)
 
-    bankAccount.decreaseAmount(event.amount)
+    bankAccount.decreaseBalance(event.amount)
     assertThat(bankAccount.getCurrentBalance()).isEqualTo(validInitialBalance - amount)
   }
 
@@ -106,7 +107,7 @@ internal class BankAccountTest {
       initialBalance = validInitialBalance
     ).let { BankAccount.initializeAccount(accountId = it.accountId, initialBalance = it.initialBalance) }
 
-    val ex = assertThrows<InsufficientBalanceException> {
+    val ex = assertThrows<InsufficientBalance> {
       bankAccount.withdrawMoney(amount)
     }
     assertThat(ex.accountId).isEqualTo(accountId)
@@ -148,7 +149,7 @@ internal class BankAccountTest {
       initialBalance = validInitialBalance
     ).let { BankAccount.initializeAccount(accountId = it.accountId, initialBalance = it.initialBalance) }
 
-    val ex = assertThrows<InsufficientBalanceException> {
+    val ex = assertThrows<InsufficientBalance> {
       bankAccount.requestMoneyTransfer(
         moneyTransferId = moneyTransferId,
         sourceAccountId = accountId,
@@ -189,7 +190,7 @@ internal class BankAccountTest {
       initialBalance = validInitialBalance
     ).let { BankAccount.initializeAccount(accountId = it.accountId, initialBalance = it.initialBalance) }
 
-    val ex = assertThrows<MaximumBalanceExceededException> {
+    val ex = assertThrows<MaximumBalanceExceeded> {
       bankAccount.receiveMoneyTransfer(
         moneyTransferId = moneyTransferId,
         targetAccountId = otherAccountId,
@@ -220,7 +221,7 @@ internal class BankAccountTest {
     bankAccount.initializeMoneyTransfer(event.moneyTransferId, event.amount)
     assertThat(bankAccount.getActiveMoneyTransfers().hasMoneyTransfer(event.moneyTransferId)).isTrue
 
-    val ex = assertThrows<MoneyTransferNotFoundException> {
+    val ex = assertThrows<MoneyTransferNotFound> {
       bankAccount.completeMoneyTransfer(
         moneyTransferId = other,
         sourceAccountId = event.sourceAccountId
@@ -263,7 +264,7 @@ internal class BankAccountTest {
 
     bankAccount.initializeMoneyTransfer(event.moneyTransferId, event.amount)
     assertThat(bankAccount.getActiveMoneyTransfers().hasMoneyTransfer(event.moneyTransferId)).isTrue
-    val ex = assertThrows<MoneyTransferNotFoundException> {
+    val ex = assertThrows<MoneyTransferNotFound> {
       bankAccount.acknowledgeMoneyTransferCompletion(unknown)
     }
     assertThat(ex.accountId).isEqualTo(accountId)
@@ -290,7 +291,7 @@ internal class BankAccountTest {
     bankAccount.initializeMoneyTransfer(event.moneyTransferId, event.amount)
     assertThat(bankAccount.getActiveMoneyTransfers().hasMoneyTransfer(event.moneyTransferId)).isTrue
 
-    val ex = assertThrows<MoneyTransferNotFoundException> {
+    val ex = assertThrows<MoneyTransferNotFound> {
       bankAccount.cancelMoneyTransfer(
         moneyTransferId = otherTransfer,
         sourceAccountId = accountId,

@@ -1,4 +1,4 @@
-package org.jmolecules.example.axonframework.bank.adapter.out.readmodel.bankaccount
+package org.jmolecules.example.axonframework.bank.adapter.out.querymodel.bankaccount
 
 import org.axonframework.messaging.responsetypes.ResponseType
 import org.axonframework.messaging.responsetypes.ResponseTypes.optionalInstanceOf

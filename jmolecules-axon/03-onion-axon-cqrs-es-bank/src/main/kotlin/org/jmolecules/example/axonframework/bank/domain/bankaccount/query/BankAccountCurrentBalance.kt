@@ -1,4 +1,4 @@
-package org.jmolecules.example.axonframework.bank.domain.bankaccount.read
+package org.jmolecules.example.axonframework.bank.domain.bankaccount.query
 
 import org.jmolecules.ddd.annotation.Entity
 import org.jmolecules.ddd.annotation.Identity

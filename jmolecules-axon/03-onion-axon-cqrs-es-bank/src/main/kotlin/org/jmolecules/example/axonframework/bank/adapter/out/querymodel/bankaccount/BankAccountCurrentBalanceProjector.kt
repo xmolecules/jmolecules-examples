@@ -1,4 +1,4 @@
-package org.jmolecules.example.axonframework.bank.adapter.out.readmodel.bankaccount
+package org.jmolecules.example.axonframework.bank.adapter.out.querymodel.bankaccount
 
 import org.jmolecules.architecture.cqrs.annotation.QueryModel
 import org.jmolecules.event.annotation.DomainEventHandler
@@ -6,12 +6,12 @@ import org.jmolecules.example.axonframework.bank.application.port.out.repository
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.BankAccountCreatedEvent
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.MoneyDepositedEvent
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.MoneyWithdrawnEvent
-import org.jmolecules.example.axonframework.bank.domain.bankaccount.read.BankAccountCurrentBalance
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.query.BankAccountCurrentBalance
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferredEvent
 import org.springframework.stereotype.Component
 
 @Component
-@QueryModel // currently needed to map handler!
+@QueryModel // FIXME: currently needed to map handler!
 class BankAccountCurrentBalanceProjector(
   private val repository: BankAccountCurrentBalanceRepository
 ) {
