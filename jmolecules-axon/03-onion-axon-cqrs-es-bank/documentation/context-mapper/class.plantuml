@@ -1,6 +1,7 @@
 @startuml
 
 top to bottom direction
+
 skinparam linetype ortho
 
 package command {
@@ -93,9 +94,6 @@ package type {
 MoneyTransferSummaries *-d- MoneyTransferSummary
 BankAccount -r> ActiveMoneyTransfers
 BankAccount -l> BankAccountBalance
-command -d-> type
-query -d-> type
-
 
 hide members
 show BankAccount members
