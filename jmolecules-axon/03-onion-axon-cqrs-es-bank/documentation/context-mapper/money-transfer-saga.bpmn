@@ -69,7 +69,7 @@
     <bpmn:sequenceFlow id="Flow_0xe9lef" name="ReceiveMoneyTransferCommand" sourceRef="Activity_0gmeiia" targetRef="Activity_1qkb613" />
     <bpmn:sequenceFlow id="Flow_17hx9h7" name="MoneyTransferReceivedEvent" sourceRef="Activity_1qkb613" targetRef="Activity_1mkwjvn" />
     <bpmn:sequenceFlow id="Flow_01jtlpr" sourceRef="Activity_1fv9cei" targetRef="Event_0esb3ik" />
-    <bpmn:sequenceFlow id="Flow_0apzdhv" sourceRef="Activity_1mkwjvn" targetRef="Activity_1fv9cei" />
+    <bpmn:sequenceFlow id="Flow_0apzdhv" name="CompleteMoneyTransferCommand" sourceRef="Activity_1mkwjvn" targetRef="Activity_1fv9cei" />
     <bpmn:association id="Association_0ir0d3m" associationDirection="One" sourceRef="Event_08si70s" targetRef="Activity_0xvcw5i" />
     <bpmn:association id="Association_1pia52k" associationDirection="One" sourceRef="Event_1jhskok" targetRef="Activity_0xvcw5i" />
   </bpmn:process>
@@ -79,16 +79,16 @@
         <dc:Bounds x="160" y="80" width="1120" height="603" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_0d4otgl_di" bpmnElement="Lane_0d4otgl" isHorizontal="true">
-        <dc:Bounds x="190" y="80" width="1090" height="153" />
+      <bpmndi:BPMNShape id="Lane_1l85e50_di" bpmnElement="Lane_1l85e50" isHorizontal="true">
+        <dc:Bounds x="190" y="426" width="1090" height="257" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_0s0lgp2_di" bpmnElement="Lane_0s0lgp2" isHorizontal="true">
         <dc:Bounds x="190" y="233" width="1090" height="193" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Lane_1l85e50_di" bpmnElement="Lane_1l85e50" isHorizontal="true">
-        <dc:Bounds x="190" y="426" width="1090" height="257" />
+      <bpmndi:BPMNShape id="Lane_0d4otgl_di" bpmnElement="Lane_0d4otgl" isHorizontal="true">
+        <dc:Bounds x="190" y="80" width="1090" height="153" />
         <bpmndi:BPMNLabel />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
@@ -140,24 +140,11 @@
         <di:waypoint x="1140" y="330" />
         <di:waypoint x="1192" y="330" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_0ir0d3m_di" bpmnElement="Association_0ir0d3m">
-        <di:waypoint x="540" y="578" />
-        <di:waypoint x="540" y="630" />
-        <di:waypoint x="1010" y="630" />
-        <di:waypoint x="1010" y="400" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Association_1pia52k_di" bpmnElement="Association_1pia52k">
-        <di:waypoint x="750" y="388" />
-        <di:waypoint x="750" y="408" />
-        <di:waypoint x="940" y="408" />
-        <di:waypoint x="940" y="338" />
-        <di:waypoint x="990" y="338" />
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Event_0ztwo52_di" bpmnElement="Event_08si70s">
-        <dc:Bounds x="522" y="542" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Event_0sw4fzj_di" bpmnElement="Event_1jhskok">
         <dc:Bounds x="732" y="352" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_0ztwo52_di" bpmnElement="Event_08si70s">
+        <dc:Bounds x="522" y="542" width="36" height="36" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Flow_0rhj0zq_di" bpmnElement="Flow_0rhj0zq">
         <di:waypoint x="288" y="330" />
@@ -195,8 +182,21 @@
         <di:waypoint x="730" y="180" />
         <di:waypoint x="730" y="290" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="691" y="292" width="88" height="27" />
+          <dc:Bounds x="746" y="196" width="87" height="27" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_0ir0d3m_di" bpmnElement="Association_0ir0d3m">
+        <di:waypoint x="540" y="578" />
+        <di:waypoint x="540" y="630" />
+        <di:waypoint x="1010" y="630" />
+        <di:waypoint x="1010" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Association_1pia52k_di" bpmnElement="Association_1pia52k">
+        <di:waypoint x="750" y="388" />
+        <di:waypoint x="750" y="408" />
+        <di:waypoint x="940" y="408" />
+        <di:waypoint x="940" y="338" />
+        <di:waypoint x="990" y="338" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
