@@ -1,0 +1,53 @@
+@startuml
+
+left to right direction
+
+package "Application" {
+    [Policy] #pink
+    package "Use Cases"
+}
+
+component "Adapter" {
+    [Query Dispatcher]
+    [Command Dispatcher]
+
+    component "Command Model" {
+        [Commands] #lightblue
+        [Aggregate] #yellow
+    }
+
+    component "Query Model" {
+        [Queries] #lightgreen
+        [Projector] #lightgreen
+        [Projection] #lightgreen
+        [Repository]
+    }
+
+}
+
+package "Domain Model" {
+    [Command] #yellow
+    [Query] #lightgreen
+    [Domain Event] #orange
+}
+
+[Use Cases] -> [Command Dispatcher]
+[Command Dispatcher] --> [Commands]
+[Commands] -d-> [Aggregate]
+[Aggregate] -> [Domain Event]
+[Aggregate] -> [Command]
+
+[Use Cases] -> [Query Dispatcher]
+[Query Dispatcher] --> [Queries]
+
+
+[Domain Event] --> [Projector]
+[Domain Event] -> [Policy]
+
+[Policy] --> [Commands]
+[Queries] -> [Projection]
+
+[Projection] --> [Repository]
+[Projector] -> [Repository]
+[Repository] -> [Query]
+@enduml
