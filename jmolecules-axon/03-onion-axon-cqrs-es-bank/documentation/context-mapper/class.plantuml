@@ -1,53 +1,118 @@
 @startuml
 
-package bankaccount {
+top to bottom direction
+skinparam linetype ortho
 
-class BankAccount {
-    - accountId: AccountId,
-    - balanceModel: BankAccountBalance,
-    - activeMoneyTransfers: ActiveMoneyTransfers
-    + {static} initializeAccount(accountId: AccountId, initialBalance: Balance): BankAccount
+package command {
 
-    + depositMoney(amount: Amount): MoneyDepositedEvent
-    + withdrawMoney(amount: Amount): MoneyWithdrawnEvent
-    + requestMoneyTransfer(moneyTransferId: MoneyTransferId, ...): MoneyTransferRequestedEvent
-    + receiveMoneyTransfer(moneyTransferId: MoneyTransferId, ...): MoneyTransferReceivedEvent
-    + completeMoneyTransfer(moneyTransferId: MoneyTransferId, ...): MoneyTransferCompletedEvent
-    + cancelMoneyTransfer(moneyTransferId: MoneyTransferId, ...): MoneyTransferCancelledEvent
+    entity BankAccount {
+        - accountId: AccountId,
+        - balanceModel: BankAccountBalance,
+        - activeMoneyTransfers: ActiveMoneyTransfers
+    .. factory ..
+        + {static} initializeAccount(accountId: AccountId, initialBalance: Balance): BankAccount
+    .. validation methods ..
+        + depositMoney(amount: Amount): MoneyDepositedEvent
+        + withdrawMoney(amount: Amount): MoneyWithdrawnEvent
+        + requestMoneyTransfer(moneyTransferId: MoneyTransferId, ...): MoneyTransferRequestedEvent
+        + receiveMoneyTransfer(moneyTransferId: MoneyTransferId, ...): MoneyTransferReceivedEvent
+        + completeMoneyTransfer(moneyTransferId: MoneyTransferId, ...): MoneyTransferCompletedEvent
+        + cancelMoneyTransfer(moneyTransferId: MoneyTransferId, ...): MoneyTransferCancelledEvent
+    ... mutation methods ....
+        + increaseBalance(amount: Amount)
+        + decreaseBalance(amount: Amount)
+        + initializeMoneyTransfer(moneyTransferId: MoneyTransferId, amount: Amount)
+        + acknowledgeMoneyTransferCompletion(moneyTransferId: MoneyTransferId)
+        + acknowledgeMoneyTransferCancellation(moneyTransferId: MoneyTransferId)
+    }
 
-    + increaseBalance(amount: Amount)
-    + decreaseBalance(amount: Amount)
-    + initializeMoneyTransfer(moneyTransferId: MoneyTransferId, amount: Amount)
-    + acknowledgeMoneyTransferCompletion(moneyTransferId: MoneyTransferId)
-    + acknowledgeMoneyTransferCancellation(moneyTransferId: MoneyTransferId)
+    class BankAccountBalance <<(V,orchid)>> {
+        - currentBalance: Balance
+        - maximumBalance: Balance
+        - minimumBalance: Balance
+        + canIncrease(amount: Amount): Boolean
+        + canDecrease(amount: Amount): Boolean
+        + increase(amount: Amount): BankAccountBalance
+        + decrease(amount: Amount): BankAccountBalance
+    }
+
+    class ActiveMoneyTransfers <<(V,orchid)>> {
+        - activeMoneyTransfers: Map<MoneyTransferId, Amount>
+        + getReservedAmount(): ReservedAmount
+        + getAmountForTransfer(moneyTransferId: MoneyTransferId): Amount
+        + hasMoneyTransfer(moneyTransferId: MoneyTransferId): Boolean
+        + initTransfer(moneyTransferId: MoneyTransferId, amount: Amount)
+        + completeTransfer(moneyTransferId: MoneyTransferId)
+        + cancelTransfer(moneyTransferId: MoneyTransferId)
+    }
 }
 
-class BankAccountBalance {
-    - currentBalance: Balance
-    - maximumBalance: Balance
-    - minimumBalance: Balance
-    + canIncrease(amount: Amount): Boolean
-    + canDecrease(amount: Amount): Boolean
-    + increase(amount: Amount): BankAccountBalance
-    + decrease(amount: Amount): BankAccountBalance
-}
-}
+package query {
+    entity BankAccountCurrentBalance {
+      - accountId: AccountId,
+      - balance: Balance
+    }
 
-package moneytransfer {
-
-class ActiveMoneyTransfers {
-    + getReservedAmount(): ReservedAmount
-    + getAmountForTransfer(moneyTransferId: MoneyTransferId): Amount
-    + hasMoneyTransfer(moneyTransferId: MoneyTransferId): Boolean
-    + initTransfer(moneyTransferId: MoneyTransferId, amount: Amount)
-    + completeTransfer(moneyTransferId: MoneyTransferId)
-    + cancelTransfer(moneyTransferId: MoneyTransferId)
-}
+    entity BankAccountMoneyTransfer {
+      - moneyTransferId: MoneyTransferId
+      - sourceAccountId: AccountId
+      - targetAccountId: AccountId
+      - amount: Amount
+      - success: Boolean? = null
+      - errorMessage: RejectionReason? = null
+    }
 
 }
 
+package type {
+    class AccountId <<(V,orchid)>>
+    class Amount <<(V,orchid)>>
+    class Balance <<(V,orchid)>>
+    class ReservedAmount <<(V,orchid)>>
+    class CurrentBalance <<(V,orchid)>> {
+        - accountId: AccountId
+        - balance: Balance
+    }
+    class MoneyTransferId <<(V,orchid)>>
+    class MoneyTransferStatus <<(V,orchid)>>
+    class MoneyTransferSummaries <<(V,orchid)>>
 
-BankAccount -r-> ActiveMoneyTransfers
-BankAccount --> BankAccountBalance
+    entity MoneyTransferSummary {
+      - moneyTransferId: MoneyTransferId,
+      - sourceAccountId: AccountId,
+      - targetAccountId: AccountId,
+      - amount: Amount,
+      - status: MoneyTransferStatus
+    }
+
+    class MoneyTransferNotFound <<(E,orange)>>
+    class InsufficientBalance <<(E,orange)>>
+    class MaximumBalanceExceeded <<(E,orange)>>
+}
+
+MoneyTransferSummaries *-d- MoneyTransferSummary
+BankAccount -r> ActiveMoneyTransfers
+BankAccount -l> BankAccountBalance
+command -d-> type
+query -d-> type
+
+
+hide members
+show BankAccount members
+show BankAccount methods
+
+show BankAccountBalance members
+show ActiveMoneyTransfers members
+
+show MoneyTransferSummary members
+hide MoneyTransferSummary methods
+
+show CurrentBalance members
+hide CurrentBalance methods
+
+show BankAccountMoneyTransfer members
+hide BankAccountMoneyTransfer methods
+show BankAccountCurrentBalance members
+hide BankAccountCurrentBalance methods
 
 @enduml
