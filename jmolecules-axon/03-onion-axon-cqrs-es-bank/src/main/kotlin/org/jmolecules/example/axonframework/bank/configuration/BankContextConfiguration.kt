@@ -18,11 +18,7 @@ import java.util.*
 class BankContextConfiguration {
 
   @Bean
-  fun randomGenerator(): MoneyTransferIdGenerator {
-    return object : MoneyTransferIdGenerator {
-      override fun get(): MoneyTransferId = MoneyTransferId.of(UUID.randomUUID().toString())
-    }
-  }
+  fun randomGenerator()=MoneyTransferIdGenerator { MoneyTransferId.of(UUID.randomUUID().toString()) }
 
   @Bean
   fun createBankAccountUseCase(bankAccountPort: BankAccountCommandPort) =

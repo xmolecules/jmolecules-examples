@@ -5,4 +5,4 @@ import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.Money
 import java.util.function.Supplier
 
 @SecondaryPort
-interface MoneyTransferIdGenerator : Supplier<MoneyTransferId>
+fun interface MoneyTransferIdGenerator : Supplier<MoneyTransferId>
