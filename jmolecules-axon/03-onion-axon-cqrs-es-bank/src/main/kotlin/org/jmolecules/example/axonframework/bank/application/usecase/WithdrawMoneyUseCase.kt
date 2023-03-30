@@ -5,6 +5,7 @@ import org.jmolecules.example.axonframework.bank.application.port.out.command.At
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalance
+import java.util.concurrent.CompletableFuture
 
 /**
  * Use case to withdraw money.
@@ -19,7 +20,7 @@ class WithdrawMoneyUseCase(
    * @param amount amount to withdraw.
    */
   @Throws(InsufficientBalance::class)
-  override fun withdrawMoney(accountId: AccountId, amount: Amount) {
-    atmOutPort.withdrawMoney(accountId, amount)
+  override fun withdrawMoney(accountId: AccountId, amount: Amount): CompletableFuture<Unit> {
+    return atmOutPort.withdrawMoney(accountId, amount)
   }
 }

@@ -32,7 +32,7 @@ class BankAccountResource(
     ]
   )
   fun createBankAccount(@RequestBody dto: CreateBankAccountDto): ResponseEntity<String> {
-    createBankAccountInPort.createBankAccount(AccountId.of(dto.accountId), Balance.of(dto.initialBalance))
+    createBankAccountInPort.createBankAccount(AccountId.of(dto.accountId), Balance.of(dto.initialBalance)).get()
     return ResponseEntity.created(
       ServletUriComponentsBuilder
         .fromCurrentContextPath()

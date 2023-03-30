@@ -21,6 +21,7 @@ import org.jmolecules.example.axonframework.bank.adapter.out.commandmodel.moneyt
 import org.jmolecules.example.axonframework.bank.adapter.out.commandmodel.moneytransfer.ReceiveMoneyTransferCommand
 import org.jmolecules.example.axonframework.bank.adapter.out.commandmodel.moneytransfer.RequestMoneyTransferCommand
 import org.springframework.stereotype.Component
+import java.util.concurrent.CompletableFuture
 
 /**
  * Implementation of the bank account command model dispatch.
@@ -33,8 +34,8 @@ class BankAccountCommandDispatchAdapter(
 ) : BankAccountCommandPort, AtmCommandPort, MoneyTransferCommandPort {
 
   @CommandDispatcher(dispatches = "axon.bank.CreateBankAccountCommand")
-  override fun createBankAccount(accountId: AccountId, initialBalance: Balance) {
-    commandGateway.sendAndWait<Any>(
+  override fun createBankAccount(accountId: AccountId, initialBalance: Balance): CompletableFuture<Unit> {
+    return commandGateway.send(
       CreateBankAccountCommand(
         accountId = accountId,
         initialBalance = initialBalance
@@ -43,8 +44,8 @@ class BankAccountCommandDispatchAdapter(
   }
 
   @CommandDispatcher(dispatches = "axon.bank.WithdrawMoneyCommand")
-  override fun withdrawMoney(accountId: AccountId, amount: Amount) {
-    commandGateway.sendAndWait<Void>(
+  override fun withdrawMoney(accountId: AccountId, amount: Amount): CompletableFuture<Unit> {
+    return commandGateway.send(
       WithdrawMoneyCommand(
         accountId,
         amount
@@ -53,8 +54,8 @@ class BankAccountCommandDispatchAdapter(
   }
 
   @CommandDispatcher(dispatches = "axon.bank.DepositMoneyCommand")
-  override fun depositMoney(accountId: AccountId, amount: Amount) {
-    commandGateway.sendAndWait<Void>(
+  override fun depositMoney(accountId: AccountId, amount: Amount): CompletableFuture<Unit> {
+    return commandGateway.send(
       DepositMoneyCommand(
         accountId,
         amount
@@ -67,17 +68,16 @@ class BankAccountCommandDispatchAdapter(
     sourceAccountId: AccountId,
     targetAccountId: AccountId,
     amount: Amount
-  ): MoneyTransferId {
+  ): CompletableFuture<MoneyTransferId> {
     val moneyTransferId = moneyTransferIdGenerator.get()
-    commandGateway.sendAndWait<Void>(
+    return commandGateway.send<Unit>(
       RequestMoneyTransferCommand(
         moneyTransferId = moneyTransferId,
         sourceAccountId = sourceAccountId,
         targetAccountId = targetAccountId,
         amount = amount
       )
-    )
-    return moneyTransferId
+    ).thenApply { moneyTransferId }
   }
 
   @CommandDispatcher(dispatches = "axon.bank.ReceiveMoneyTransferCommand")

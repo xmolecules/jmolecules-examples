@@ -25,7 +25,7 @@ interface TransferMoneyInPort {
    * @throws [MaximumBalanceExceeded] if the balance target account would be above the maximum.
    */
   @Throws(InsufficientBalance::class, MaximumBalanceExceeded::class)
-  fun transferMoney(sourceAccountId: AccountId, targetAccountId: AccountId, amount: Amount): MoneyTransferId
+  fun transferMoney(sourceAccountId: AccountId, targetAccountId: AccountId, amount: Amount): CompletableFuture<MoneyTransferId>
 
   /**
    * Retrieves a list of money transfers for given account.

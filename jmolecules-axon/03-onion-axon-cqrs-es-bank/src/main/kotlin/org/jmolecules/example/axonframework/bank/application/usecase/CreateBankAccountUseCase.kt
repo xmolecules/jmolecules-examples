@@ -6,6 +6,7 @@ import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Account
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalance
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceeded
+import java.util.concurrent.CompletableFuture
 
 /**
  * Application Service to manipulate the bank account.
@@ -20,7 +21,7 @@ class CreateBankAccountUseCase(
    * @param initialBalance balance of the account.
    */
   @Throws(MaximumBalanceExceeded::class, InsufficientBalance::class)
-  override fun createBankAccount(accountId: AccountId, initialBalance: Balance) {
-    bankAccountPort.createBankAccount(accountId, initialBalance)
+  override fun createBankAccount(accountId: AccountId, initialBalance: Balance): CompletableFuture<Unit> {
+    return bankAccountPort.createBankAccount(accountId, initialBalance)
   }
 }

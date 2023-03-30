@@ -34,7 +34,7 @@ class AtmResource(
   )
   fun withdrawMoney(@RequestBody dto: WithdrawMoneyDto): ResponseEntity<Void> {
     logger.info { "ATM Withdraw Request: $dto" }
-    withdrawMoneyInPort.withdrawMoney(AccountId.of(dto.accountId), Amount.of(dto.amount))
+    withdrawMoneyInPort.withdrawMoney(AccountId.of(dto.accountId), Amount.of(dto.amount)).get()
     return ResponseEntity.noContent().build()
   }
 
@@ -49,7 +49,7 @@ class AtmResource(
   )
   fun depositMoney(@RequestBody dto: DepositMoneyDto): ResponseEntity<Void> {
     logger.info { "ATM Deposit Request: $dto" }
-    depositMoneyInPort.depositMoney(AccountId.of(dto.accountId), Amount.of(dto.amount))
+    depositMoneyInPort.depositMoney(AccountId.of(dto.accountId), Amount.of(dto.amount)).get()
     return ResponseEntity.noContent().build()
   }
 

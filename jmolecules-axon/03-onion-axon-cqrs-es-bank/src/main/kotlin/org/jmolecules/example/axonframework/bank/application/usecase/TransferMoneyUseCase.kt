@@ -32,7 +32,7 @@ class TransferMoneyUseCase(
    * @throws [MaximumBalanceExceeded] if the balance target account would be above the maximum.
    */
   @Throws(InsufficientBalance::class, MaximumBalanceExceeded::class)
-  override fun transferMoney(sourceAccountId: AccountId, targetAccountId: AccountId, amount: Amount): MoneyTransferId {
+  override fun transferMoney(sourceAccountId: AccountId, targetAccountId: AccountId, amount: Amount): CompletableFuture<MoneyTransferId> {
     return moneyTransferCommandPort.transferMoney(
       sourceAccountId = sourceAccountId,
       targetAccountId = targetAccountId,

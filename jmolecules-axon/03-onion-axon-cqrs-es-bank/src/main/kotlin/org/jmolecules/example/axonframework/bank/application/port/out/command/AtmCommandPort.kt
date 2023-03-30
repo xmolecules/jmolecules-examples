@@ -5,6 +5,7 @@ import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Insuffi
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceeded
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
+import java.util.concurrent.CompletableFuture
 import kotlin.jvm.Throws
 
 /**
@@ -19,7 +20,7 @@ interface AtmCommandPort {
    * @throws MaximumBalanceExceeded if the resulting balance is above the maximum amount.
    */
   @Throws(MaximumBalanceExceeded::class)
-  fun depositMoney(accountId: AccountId, amount: Amount)
+  fun depositMoney(accountId: AccountId, amount: Amount): CompletableFuture<Unit>
 
   /**
    * Withdraws money from account.
@@ -28,5 +29,5 @@ interface AtmCommandPort {
    * @throws InsufficientBalance the remaining balance is below minimum account balance.
    */
   @Throws(InsufficientBalance::class)
-  fun withdrawMoney(accountId: AccountId, amount: Amount)
+  fun withdrawMoney(accountId: AccountId, amount: Amount): CompletableFuture<Unit>
 }

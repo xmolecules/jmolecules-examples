@@ -37,7 +37,7 @@ class MoneyTransferResource(
       AccountId.of(dto.sourceAccountId),
       AccountId.of(dto.targetAccountId),
       Amount.of(dto.amount)
-    )
+    ).get()
     return ResponseEntity.created(
       ServletUriComponentsBuilder
         .fromCurrentContextPath()

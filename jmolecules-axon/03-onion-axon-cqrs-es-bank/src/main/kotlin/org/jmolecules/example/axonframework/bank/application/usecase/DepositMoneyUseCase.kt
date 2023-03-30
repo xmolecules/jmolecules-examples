@@ -5,6 +5,7 @@ import org.jmolecules.example.axonframework.bank.application.port.out.command.At
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceeded
+import java.util.concurrent.CompletableFuture
 
 /**
  * Operations on bank account available at ATM.
@@ -19,7 +20,7 @@ class DepositMoneyUseCase(
    * @param amount amount to deposit.
    */
   @Throws(MaximumBalanceExceeded::class)
-  override fun depositMoney(accountId: AccountId, amount: Amount) {
-    atmOutPort.depositMoney(accountId, amount)
+  override fun depositMoney(accountId: AccountId, amount: Amount): CompletableFuture<Unit> {
+    return atmOutPort.depositMoney(accountId, amount)
   }
 }
