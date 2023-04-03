@@ -17,8 +17,8 @@ package example.jmolecules.presentation.types.order;
 
 import example.jmolecules.presentation.types.order.Order.OrderId;
 
+import org.jmolecules.ddd.integration.AssociationResolver;
 import org.jmolecules.ddd.types.Repository;
-import org.jmolecules.spring.AssociationResolver;
 
 /**
  * @author Oliver Drotbohm

@@ -37,8 +37,8 @@
 		<!-- jMolecules -->
 
 		<dependency>
-			<groupId>org.jmolecules</groupId>
-			<artifactId>jmolecules-events</artifactId>
+			<groupId>org.jmolecules.integrations</groupId>
+			<artifactId>jmolecules-starter-ddd</artifactId>
 		</dependency>
 
 		<!-- jMolecules integrations -->
@@ -46,11 +46,13 @@
 		<dependency>
 			<groupId>org.jmolecules.integrations</groupId>
 			<artifactId>jmolecules-spring</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.jmolecules.integrations</groupId>
 			<artifactId>jmolecules-jpa</artifactId>
+			<scope>runtime</scope>
 		</dependency>
 
 		<dependency>
@@ -88,7 +90,7 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>transform</goal>
+							<goal>transform-extended</goal>
 						</goals>
 					</execution>
 				</executions>
