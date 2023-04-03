@@ -18,7 +18,6 @@ package org.jmolecules.examples.jpa.order;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 
 import java.util.List;
 import java.util.UUID;
@@ -43,12 +42,9 @@ public class Order implements AggregateRoot<Order, Order.OrderId> {
 
 	public Order(Customer customer) {
 
-		this.id = OrderId.of(UUID.randomUUID());
+		this.id = new OrderId(UUID.randomUUID());
 		this.customer = Association.forAggregate(customer);
 	}
 
-	@Value(staticConstructor = "of")
-	public static class OrderId implements Identifier {
-		private final UUID orderId;
-	}
+	public record OrderId(UUID orderId) implements Identifier {}
 }

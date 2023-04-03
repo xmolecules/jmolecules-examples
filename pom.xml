@@ -22,6 +22,7 @@
 		<archunit.version>1.0.1</archunit.version>
 		<axon.version>4.6.2</axon.version>
 		<bytebuddy.version>1.14.3</bytebuddy.version>
+		<hibernate.version>6.2.0.Final</hibernate.version>
 		<java.version>17</java.version>
 		<jmolecules.version>2022.2.4</jmolecules.version>
 		<spring-modulith.version>0.5.1</spring-modulith.version>
@@ -41,6 +42,14 @@
 
 	<dependencyManagement>
 		<dependencies>
+
+			<!-- Custom version overrides -->
+			<dependency>
+				<groupId>org.hibernate.orm</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
@@ -55,6 +64,7 @@
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
