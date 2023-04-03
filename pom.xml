@@ -23,7 +23,7 @@
 		<axon.version>4.6.2</axon.version>
 		<bytebuddy.version>1.12.19</bytebuddy.version>
 		<java.version>17</java.version>
-		<jmolecules-bom.version>2022.2.2</jmolecules-bom.version>
+		<jmolecules.version>2022.2.4</jmolecules.version>
 		<spring-modulith.version>0.5.1</spring-modulith.version>
 		<spring-boot.version>3.0.5</spring-boot.version>
 	</properties>
@@ -51,7 +51,7 @@
 			<dependency>
 				<groupId>org.jmolecules</groupId>
 				<artifactId>jmolecules-bom</artifactId>
-				<version>${jmolecules-bom.version}</version>
+				<version>${jmolecules.version}</version>
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
