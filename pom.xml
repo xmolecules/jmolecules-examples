@@ -24,7 +24,7 @@
 		<bytebuddy.version>1.12.19</bytebuddy.version>
 		<java.version>17</java.version>
 		<jmolecules-bom.version>2022.2.2</jmolecules-bom.version>
-		<spring-modulith.version>0.1.0</spring-modulith.version>
+		<spring-modulith.version>0.5.1</spring-modulith.version>
 		<spring-boot.version>3.0.5</spring-boot.version>
 	</properties>
 
