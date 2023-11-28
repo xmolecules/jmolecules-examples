@@ -16,7 +16,6 @@
 package org.jmolecules.examples.jpa.customer;
 
 import lombok.Getter;
-import lombok.Value;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +41,7 @@ public class Customer implements AggregateRoot<Customer, CustomerId> {
 
 		Assert.notNull(address, "Address must not be null!");
 
-		this.id = CustomerId.of(UUID.randomUUID().toString());
+		this.id = new CustomerId(UUID.randomUUID());
 
 		this.name = new Name(firstname, lastname);
 		this.addresses = new ArrayList<>();
@@ -51,8 +50,5 @@ public class Customer implements AggregateRoot<Customer, CustomerId> {
 
 	public record Name(String firstname, String lastname) implements ValueObject {}
 
-	@Value(staticConstructor = "of")
-	public static class CustomerId implements Identifier {
-		private final String id;
-	}
+	public record CustomerId(UUID id) implements Identifier {}
 }

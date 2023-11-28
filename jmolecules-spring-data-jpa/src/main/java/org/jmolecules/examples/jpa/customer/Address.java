@@ -16,7 +16,6 @@
 package org.jmolecules.examples.jpa.customer;
 
 import lombok.Getter;
-import lombok.Value;
 
 import java.util.UUID;
 
@@ -26,19 +25,16 @@ import org.jmolecules.ddd.types.Identifier;
 @Getter
 public class Address implements Entity<Customer, Address.AddressId> {
 
-	private Address.AddressId id;
+	private final AddressId id;
 	private final String street, city, zipCode;
 
 	public Address(String street, String city, String zipCode) {
 
-		this.id = AddressId.of(UUID.randomUUID());
+		this.id = new AddressId(UUID.randomUUID());
 		this.street = street;
 		this.city = city;
 		this.zipCode = zipCode;
 	}
 
-	@Value(staticConstructor = "of")
-	public static class AddressId implements Identifier {
-		private final UUID id;
-	}
+	public record AddressId(UUID id) implements Identifier {}
 }
