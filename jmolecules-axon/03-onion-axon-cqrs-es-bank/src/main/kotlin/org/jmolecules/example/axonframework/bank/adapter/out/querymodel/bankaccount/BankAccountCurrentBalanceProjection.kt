@@ -2,7 +2,7 @@ package org.jmolecules.example.axonframework.bank.adapter.out.querymodel.bankacc
 
 import mu.KLogging
 import org.axonframework.queryhandling.QueryHandler
-import org.jmolecules.architecture.cqrs.annotation.QueryModel
+import org.jmolecules.architecture.cqrs.QueryModel
 import org.jmolecules.example.axonframework.bank.application.port.out.repository.BankAccountCurrentBalanceRepository
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.query.BankAccountCurrentBalance
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.CurrentBalance

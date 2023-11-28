@@ -1,7 +1,7 @@
 package org.jmolecules.example.axonframework.bank.adapter.out.dispatch
 
 import org.axonframework.commandhandling.gateway.CommandGateway
-import org.jmolecules.architecture.cqrs.annotation.CommandDispatcher
+import org.jmolecules.architecture.cqrs.CommandDispatcher
 import org.jmolecules.architecture.hexagonal.SecondaryAdapter
 import org.jmolecules.example.axonframework.bank.application.port.out.MoneyTransferIdGenerator
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId

@@ -15,9 +15,9 @@
   <packaging>pom</packaging>
 
   <properties>
-    <spring-boot.version>2.7.7</spring-boot.version>
-    <axon.version>4.6.3</axon.version>
-    <springdoc-openapi.version>1.6.14</springdoc-openapi.version>
+    <spring-boot.version>3.1.5</spring-boot.version>
+    <axon.version>4.9.0</axon.version>
+    <springdoc-openapi.version>2.2.0</springdoc-openapi.version>
   </properties>
 
   <modules>
@@ -28,6 +28,10 @@
 
   <dependencyManagement>
     <dependencies>
+      <!-- Inherited from parent pom -->
+      <!-- Spring BOM -->
+      <!-- JMolecules BOM -->
+
       <!-- Axon Framework -->
       <dependency>
         <groupId>org.axonframework</groupId>
@@ -38,7 +42,7 @@
       </dependency>
       <dependency>
         <groupId>org.springdoc</groupId>
-        <artifactId>springdoc-openapi-ui</artifactId>
+        <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
         <version>${springdoc-openapi.version}</version>
       </dependency>
       <dependency>
@@ -67,16 +71,15 @@
       <groupId>org.jmolecules</groupId>
       <artifactId>jmolecules-events</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.jmolecules</groupId>
+      <artifactId>jmolecules-hexagonal-architecture</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>org.jmolecules.integrations</groupId>
       <artifactId>jmolecules-bytebuddy</artifactId>
       <scope>provided</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.jmolecules</groupId>
-      <artifactId>jmolecules-hexagonal-architecture</artifactId>
-      <version>1.6.0</version>
     </dependency>
     <!-- Axon Framework -->
     <dependency>
@@ -117,6 +120,12 @@
     <dependency>
       <groupId>org.jmolecules.integrations</groupId>
       <artifactId>jmolecules-archunit</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>com.tngtech.archunit</groupId>
+          <artifactId>archunit-junit5</artifactId>
+        </exclusion>
+      </exclusions>
       <scope>test</scope>
     </dependency>
 
@@ -154,7 +163,8 @@
           <dependency>
             <groupId>org.jmolecules.integrations</groupId>
             <artifactId>jmolecules-bytebuddy</artifactId>
-            <version>${jmolecules-integrations.version}</version>
+            <!-- should match the version from the jmolecules bom -->
+            <version>0.17.0</version>
           </dependency>
         </dependencies>
       </plugin>

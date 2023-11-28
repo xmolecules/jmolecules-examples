@@ -3,7 +3,7 @@ package org.jmolecules.example.axonframework.bank
 import com.tngtech.archunit.core.domain.JavaClasses
 import com.tngtech.archunit.junit.AnalyzeClasses
 import com.tngtech.archunit.junit.ArchTest
-import org.jmolecules.archunit.AxonCqrsEsRules
+import org.jmolecules.archunit.ExtendedArchitectureRules
 import org.jmolecules.archunit.HexagonalArchitecture
 import org.jmolecules.archunit.JMoleculesArchitectureRules
 
@@ -15,12 +15,12 @@ internal class ArchitectureTests {
 
   @ArchTest
   fun `validates architecture is hexagonal`(classes: JavaClasses) {
-    JMoleculesArchitectureRules.ensureHexagonal().check(classes)
+    ExtendedArchitectureRules.ensureHexagonal(setOf("JMolecules")).check(classes)
   }
 
   @ArchTest
   fun `validates architecture is onion`(classes: JavaClasses) {
-    JMoleculesArchitectureRules.ensureOnionClassical().check(classes)
+    ExtendedArchitectureRules.ensureOnionClassical(setOf("JMolecules")).check(classes)
   }
 
   @ArchTest
@@ -51,7 +51,7 @@ internal class ArchitectureTests {
 
   @ArchTest
   fun `validates cqrs-es axon framework rules`(classes: JavaClasses) {
-    AxonCqrsEsRules.ensureAxonCqrsEs().check(classes)
+    ExtendedArchitectureRules.ensureAxonCqrsEs(setOf("JMolecules")).check(classes)
   }
 
 }

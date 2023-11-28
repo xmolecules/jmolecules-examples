@@ -1,6 +1,5 @@
 package org.jmolecules.example.axonframework.infrastructure.property
 
-import com.fasterxml.jackson.module.kotlin.isKotlinClass
 import org.axonframework.common.property.AbstractMethodPropertyAccessStrategy
 import org.axonframework.common.property.MethodAccessedProperty
 import org.axonframework.common.property.Property
@@ -11,6 +10,10 @@ import kotlin.reflect.jvm.javaGetter
  * Property access strategy for fancy getter names of the inherited properties used by Axon Saga accessing properties of data classes.
  */
 class KotlinPropertyAccessStrategy : AbstractMethodPropertyAccessStrategy() {
+
+  companion object {
+    private const val METADATA_FQN = "kotlin.Metadata"
+  }
 
   override fun getPriority(): Int = 1
 
@@ -25,4 +28,6 @@ class KotlinPropertyAccessStrategy : AbstractMethodPropertyAccessStrategy() {
   }
 
   override fun getterName(property: String): String = property
+
+  private fun Class<*>.isKotlinClass() = declaredAnnotations.any { it.annotationClass.java.name == METADATA_FQN }
 }

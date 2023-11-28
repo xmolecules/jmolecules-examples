@@ -14,9 +14,9 @@
   <artifactId>jmolecules-axon-onion-cqrs-es-bank</artifactId>
 
   <properties>
-    <kotlin.version>1.8.10</kotlin.version>
-    <kotlin-logging.version>3.0.4</kotlin-logging.version>
-    <jackson-module-kogera.version>2.14.2-alpha4</jackson-module-kogera.version>
+    <kotlin.version>1.9.21</kotlin.version>
+    <kotlin-logging.version>3.0.5</kotlin-logging.version>
+    <jackson-module-kogera.version>2.15.3-beta6</jackson-module-kogera.version>
   </properties>
 
   <dependencyManagement>
@@ -65,11 +65,7 @@
 
     <dependency>
       <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-ui</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-kotlin</artifactId>
+      <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
     </dependency>
   </dependencies>
 

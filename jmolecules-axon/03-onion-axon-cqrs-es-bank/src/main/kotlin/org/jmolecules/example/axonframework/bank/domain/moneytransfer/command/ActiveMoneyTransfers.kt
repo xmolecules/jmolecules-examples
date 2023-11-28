@@ -1,6 +1,10 @@
 package org.jmolecules.example.axonframework.bank.domain.moneytransfer.command
 
+import org.jmolecules.architecture.onion.classical.DomainModelRing
+import org.jmolecules.example.axonframework.bank.adapter.out.commandmodel.bankaccount.CreateBankAccountCommand
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.AccountId
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Amount
+import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.Balance
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.ReservedAmount
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 
@@ -27,5 +31,4 @@ data class ActiveMoneyTransfers(
   fun cancelTransfer(moneyTransferId: MoneyTransferId) {
     activeMoneyTransfers.remove(moneyTransferId)
   }
-
 }

@@ -7,7 +7,7 @@ import org.jmolecules.ddd.annotation.ValueObject
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.InsufficientBalance
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.type.MaximumBalanceExceeded
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFound
-import org.springdoc.core.GroupedOpenApi
+import org.springdoc.core.models.GroupedOpenApi
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.ResponseEntity
@@ -35,6 +35,7 @@ class RestConfiguration {
       is AxonServerRemoteCommandHandlingException -> ResponseEntity.badRequest().body(
         ErrorDto(exception.exceptionDescriptions.toString())
       )
+
       else -> ResponseEntity.badRequest().body(
         ErrorDto(exception.message ?: "")
       )

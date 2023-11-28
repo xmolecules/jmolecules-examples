@@ -1,6 +1,6 @@
 package org.jmolecules.example.axonframework.bank.adapter.out.querymodel.moneytransfer
 
-import org.jmolecules.architecture.cqrs.annotation.QueryModel
+import org.jmolecules.architecture.cqrs.QueryModel
 import org.jmolecules.event.annotation.DomainEventHandler
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferCancelledEvent
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.event.MoneyTransferCompletedEvent
