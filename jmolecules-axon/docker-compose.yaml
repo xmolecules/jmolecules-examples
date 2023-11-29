@@ -1,0 +1,23 @@
+version: "3"
+
+#
+# If you don't want to run with in-memory buses and stores, start docker compose and disable the mem-profile
+# To do so, please open the application.yml and comment out the lines 7-8 (profiles include)
+#
+
+services:
+  axon-server:
+    container_name: "jmolecules-example-axon-server"
+    image: axoniq/axonserver:2023.2.1-jdk-17
+    hostname: axonserver
+    environment:
+      AXONIQ_AXONSERVER_DEVMODE_ENABLED: "true"
+      AXONIQ_AXONSERVER_SSL_ENABLED: "false"
+      AXONIQ_AXONSERVER_ACCESSCONTROL_ENABLED: "false"
+      AXONIQ_AXONSERVER_NAME: "localhost"
+      AXONIQ_AXONSERVER_HOSTNAME: "localhost"
+      AXONIQ_AXONSERVER_AUTOCLUSTER_FIRST: "localhost"
+    ports:
+      - "8024:8024"
+      - "8124:8124"
+      - "8224:8224"

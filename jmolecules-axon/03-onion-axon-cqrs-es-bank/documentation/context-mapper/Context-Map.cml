@@ -1,0 +1,43 @@
+ContextMap AxonBank {
+    type = SYSTEM_LANDSCAPE
+    state = TO_BE
+
+    contains BankAccountContext
+}
+
+BoundedContext BankAccountContext {
+  Application {
+    Command CreateBankAccountCommand
+    Command DepositMoneyCommand
+    Command WithdrawMoneyCommand
+    Command CancelMoneyTransferCommand
+    Command CompleteMoneyTransferCommand
+    Command ReceiveMoneyTransferCommand
+    Command RequestMoneyTransferCommand
+  }
+  Aggregate BankAccount {
+    Entity BankAccountAggregate {
+      aggregateRoot
+
+      String accountId
+      BalanceModel balance
+      MoneyTransferModel moneyTransfers
+    }
+
+    ValueObject BalanceModel {
+    }
+
+    ValueObject MoneyTransferModel {
+    }
+
+    DomainEvent BankAccountCreatedEvent
+    DomainEvent MoneyDepositedEvent
+    DomainEvent MoneyWithdrawnEvent
+    DomainEvent MoneyTransferCancelledEvent
+    DomainEvent MoneyTransferCompletedEvent
+    DomainEvent MoneyTransferReceivedEvent
+    DomainEvent MoneyTransferredEvent
+    DomainEvent MoneyTransferRequestedEvent
+  }
+}
+

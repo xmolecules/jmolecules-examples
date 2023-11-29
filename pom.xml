@@ -19,14 +19,17 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<archunit.version>1.0.1</archunit.version>
-		<axon.version>4.6.2</axon.version>
-		<bytebuddy.version>1.14.4</bytebuddy.version>
-		<hibernate.version>6.2.0.Final</hibernate.version>
 		<java.version>17</java.version>
-		<jmolecules.version>2022.2.4</jmolecules.version>
+		<spring-boot.version>3.1.5</spring-boot.version>
+
+		<archunit.version>1.2.0</archunit.version>
+		<bytebuddy.version>1.14.4</bytebuddy.version>
+
+		<jmolecules.version>2023.1.0</jmolecules.version>
+
 		<spring-modulith.version>0.6.0</spring-modulith.version>
-		<spring-boot.version>3.1.0</spring-boot.version>
+    	<moduliths.version>1.3.0</moduliths.version>
+
 	</properties>
 
 	<profiles>
@@ -42,14 +45,6 @@
 
 	<dependencyManagement>
 		<dependencies>
-
-			<!-- Custom version overrides -->
-			<dependency>
-				<groupId>org.hibernate.orm</groupId>
-				<artifactId>hibernate-core</artifactId>
-				<version>${hibernate.version}</version>
-			</dependency>
-
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
@@ -83,6 +78,13 @@
 			<organization>VMware Inc.</organization>
 			<organizationUrl>https://vmware.com</organizationUrl>
 		</developer>
+		<developer>
+			<id>zambrovski</id>
+			<name>Simon Zambrovski</name>
+			<email>simon.zambrovski@holisticon.de</email>
+			<organization>Holisticon AG</organization>
+			<organizationUrl>https://holisticon.de</organizationUrl>
+		</developer>
 	</developers>
 
 	<dependencies>
@@ -103,7 +105,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.1</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
@@ -112,6 +114,7 @@
 			</plugin>
 
 			<plugin>
+      			<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.2</version>
 			</plugin>

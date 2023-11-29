@@ -1,0 +1,5 @@
+-------------------------------------------------------------------------------
+Example Banking Application using Axon Framework, CQRS/ES, jMolecules
+-------------------------------------------------------------------------------
+SpringBoot: ${spring-boot.version}
+SwaggerUI:  http://localhost:${server.port}/swagger-ui/index.html

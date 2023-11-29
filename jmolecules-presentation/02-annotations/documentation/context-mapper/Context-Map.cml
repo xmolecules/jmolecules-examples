@@ -8,5 +8,7 @@ ContextMap ShoppingSystem {
     CustomerContext [U]->[D] OrderContext
 }
 
-BoundedContext CustomerContext { }
+BoundedContext CustomerContext {
+
+}
 BoundedContext OrderContext { }

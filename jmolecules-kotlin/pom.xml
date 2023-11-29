@@ -11,6 +11,9 @@
 
 	<artifactId>jmolecules-kotlin</artifactId>
 	<name>jMolecules Examples - Kotlin</name>
+  <properties>
+    <kotlin.version>1.7.10</kotlin.version>
+  </properties>
 
 	<dependencies>
 
@@ -24,6 +27,7 @@
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-stdlib</artifactId>
+      <version>${kotlin.version}</version>
 		</dependency>
 
 		<!-- Persistence and jMolecules Integration -->
@@ -52,6 +56,7 @@
 		<dependency>
 			<groupId>org.jetbrains.kotlin</groupId>
 			<artifactId>kotlin-reflect</artifactId>
+      <version>${kotlin.version}</version>
 		</dependency>
 
 		<!-- Database -->
@@ -74,6 +79,7 @@
 
 				<groupId>org.jetbrains.kotlin</groupId>
 				<artifactId>kotlin-maven-plugin</artifactId>
+        <version>${kotlin.version}</version>
 
 				<configuration>
 					<jvmTarget>${java.version}</jvmTarget>
@@ -115,6 +121,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+        <version>${spring-boot.version}</version>
 			</plugin>
 
 		</plugins>

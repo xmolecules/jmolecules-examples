@@ -1,0 +1,38 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: hexagonal-axon-bank
+  profiles:
+    include: non-mem # disable this and start docker compose to play with Axon Server as event store.
+
+springdoc:
+  swagger-ui:
+    use-root-path: true
+    syntax-highlight:
+      activated: true
+    try-it-out-enabled: true
+
+axon:
+  serializer:
+    events: jackson
+    general: jackson
+    messages: jackson
+
+logging:
+  level:
+    org.jmolecules.example.axonframework: TRACE
+
+---
+#
+# This is a "mem" profile, which switches everything to use mem-buses (instead of axon server)
+#
+spring:
+  config:
+    activate:
+      on-profile: mem
+
+axon:
+  axonserver:
+    enabled: false # disable axon server connector by default

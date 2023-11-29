@@ -11,7 +11,6 @@
 	<name>jMolecules Examples - Spring Data JPA Example</name>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -24,20 +23,17 @@
 		</dependency>
 
 		<!-- jMolecules -->
-
 		<dependency>
 			<groupId>org.jmolecules.integrations</groupId>
 			<artifactId>jmolecules-starter-ddd</artifactId>
 		</dependency>
 
 		<!-- jMolecules integrations -->
-
 		<dependency>
 			<groupId>org.jmolecules.integrations</groupId>
 			<artifactId>jmolecules-spring</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>org.jmolecules.integrations</groupId>
 			<artifactId>jmolecules-jpa</artifactId>

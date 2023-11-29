@@ -1,0 +1,132 @@
+@startuml
+
+top to bottom direction
+
+package "In Adapter" {
+    [AtmResource] <<REST controller>>
+    [BankAccountResource] <<REST controller>>
+    [MoneyTransferResource] <<REST controller>>
+}
+
+component "Application" {
+    portin "Create Bank Account" as InPort1
+    portin "Deposit Money" as InPort2
+    portin "Withdraw Money" as InPort3
+    portin "Transfer Money" as InPort4
+    portin "Retrieve Bank Account Information" as InPort5
+
+    component "Policies" {
+        [Transfer Money PM] <<process manager>> #pink
+    }
+
+    component "Use Cases" {
+        [Create Bank Account] <<use case>> as UC01
+        [Deposit Money] <<use case>> as UC02
+        [Withdraw Money] <<use case>> as UC03
+        [Transfer Money PM] <<use case>> as UC04
+        [Retrieve Bank Account Information] <<use case>> as UC05
+    }
+    portout "Bank\n Account\n Command" as BankAccountCommandPort
+    portout "Bank\n Account\n Query" as BankAccountQueryPort
+    portout "ATM\n Command" as AtmCommandPort
+    portout "Money\n Transfer\n Command" as MoneyTransferCommandPort
+    portout "Money\n Transfer\n Query" as MoneyTransferQueryPort
+}
+
+component "Domain Model" {
+    component "bankaccount" {
+        [Bank Account] <<command>> #yellow
+        [Current Balance] <<query>> #lightgreen
+        [Bank Account Events] #orange
+    }
+    component "moneytransfer" {
+        [Active Money Transfers] <<command>> #yellow
+        [Money Transfer] #yellow
+        [Money Transfer Summary] <<query>> #lightgreen
+        [Money Transfer Events] #orange
+    }
+}
+
+component "Out Adapter" {
+
+    component "Command model" {
+        component "Commands" #lightblue
+        [BankAccountAggregate] #lightblue
+    }
+
+    component "Query model" {
+        component "Queries" #lightgreen
+        component "Current Balances" {
+            [Current Balance Projection] #lightgreen
+            [Current Balance Projector] #lightgreen
+            [Current Balance Repository]
+        }
+        component "Money Transfers" {
+            [Money Transfer Projector] #lightgreen
+            [Money Transfer Projection] #lightgreen
+            [Money Transfer Repository]
+        }
+    }
+
+    component "Message Dispatcher" {
+        [BankAccountCommandDispatcher]
+        [BankAccountQueryDispatcher]
+    }
+}
+
+AtmResource -down-> InPort2
+AtmResource -down-> InPort3
+BankAccountResource -down-> InPort1
+BankAccountResource -down-> InPort5
+MoneyTransferResource -down-> InPort4
+
+InPort1 <.. UC01 : impl
+InPort2 <.. UC02 : impl
+InPort3 <.. UC03 : impl
+InPort4 <.. UC04 : impl
+InPort5 <.. UC05 : impl
+
+UC01 --> BankAccountCommandPort
+
+UC02 --> AtmCommandPort
+UC03 --> AtmCommandPort
+
+UC04 --> MoneyTransferCommandPort
+UC04 --> MoneyTransferQueryPort
+
+UC05 --> BankAccountQueryPort
+
+BankAccountCommandDispatcher .up.> BankAccountCommandPort : impl
+BankAccountCommandDispatcher .up.> AtmCommandPort : impl
+BankAccountCommandDispatcher .up.> MoneyTransferCommandPort : impl
+[BankAccountQueryDispatcher] .up.> BankAccountQueryPort : impl
+[BankAccountQueryDispatcher] .up.> MoneyTransferQueryPort : impl
+
+BankAccountCommandDispatcher -down-> Commands
+BankAccountAggregate -up-> Commands
+BankAccountAggregate --> [Active Money Transfers]
+BankAccountAggregate --> [Bank Account Events]
+
+BankAccountAggregate --> [Bank Account]
+[Bank Account] -up-> [Bank Account Events]
+[Active Money Transfers] -up-> [Money Transfer Events]
+BankAccountAggregate --> [Money Transfer Events]
+
+BankAccountQueryDispatcher -down-> Queries
+[Current Balance Projection] -up-> Queries
+[Current Balance Projection] --> [Current Balance Repository]
+[Current Balance Projector] --> [Current Balance Repository]
+[Current Balance Projector] -down-> [Bank Account Events]
+[Current Balance Repository] --> [Current Balance]
+
+[Money Transfer Projection] -up-> Queries
+[Money Transfer Projection] --> [Money Transfer Repository]
+[Money Transfer Projector] --> [Money Transfer Repository]
+[Money Transfer Projector] -down-> [Money Transfer Events]
+[Money Transfer Repository] --> [Money Transfer Summary]
+
+
+[Transfer Money PM] --> [Money Transfer Events]
+[Transfer Money PM] --> [Money Transfer]
+[Transfer Money PM] --> MoneyTransferCommandPort
+@enduml
