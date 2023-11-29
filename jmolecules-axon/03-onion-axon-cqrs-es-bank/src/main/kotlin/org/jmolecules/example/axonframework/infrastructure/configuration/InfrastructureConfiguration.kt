@@ -1,5 +1,3 @@
-@file: InfrastructureRing
-
 package org.jmolecules.example.axonframework.infrastructure.configuration
 
 import com.fasterxml.jackson.annotation.JsonInclude
@@ -14,14 +12,12 @@ import org.axonframework.eventsourcing.eventstore.EventStorageEngine
 import org.axonframework.eventsourcing.eventstore.inmemory.InMemoryEventStorageEngine
 import org.axonframework.modelling.saga.repository.SagaStore
 import org.axonframework.modelling.saga.repository.inmemory.InMemorySagaStore
-import org.jmolecules.architecture.onion.classical.InfrastructureRing
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferStatus
 import org.jmolecules.example.axonframework.infrastructure.jackson.KotlinTypeInfo
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Profile
-import java.util.*
 
 @Configuration
 class InfrastructureConfiguration {

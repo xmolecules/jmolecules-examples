@@ -1,5 +1,7 @@
 package org.jmolecules.example.axonframework.bank.domain.bankaccount.command
 
+import org.axonframework.springboot.autoconfig.InfraConfiguration
+import org.jmolecules.example.axonframework.bank.adapter.out.commandmodel.bankaccount.CreateBankAccountCommand
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.BankAccountCreatedEvent
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.MoneyDepositedEvent
 import org.jmolecules.example.axonframework.bank.domain.bankaccount.event.MoneyWithdrawnEvent
@@ -13,6 +15,7 @@ import org.jmolecules.example.axonframework.bank.domain.moneytransfer.command.Ac
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferId
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.MoneyTransferNotFound
 import org.jmolecules.example.axonframework.bank.domain.moneytransfer.type.RejectionReason
+import org.jmolecules.example.axonframework.infrastructure.configuration.InfrastructureConfiguration
 
 /**
  * Represents bank account.
@@ -76,6 +79,9 @@ class BankAccount(
   // Model validation
 
   fun depositMoney(amount: Amount): MoneyDepositedEvent {
+    // ****
+    InfrastructureConfiguration //TODO das sollte knallen!!!!!!
+    // ****
     if (!balanceModel.canIncrease(amount)) {
       throw MaximumBalanceExceeded(
         accountId = accountId,

@@ -14,7 +14,6 @@ fun main(args: Array<String>) {
   runApplication<HexagonalAxonBankApplication>(*args).let { }
 }
 
-@InfrastructureRing
 @SpringBootApplication
 @Import(
   BankContextConfiguration::class,
