@@ -58,6 +58,7 @@
 				<scope>import</scope>
 				<type>pom</type>
 			</dependency>
+
 			<dependency>
 				<groupId>org.jmolecules</groupId>
 				<artifactId>jmolecules-bom</artifactId>
