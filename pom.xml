@@ -21,7 +21,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<archunit.version>1.0.1</archunit.version>
 		<axon.version>4.6.2</axon.version>
-		<bytebuddy.version>1.14.4</bytebuddy.version>
+		<bytebuddy.version>1.14.10</bytebuddy.version>
 		<hibernate.version>6.4.1.Final</hibernate.version>
 		<java.version>17</java.version>
 		<jmolecules.version>2023.1.0</jmolecules.version>
