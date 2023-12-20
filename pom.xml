@@ -25,7 +25,7 @@
 		<hibernate.version>6.2.0.Final</hibernate.version>
 		<java.version>17</java.version>
 		<jmolecules.version>2022.2.4</jmolecules.version>
-		<spring-modulith.version>0.6.0</spring-modulith.version>
+		<spring-modulith.version>1.1.0</spring-modulith.version>
 		<spring-boot.version>3.1.6</spring-boot.version>
 	</properties>
 
