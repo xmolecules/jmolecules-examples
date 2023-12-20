@@ -12,10 +12,6 @@
 	<description>Runtime Support for Axon Framework</description>
 	<artifactId>jmolecules-axon</artifactId>
 
-	<properties>
-		<jmolecules-bom.version>2022.2.2-SNAPSHOT</jmolecules-bom.version>
-	</properties>
-
 	<dependencyManagement>
 		<dependencies>
 			<!-- Axon Framework -->
