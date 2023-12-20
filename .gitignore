@@ -1,10 +1,12 @@
 .classpath
 .DS_Store
+.factorypath
+.gradle/
 .idea/
 .project
 .settings/
 .sts4-cache/
-.factorypath
+.vscode/
 target/
 *.orig
 *.iml

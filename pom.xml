@@ -12,6 +12,7 @@
 
 	<modules>
 		<module>jmolecules-presentation</module>
+		<module>jmolecules-spring-data-jdbc</module>
 		<module>jmolecules-spring-data-jpa</module>
 		<module>jmolecules-kotlin</module>
 		<module>jmolecules-axon</module>
