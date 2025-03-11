@@ -8,9 +8,8 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
+	<artifactId>jmolecules-example-axon</artifactId>
 	<name>jMolecules Examples - Axon Framework</name>
-	<description>Runtime Support for Axon Framework</description>
-	<artifactId>jmolecules-axon</artifactId>
 
 	<dependencyManagement>
 		<dependencies>

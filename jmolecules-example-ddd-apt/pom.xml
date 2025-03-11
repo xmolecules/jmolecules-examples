@@ -3,7 +3,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	
-	<artifactId>jmolecules-ddd-apt</artifactId>
+	<artifactId>jmolecules-example-ddd-apt</artifactId>
 	<name>jMolecules Examples - DDD APT</name>
 
 	<parent>

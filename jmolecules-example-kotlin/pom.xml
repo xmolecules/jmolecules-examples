@@ -9,7 +9,7 @@
 		<version>1.0.0-SNAPSHOT</version>
 	</parent>
 
-	<artifactId>jmolecules-kotlin</artifactId>
+	<artifactId>jmolecules-example-kotlin</artifactId>
 	<name>jMolecules Examples - Kotlin</name>
 
 	<dependencies>

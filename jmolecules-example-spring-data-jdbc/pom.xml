@@ -7,14 +7,14 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
-	<artifactId>jmolecules-spring-data-jpa</artifactId>
-	<name>jMolecules Examples - Spring Data JPA Example</name>
+	<artifactId>jmolecules-example-spring-data-jdbc</artifactId>
+	<name>jMolecules Examples - Spring Data JDBC Example</name>
 
 	<dependencies>
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-data-jdbc</artifactId>
 		</dependency>
 
 		<dependency>
@@ -35,12 +35,6 @@
 		<dependency>
 			<groupId>org.jmolecules.integrations</groupId>
 			<artifactId>jmolecules-spring</artifactId>
-			<scope>runtime</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jmolecules.integrations</groupId>
-			<artifactId>jmolecules-jpa</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 
