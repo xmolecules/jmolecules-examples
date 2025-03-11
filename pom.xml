@@ -13,6 +13,7 @@
 	<modules>
 		<module>jmolecules-axon</module>
 		<module>jmolecules-ddd-apt</module>
+		<module>jmolecules-example-archunit</module>
 		<module>jmolecules-kotlin</module>
 		<module>jmolecules-presentation</module>
 		<module>jmolecules-spring-data-jdbc</module>
