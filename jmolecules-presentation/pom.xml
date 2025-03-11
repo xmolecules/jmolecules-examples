@@ -11,7 +11,7 @@
 
 	<artifactId>jmolecules-presentation</artifactId>
 	<packaging>pom</packaging>
-	<name>Presentation</name>
+	<name>jMolecules Presentation</name>
 
 	<modules>
 		<module>01-traditional</module>

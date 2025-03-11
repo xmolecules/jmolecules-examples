@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>jmolecules-presentation-types</artifactId>
-	<name>Presentation - Types-based metadata &amp; ByteBuddy</name>
+	<name>jMolecules Presentation - Types-based metadata &amp; ByteBuddy</name>
 
 	<dependencies>
 

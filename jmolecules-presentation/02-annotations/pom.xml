@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>jmolecules-presentation-annotations</artifactId>
-	<name>Presentation - Annotation-based metadata</name>
+	<name>jMolecules Presentation - Annotation-based metadata</name>
 
 	<dependencies>
 

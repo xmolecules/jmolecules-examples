@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>jmolecules-presentation-traditional</artifactId>
-	<name>Presentation - Traditional approach</name>
+	<name>jMolecules Presentation - Traditional approach</name>
 
 	<dependencies>
 
