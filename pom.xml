@@ -11,11 +11,11 @@
 	<url>https://github.com/xmolecules/jmolecules-examples</url>
 
 	<modules>
+		<module>jmolecules-axon</module>
+		<module>jmolecules-kotlin</module>
 		<module>jmolecules-presentation</module>
 		<module>jmolecules-spring-data-jdbc</module>
 		<module>jmolecules-spring-data-jpa</module>
-		<module>jmolecules-kotlin</module>
-		<module>jmolecules-axon</module>
 	</modules>
 
 	<properties>
