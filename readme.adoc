@@ -2,10 +2,10 @@
 
 This repository contains examples that showcase the usage of jMolecules and jMolecules Integrations.
 
-* link:jmolecules-axon[`jmolecules-axon`] -- Shows how jMolecules annotations can be used to work out of the box with Axon.
-* link:jmolecules-kotlin[`jmolecules-kotlin`] -- Shows how to use the kMolecules Domain-Driven Design annotations.
-* link:jmolecules-spring-data-jdbc[`jmolecules-spring-data-jdbc`] -- Shows how a domain model using jMolecules DDD types to express domain concepts can be persisted with minimal additional JDBC metadata.
-* link:jmolecules-spring-data-jpa[`jmolecules-spring-data-jpa`] -- Shows how a domain model using jMolecules DDD types to express domain concepts can be persisted with minimal additional JPA metadata.
+* link:jmolecules-example-axon[`jmolecules-example--axon`] -- Shows how jMolecules annotations can be used to work out of the box with Axon.
+* link:jmolecules-example-kotlin[`jmolecules-example--kotlin`] -- Shows how to use the kMolecules Domain-Driven Design annotations.
+* link:jmolecules-example-spring-data-jdbc[`jmolecules-example-spring-data-jdbc`] -- Shows how a domain model using jMolecules DDD types to express domain concepts can be persisted with minimal additional JDBC metadata.
+* link:jmolecules-example-spring-data-jpa[`jmolecules-example-spring-data-jpa`] -- Shows how a domain model using jMolecules DDD types to express domain concepts can be persisted with minimal additional JPA metadata.
 
 == External examples
 
